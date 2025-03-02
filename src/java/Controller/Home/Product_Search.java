@@ -63,7 +63,49 @@ public class Product_Search extends HttpServlet {
             request.setAttribute("ProductData", productList);
             request.getRequestDispatcher("shop_category.jsp").forward(request, response);
         }
-        
+        if (action.equalsIgnoreCase("productdetail")) {
+            String product_id = request.getParameter("product_id");
+            productDAO c = new productDAO();
+            List<model.Size> sizeList = c.getSizeByID(product_id);
+            List<model.Color> colorList = c.getColorByID(product_id);
+            model.Product product = c.getProductByID(product_id);
+            int category_id = product.getCate().getCategory_id();
+            List<model.Product> productByCategory = c.getProductByCategory(category_id);
+            commentRatingDAO crDAO = new commentRatingDAO();
+            List<model.Comment> comments = crDAO.getCommentsByProductId(product_id);
+            double averageRating = crDAO.getAverageRatingForProduct(product_id);
+            request.setAttribute("ProductData", product);
+            request.setAttribute("SizeData", sizeList);
+            request.setAttribute("ColorData", colorList);
+            request.setAttribute("ProductByCategory", productByCategory);
+            request.setAttribute("comments", comments);
+            request.setAttribute("averageRating", averageRating);
+            request.getRequestDispatcher("product-details.jsp").forward(request, response);
+        } else if (action.equalsIgnoreCase("addComment")) {
+            billDAO bill = new billDAO();
+            String productId = request.getParameter("product_id");
+            String userId = request.getParameter("user_id");  // Retrieve userId from session
+            String userName = request.getParameter("user_name");  // Retrieve userId from session
+            int rating = Integer.parseInt(request.getParameter("rating"));
+            String commentText = request.getParameter("comment");
+
+            // Call DAO method to add rating
+            commentRatingDAO dao = new commentRatingDAO();
+            if (dao.hasUserCommented(productId, userId)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("errorMessage", "Bạn đã đánh giá và bình luận cho sản phẩm này rồi.");
+            }
+            if(bill.hasUserBuyItem(productId, userId)==false){
+                 HttpSession session = request.getSession();
+                session.setAttribute("errorMessage1", "Bạn phải nhận hàng mới được bình luận");
+            }
+            else {
+                dao.addComment(productId, userId, commentText, rating, userName);
+                HttpSession session = request.getSession();
+                session.setAttribute("successMessage", "Đánh giá bình luận thành công");
+            }
+            response.sendRedirect("search?action=productdetail&product_id=" + productId);
+        }
 
         if (action.equals("sort")) {
             String type = request.getParameter("type");
