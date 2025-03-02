@@ -172,51 +172,7 @@ public class User extends HttpServlet {
             }
         }
 
-        if (action.equals("signup")) {
-            HttpSession session = request.getSession();
-            userDAO da = new userDAO();
-            String email = request.getParameter("user_email");
-            String pass = request.getParameter("user_pass");
-            String repass = request.getParameter("re_pass");
-//            String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-//            System.out.println(gRecaptchaResponse);
-//            boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
-            String passwordRegex = "^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{6,}$";
-            if (!pass.matches(passwordRegex)) {
-                session.setAttribute("error_match", "Mật khẩu phải có ít nhất 6 ký tự, bao gồm ít nhất một chữ cái viết hoa và một chữ số");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-                return;
-            }
-//            if (!verify) {
-//                session.setAttribute("Recaptcha", "Vui lòng xác nhận mã captcha");
-//                request.getRequestDispatcher("login.jsp").forward(request, response);
-//                return;
-//            }
-
-            if (!pass.equals(repass)) {
-                session.setAttribute("error_rePass", "Vui lòng nhập lại mật khẩu cho đúng");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-            } else {
-                model.User a = da.checkAcc(email);
-                if (a == null) {
-                    // Check verify
-                    SendEmail sm = new SendEmail();
-                    String code = sm.getRandom();
-                    UserC userc = new UserC(code, email);
-                    boolean test = sm.sendEmail1(userc);
-                    if (test == true && userc != null) {
-                        session.setAttribute("userc", userc);
-                        session.setAttribute("email", email);
-                        session.setAttribute("pass", pass);
-                        response.sendRedirect("verify.jsp");
-                        return;
-                    }
-                } else {
-                    session.setAttribute("msg", "Email đã tồn tại");
-                    response.sendRedirect("user?action=login");
-                }
-            }
-        }
+//      
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
