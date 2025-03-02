@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 
 /**
  *
- * @author Khuong Hung
+ * @author NhatPhi
  */
 public class DBContext {
     
