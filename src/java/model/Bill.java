@@ -24,6 +24,30 @@ public class Bill {
     public Bill() {
     }
 
+    public Bill(int bill_id, User user, Float total, String payment, String address, Date date, int phone) {
+        this.bill_id = bill_id;
+        this.user = user;
+        this.total = total;
+        this.payment = payment;
+        this.address = address;
+        this.date = date;
+        this.phone = phone;
+    }
+    
+    public Bill(int bill_id,Float total,Date date) {
+        this.bill_id = bill_id;
+        this.total = total;
+        this.date = date;
+    }
+    
+    public Bill(int bill_id, Float total, String payment, String address, Date date, int phone) {
+        this.bill_id = bill_id;
+        this.total = total;
+        this.payment = payment;
+        this.address = address;
+        this.date = date;
+        this.phone = phone;
+    }
 
     public Bill(int bill_id, User user, Float total, String payment, String address, Date date, int phone, int status) {
         this.bill_id = bill_id;
