@@ -81,7 +81,11 @@ public class Product_Search extends HttpServlet {
             request.setAttribute("comments", comments);
             request.setAttribute("averageRating", averageRating);
             request.getRequestDispatcher("product-details.jsp").forward(request, response);
-        } else if (action.equalsIgnoreCase("addComment")) {
+            
+            
+            
+        }
+         else if (action.equalsIgnoreCase("addComment")) {
             billDAO bill = new billDAO();
             String productId = request.getParameter("product_id");
             String userId = request.getParameter("user_id");  // Retrieve userId from session

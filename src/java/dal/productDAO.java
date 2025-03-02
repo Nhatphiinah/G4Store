@@ -572,7 +572,23 @@ public class productDAO extends DBContext {
         }
         return list;
     }
-
+public Product getProductByID(String product_id) {
+        List<Product> list = new ArrayList<>();
+        String sql = "select c.category_id, c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id WHERE p.product_id=?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, product_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Category c = new Category(rs.getInt(1), rs.getString(2));
+                return (new Product(c, rs.getString(3), rs.getString(4), rs.getFloat(5), rs.getString(6), rs.getInt(7), rs.getString(8)));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
 
     public List<Size> getSizeByID(String product_id) {
