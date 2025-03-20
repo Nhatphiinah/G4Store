@@ -34,7 +34,7 @@ public class userDAO extends DBContext {
         }
         return null;
     }
-
+    //NhanPNTCe180453- Edit user
     public void updateUser(int user_id, String user_name, String user_pass, String dateOfBirth, String address, String phoneNumner) {
         String sql = "update users set user_name =? , user_pass = ?,dateOfBirth = ?,address = ?,phoneNumber = ? where user_id = ?";
         try {
