@@ -7,13 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Report;
 
-
+/**
+ *
+ * @TRONGNHAN
+ */
 public class reportDAO extends DBContext {
 
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-
+    //NhanPNTCe180453-view report
     public List<Report> getAll() {
         List<Report> list = new ArrayList<>();
         String sql = "Select r.id_report,r.user_id,r.content_report,r.subject_report,u.user_email From report r INNER JOIN users u On u.user_id=r.user_id";
@@ -30,7 +33,7 @@ public class reportDAO extends DBContext {
         }
         return list;
     }
-
+    //NhanPNTCe180453-submit feedback 
     public void InsertReport(String user_id, String content_report, String subject_report, String user_email) {
         try {
             String sql = "INSERT INTO [dbo].[report]\n"
@@ -49,6 +52,7 @@ public class reportDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+    //NhanPNTCE190453-delete report
     public void deleteReport(int reportId) {
         try {
             String sql = "DELETE FROM report WHERE id_report = ?";
