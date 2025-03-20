@@ -9,7 +9,7 @@ import model.Report;
 
 /**
  *
- * @author 
+ * @TRONGNHAN
  */
 public class reportDAO extends DBContext {
 
