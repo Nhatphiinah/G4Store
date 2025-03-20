@@ -142,7 +142,7 @@ public class userDAO extends DBContext {
         }
 
     }
-
+    //NhanPNTCE1800453-Ban User
     public void banUser(int user_id) {
         String sql = "UPDATE users SET banned = 1 WHERE user_id = ?";
         try {
