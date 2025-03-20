@@ -27,7 +27,7 @@ public class billDAO extends DBContext {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-
+//NhuanPPCE180878- add order
     public void addOrder(User u, Cart cart, String payment, String address, int phone) {
         LocalDate curDate = java.time.LocalDate.now();
         String date = curDate.toString();
