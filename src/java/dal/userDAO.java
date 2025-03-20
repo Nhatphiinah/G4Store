@@ -180,6 +180,7 @@ public class userDAO extends DBContext {
 //            e.printStackTrace();
 //        }
 //    }
+    //NhanPNTCE180453-Set role
     public void setAdmin(int user_id, String isAdmin, String isStoreStaff, String adminReason) {
         String sql = "UPDATE users SET isAdmin = ?, isStoreStaff = ?, adminReason = ? WHERE user_id = ?";
         try {
