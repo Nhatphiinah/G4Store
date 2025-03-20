@@ -52,6 +52,7 @@ public class reportDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+    //NhanPNTCE190453-delete report
     public void deleteReport(int reportId) {
         try {
             String sql = "DELETE FROM report WHERE id_report = ?";
