@@ -87,7 +87,9 @@ public class commentRatingDAO extends DBContext {
             System.out.println(e);
         }
         return comments;
+       
     }
+    //NhuanPPCE180878-  detele comment
     public void deleteComment(int commentId) {
         String sql = "DELETE FROM product_comment WHERE id = ?";
         try {
