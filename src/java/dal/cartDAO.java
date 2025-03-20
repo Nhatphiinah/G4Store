@@ -16,7 +16,7 @@ import model.User;
 
 /**
  *
- * @author ASUS
+ * @author PhuLTBCE180808
  */
 public class cartDAO {
     Connection conn = null;
@@ -140,6 +140,38 @@ public class cartDAO {
         }
         return null;
     }  
+    public void UpdateQuantity(Cart c){
+        String sql = "UPDATE [dbo].[cart]\n" +
+                        "   SET [quantity] = ?,\n" +
+                        "	[total] = ?" +
+                        " WHERE product_id = ? And user_id = ?";
+        
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            for (Item item : c.getItems()) {
+                Product p = item.getProduct();
+                ps.setFloat(1, item.getQuantity());
+                ps.setFloat(2, p.getProduct_price() * item.getQuantity() );
+                ps.setString(3, p.getProduct_id());
+                ps.setString(4, c.getUserId());
+                ps.executeUpdate();
+            }
+        } catch (Exception e) {
+        }
+    }
     
+    public  void DeleteProductInCart(String productId, String userId){
+        String sql = "DELETE FROM [dbo].[cart]\n" +
+                        "WHERE product_id = ? And user_id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, productId);
+            ps.setString(2, userId);
+            ps.execute();
+        } catch (Exception e) {
+        }
+    }
     
 }
