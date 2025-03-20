@@ -2,7 +2,7 @@ package model;
 import java.sql.Timestamp;
 /**
  *
- * @author Kien
+ * @author Nhuan
  */
 public class Comment {
     public int id;
