@@ -12,7 +12,7 @@ public class commentRatingDAO extends DBContext {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-
+    //NhuanPPCE180878-Add Comment
     public void addComment(String productId, String userId, String comment, int rating, String user_name) {
         String sql = "INSERT INTO product_comment (product_id, user_id, comment, rating, created_at, user_name) "
                 + "SELECT ?, ?, ?, ?, GETDATE(), ? "
