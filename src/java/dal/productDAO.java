@@ -99,7 +99,7 @@ public class productDAO extends DBContext {
     }
 
 
-    //search by price
+    //NhanPNTCE180453-search by price
     public List<Product> getProductByPrice(double a, double b) {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT c.category_name, p.product_id, p.product_name, p.product_price, p.product_describe, p.quantity, p.img, p.category_id "
@@ -554,7 +554,7 @@ public class productDAO extends DBContext {
         }
         return arr;
     }
-
+    //NhanPNTCE180453-search product by category
     public List<Product> getProductByCategory(int category_id) {
         List<Product> list = new ArrayList<>();
         String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id inner join product_active pa on pa.product_id = p.product_id Where pa.active ='True' And p.category_id=?";
