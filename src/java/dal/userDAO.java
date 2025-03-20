@@ -50,7 +50,7 @@ public class userDAO extends DBContext {
         } catch (Exception e) {
         }
     }
-
+    //NhanPNTCE180453-Delete User
     public void deleteUser(int user_id) {
         String sql = "DELETE FROM users WHERE user_id = ?";
         try {
