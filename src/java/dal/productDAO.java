@@ -99,7 +99,7 @@ public class productDAO extends DBContext {
     }
 
 
-    //search by price
+    //NhanPNTCE180453-search by price
     public List<Product> getProductByPrice(double a, double b) {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT c.category_name, p.product_id, p.product_name, p.product_price, p.product_describe, p.quantity, p.img, p.category_id "
