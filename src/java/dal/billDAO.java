@@ -334,7 +334,7 @@ public class billDAO extends DBContext {
         }
         return totalUnpaid;
     }
-
+    //NhanPNTCE180453-Revenue Statics
     public List<Object[]> getTotalBillAmountByMonth() {
         List<Object[]> result = new ArrayList<>();
         String sql = "SELECT YEAR(date) as year, MONTH(date) as month, SUM(total) as total_amount "
