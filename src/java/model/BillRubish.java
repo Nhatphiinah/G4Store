@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author Thanh
+ * @author Nhuan
  */
 public class BillRubish {
     User user;
