@@ -237,7 +237,7 @@ public class billDAO extends DBContext {
         }
         return bills;
     }
-
+//NhuanPPCE180878 - Detail bill
     public List<BillDetail> getDetail(int bill_id) {
         List<BillDetail> list = new ArrayList<>();
         String sql = "select d.detail_id, p.product_id, p.product_name, p.img, d.quantity, d.size, d.color, d.price from bill_detail d "
