@@ -125,6 +125,7 @@ public class billDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+     //NhuanPPCE180878- update Bill
          public void updateBill(int Id, int status) {
         try {
             String sql = "UPDATE bill SET status = ? WHERE bill_id = ?";
