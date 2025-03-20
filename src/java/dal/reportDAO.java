@@ -13,7 +13,7 @@ public class reportDAO extends DBContext {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-
+    //NhanPNTCe180453-view report
     public List<Report> getAll() {
         List<Report> list = new ArrayList<>();
         String sql = "Select r.id_report,r.user_id,r.content_report,r.subject_report,u.user_email From report r INNER JOIN users u On u.user_id=r.user_id";
