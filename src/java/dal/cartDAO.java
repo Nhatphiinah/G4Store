@@ -53,7 +53,48 @@ public class cartDAO {
         } catch (Exception e) {
         }
     }
-    
+    public Cart GetCartByUser(int userId){
+        String sql = "SELECT [cart_id]\n" +
+                    "      ,[product_id]\n" +
+                    "      ,[product_name]\n" +
+                    "      ,[product_img]\n" +
+                    "      ,[product_price]\n" +
+                    "      ,[total]\n" +
+                    "      ,[quantity]\n" +
+                    "      ,[user_id]\n" +
+                    "  FROM [ShopYouAndMeVersionFinal].[dbo].[cart]\n" +
+                    "  Where user_id = ?";
+        
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            Cart c = new Cart();
+            List<Item> items = new ArrayList<>();
+            while(rs.next()) {
+              c.setId(rs.getInt("cart_id"));
+              c.setUserId(rs.getString("user_id"));
+              
+              Item item = new Item();
+              
+              Product p = new Product();
+              p.setProduct_id(rs.getString("product_id"));
+              p.setProduct_name(rs.getString("product_name"));
+              p.setImg(rs.getString("product_img"));
+              p.setProduct_price(rs.getFloat("product_price"));
+              
+              item.setProduct(p);
+              item.setQuantity(rs.getInt("quantity"));
+              
+              items.add(item);
+            }
+            c.setItems(items);
+            return c;
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
     
     
