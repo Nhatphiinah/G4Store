@@ -6,7 +6,7 @@
 package model;
 /**
  *
- * @author Thanh
+ * @author phultbce180808
  */
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,12 @@ import java.util.List;
 
 public class Cart {
 
+    private int id;
+    private String userId;
+    private User user;
     List<Item> items;
-
+    
+    
     public Cart() {
         items = new ArrayList<>();
     }
@@ -32,11 +36,37 @@ public class Cart {
         this.items = items;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    
+    
     // số lượng 1 sản phẩm trong giỏ - khách sẽ mua
     public int getQuantityById(String id) {
         return getItemById(id).getQuantity();
     }
-
+    
     private Item getItemById(String id) {
         for (Item i : items) {
             if (i.getProduct().getProduct_id().equals(id)) {
