@@ -129,7 +129,7 @@ public class userDAO extends DBContext {
             e.printStackTrace();
         }
     }
-
+    //NhanPNTCE180453-set role
     public void setAdmin(int user_id, String isAdmin) {
         String sql = "update users set isAdmin= ? where user_id = ?";
         try {
