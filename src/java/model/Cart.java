@@ -66,7 +66,7 @@ public class Cart {
     public int getQuantityById(String id) {
         return getItemById(id).getQuantity();
     }
-
+    
     private Item getItemById(String id) {
         for (Item i : items) {
             if (i.getProduct().getProduct_id().equals(id)) {
