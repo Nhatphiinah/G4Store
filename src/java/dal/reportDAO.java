@@ -30,7 +30,7 @@ public class reportDAO extends DBContext {
         }
         return list;
     }
-
+    //NhanPNTCe180453-submit feedback 
     public void InsertReport(String user_id, String content_report, String subject_report, String user_email) {
         try {
             String sql = "INSERT INTO [dbo].[report]\n"
