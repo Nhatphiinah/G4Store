@@ -98,7 +98,7 @@ public class userDAO extends DBContext {
         } catch (Exception e) {
         };
     }
-
+    //NhanPNTCE180453-View User
     public List<User> getUser() {
         List<User> list = new ArrayList<>();
         String sql = "select *, CAST(banned AS BIT) AS banned FROM users";
