@@ -154,7 +154,7 @@ public class userDAO extends DBContext {
             System.out.println(e);
         }
     }
-
+    //NhanPNTCE180453-Unban User
     public void unbanUser(int user_id) {
         String sql = "UPDATE users SET banned = 0 WHERE user_id = ?";
         try {
