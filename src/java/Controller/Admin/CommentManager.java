@@ -23,6 +23,7 @@ import model.User;
  * @author admin
  */
 @WebServlet(name = "CommentManager", urlPatterns = {"/commentmanager"})
+//NhuanPPCE180878- Comment manager
 public class CommentManager extends HttpServlet {
 
     /**
