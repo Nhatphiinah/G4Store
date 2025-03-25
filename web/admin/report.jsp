@@ -1,8 +1,3 @@
-<%-- 
-    Document   : report
-    Created on : Jun 11, 2024, 1:09:56 AM
-    Author     : admin
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -33,11 +28,8 @@
                                             aria-label="Hide Sidebar"></a>
             <!-- Navbar Right Menu-->
             <ul class="app-nav">
-
-
                 <!-- User Menu-->
                 <li><a class="app-nav__item" href="dashboard"><i class='bx bx-log-out bx-rotate-180'></i> </a>
-
                 </li>
             </ul>
         </header>
@@ -116,8 +108,6 @@
         </div>
     </main>
 
-
-
     <!-- Essential javascripts for application to work-->
     <script src="admin/js/jquery-3.2.1.min.js"></script>
     <script src="admin/js/popper.min.js"></script>
@@ -133,7 +123,6 @@
     <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
     <script>
-
         jQuery(document).ready(function () {
             // Event delegation for delete buttons
             jQuery(document).on('click', '.trash', function () {
@@ -152,7 +141,6 @@
                 });
             });
         });
-
         //Thời Gian
         function time() {
             var today = new Date();
