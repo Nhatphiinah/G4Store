@@ -9,6 +9,7 @@ package model;
 public class Size {
     String product_id;
     String size;
+    int quantity;
 
     public Size() {
     }
@@ -16,6 +17,12 @@ public class Size {
     public Size(String product_id, String size) {
         this.product_id = product_id;
         this.size = size;
+    }
+    
+    public Size(String product_id, String size,int quantity) {
+        this.product_id = product_id;
+        this.size = size;
+        this.quantity = quantity;
     }
 
     public String getProduct_id() {
@@ -33,5 +40,15 @@ public class Size {
     public void setSize(String size) {
         this.size = size;
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+    
     
 }

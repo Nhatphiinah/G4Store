@@ -511,7 +511,22 @@ public class productDAO extends DBContext {
         }
         return list;
     }
-
+    
+ public Size getQuatityBySize(String product_id, String size) {
+        String sql = "select * from product_size where product_id=? And size=?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, product_id);
+            ps.setString(2, size);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Size(rs.getString(1), rs.getString(2), rs.getInt(3));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
     public List<Product> getProductHigh() {
         List<Product> list = new ArrayList<>();
         String sql = "select c.category_name , p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img from product p inner join category c on p.category_id = c.category_id ORDER BY p.product_price DESC";
