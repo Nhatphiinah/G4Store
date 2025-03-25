@@ -27,7 +27,7 @@ public class billDAO extends DBContext {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-//NhuanPPCE180878- add order
+
     public void addOrder(User u, Cart cart, String payment, String address, int phone) {
         LocalDate curDate = java.time.LocalDate.now();
         String date = curDate.toString();
@@ -125,7 +125,6 @@ public class billDAO extends DBContext {
         } catch (Exception e) {
         }
     }
-     //NhuanPPCE180878- update Bill
          public void updateBill(int Id, int status) {
         try {
             String sql = "UPDATE bill SET status = ? WHERE bill_id = ?";
@@ -237,7 +236,7 @@ public class billDAO extends DBContext {
         }
         return bills;
     }
-//NhuanPPCE180878 - Detail bill
+
     public List<BillDetail> getDetail(int bill_id) {
         List<BillDetail> list = new ArrayList<>();
         String sql = "select d.detail_id, p.product_id, p.product_name, p.img, d.quantity, d.size, d.color, d.price from bill_detail d "
@@ -335,7 +334,7 @@ public class billDAO extends DBContext {
         }
         return totalUnpaid;
     }
-    //NhanPNTCE180453-Revenue Statistics        
+
     public List<Object[]> getTotalBillAmountByMonth() {
         List<Object[]> result = new ArrayList<>();
         String sql = "SELECT YEAR(date) as year, MONTH(date) as month, SUM(total) as total_amount "
