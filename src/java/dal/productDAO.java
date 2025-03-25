@@ -511,6 +511,20 @@ public class productDAO extends DBContext {
         }
         return list;
     }
+    //NhuanPPCE180878- UpdateQuantity
+     public void UpdateQuantity(String id, int quantity) {
+        String sql = "UPDATE [dbo].[product]\n"
+                + "   SET [quantity] = ?\n"
+                + " WHERE [product_id] = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, quantity);
+            ps.setString(2, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
     //NhuanPPCE180878- update quantityBySzie
      public void UpdateQuatityBySize(String product_id, String size, int quantity) {
         String sql = "UPDATE [dbo].[product_size]\n"
