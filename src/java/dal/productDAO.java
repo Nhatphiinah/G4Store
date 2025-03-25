@@ -541,6 +541,7 @@ public class productDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+     //NhuanPPCE180878  update get
  public Size getQuatityBySize(String product_id, String size) {
         String sql = "select * from product_size where product_id=? And size=?";
         try {
