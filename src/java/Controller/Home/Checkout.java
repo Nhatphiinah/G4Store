@@ -79,7 +79,7 @@ public class Checkout extends HttpServlet {
         session.setAttribute("orderSuccessMessage", "Đơn hàng của bạn đã được đặt thành công!");
         response.sendRedirect("home");
     }
-
+//update vnpay
     private void handleVNPayPayment(HttpServletRequest request, HttpServletResponse response, BillRubish bill, billDAO dao) throws ServletException, IOException {
         request.getSession().setAttribute("pendingBill", bill);
         request.setAttribute("total", (int) Math.round(bill.getCart().getTotalMoney()));
