@@ -511,7 +511,22 @@ public class productDAO extends DBContext {
         }
         return list;
     }
-    
+    //NhuanPPCE180878- update quantityBySzie
+     public void UpdateQuatityBySize(String product_id, String size, int quantity) {
+        String sql = "UPDATE [dbo].[product_size]\n"
+                + "   SET [quantity] = ?"
+                + " where product_id=? And size = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, quantity);
+            ps.setString(2, product_id);
+            ps.setString(3, size);
+            rs = ps.executeQuery();
+
+        } catch (Exception e) {
+        }
+    }
  public Size getQuatityBySize(String product_id, String size) {
         String sql = "select * from product_size where product_id=? And size=?";
         try {
