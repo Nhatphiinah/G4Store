@@ -38,7 +38,6 @@ public class aboutDAO extends DBContext {
         }
         return list;
     }
-
     public void addAbout(String title,String img,String content) {
         String sql = "INSERT INTO [dbo].[About]\n"
                 + "           ([Title]\n"
@@ -55,6 +54,7 @@ public class aboutDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+    
 
     
 
