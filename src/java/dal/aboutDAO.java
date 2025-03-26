@@ -56,8 +56,6 @@ public class aboutDAO extends DBContext {
     }
     
 
-    
-
     public void UpdateAbout(About about) {
         try {
             // Update product details
@@ -75,7 +73,9 @@ public class aboutDAO extends DBContext {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }   
+
+    
     public void DeleteAbout(String AboutId) {
         String sql = "DELETE FROM [dbo].[About] Where AboutId= ?";
         try {
