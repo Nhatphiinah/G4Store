@@ -196,7 +196,7 @@ public class userDAO extends DBContext {
 
         }
     }
-
+    //NhanPNTCE180453-Addstaff
 public void addStaff(User u) {
         try {
             String query = "insert into users([user_name],[user_email],[user_pass],[isAdmin],[banned],[isStoreStaff]) values(?,?,?,?,?,?)";
