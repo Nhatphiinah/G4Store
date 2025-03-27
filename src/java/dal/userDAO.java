@@ -196,4 +196,21 @@ public class userDAO extends DBContext {
 
         }
     }
+
+public void addStaff(User u) {
+        try {
+            String query = "insert into users([user_name],[user_email],[user_pass],[isAdmin],[banned],[isStoreStaff]) values(?,?,?,?,?,?)";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, u.getUser_name());
+            ps.setString(2, u.getUser_email());
+            ps.setString(3, u.getUser_pass());
+            ps.setString(4, u.getIsAdmin());
+            ps.setBoolean(5, u.isBanned());
+            ps.setString(6, u.getIsStoreStaff());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
