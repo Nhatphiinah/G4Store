@@ -165,7 +165,7 @@ x<%@page contentType="text/html" pageEncoding="UTF-8"%>
     phoneInput.addEventListener('input', function() {
         this.value = this.value.replace(/\D/g, '');
         
-        // Limit to 10 digits
+        //NhuanPPCE180878 Limit to 10 digits
         if (this.value.length > 10) {
             this.value = this.value.slice(0, 10);
         }
