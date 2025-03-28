@@ -9,7 +9,7 @@
         <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-         <link rel="stylesheet" href="assets/css/plugins.css">
+        <link rel="stylesheet" href="assets/css/plugins.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <style>
             body {
@@ -101,14 +101,14 @@
                 border-color: #007bff;
             }
             .breadcrumb_content ul li:last-child {
-    margin-right: 0;
-}
-.breadcrumb_content ul li a {
-    color: #999999;
-}
-.breadcrumb_content ul li a:hover {
-    color: #ff6a28;
-}
+                margin-right: 0;
+            }
+            .breadcrumb_content ul li a {
+                color: #999999;
+            }
+            .breadcrumb_content ul li a:hover {
+                color: #ff6a28;
+            }
         </style>
 
 
@@ -117,7 +117,7 @@
         <jsp:include page="layout/menu.jsp"/>
         <!--Offcanvas menu area start-->
         <div class="off_canvars_overlay"></div>
-        
+
 
         <div class="container my-5">
             <nav aria-label="breadcrumb">
@@ -131,12 +131,12 @@
                 <div class="col-lg-3">
                     <div class="sidebar mb-4">
                         <h2><i class="fas fa-th-list mr-2"></i>Danh mục</h2>
-                       <ul>
-    <li><a href="search?action=listByCategory&category_id=all">TẤT CẢ</a></li>
-    <c:forEach items="${CategoryData}" var="c">
-        <li><a href="search?action=listByCategory&category_id=${c.category_id}">${c.category_name}</a></li>
-    </c:forEach>
-</ul>
+                        <ul>
+                            <li><a href="search?action=listByCategory&category_id=all">TẤT CẢ</a></li>
+                                <c:forEach items="${CategoryData}" var="c">
+                                <li><a href="search?action=listByCategory&category_id=${c.category_id}">${c.category_name}</a></li>
+                                </c:forEach>
+                        </ul>
 
                         <h2 class="mt-4"><i class="fas fa-money-bill mr-2"></i>Giá</h2>
                         <form action="search?action=searchByPrice" method="POST">
@@ -162,13 +162,13 @@
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm mt-3">Tìm kiếm</button>
                         </form>
-                          <h2 class="mt-4"><i class="fas fa-money-bill mr-2"></i>Trạng thái</h2>
-                  <div class="status-menu">
-    <ul>
-        <li><a href="search?action=NoSoldOut">Sản phẩm còn hàng</a></li>
-        <li><a href="search?action=SoldOut">Sản phẩm hết hàng</a></li>
-    </ul>
-</div>
+                        <h2 class="mt-4"><i class="fas fa-money-bill mr-2"></i>Trạng thái</h2>
+                        <div class="status-menu">
+                            <ul>
+                                <li><a href="search?action=NoSoldOut">Sản phẩm còn hàng</a></li>
+                                <li><a href="search?action=SoldOut">Sản phẩm hết hàng</a></li>
+                            </ul>
+                        </div>
 
                         <h2 class="mt-4"><i class="fas fa-palette mr-2"></i>Màu Sắc</h2>
                         <form action="search?action=SearchByColor" method="POST">
@@ -208,7 +208,7 @@
                             </div>
                         </div>
                     </div>
-                
+
 
 
                     <div class="row">
@@ -235,24 +235,24 @@
                             </c:otherwise>
                         </c:choose>
                     </div>
-<!-- 
-                  <nav aria-label="Page navigation" class="mt-4">
-    <ul class="pagination justify-content-center">
-        <c:forEach begin="${1}" end="${num}" var="i">
-            <li class="page-item ${i==page?'active':''}">
-                <c:choose>
-                    <c:when test="${not empty sessionScope.selectedCategoryId}">
-                        <a class="page-link" href="search?action=listByCategory&category_id=${sessionScope.selectedCategoryId}&page=${i}">${i}</a>
-                    </c:when>
-                    <c:otherwise>
-                        <a class="page-link" href="search?action=listByCategory&category_id=all&page=${i}">${i}</a>
-                    </c:otherwise>
-                </c:choose>
-            </li>
-        </c:forEach>
-    </ul>
-</nav>
--->
+                    <!-- 
+                                      <nav aria-label="Page navigation" class="mt-4">
+                        <ul class="pagination justify-content-center">
+                    <c:forEach begin="${1}" end="${num}" var="i">
+                        <li class="page-item ${i==page?'active':''}">
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.selectedCategoryId}">
+                                <a class="page-link" href="search?action=listByCategory&category_id=${sessionScope.selectedCategoryId}&page=${i}">${i}</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="page-link" href="search?action=listByCategory&category_id=all&page=${i}">${i}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </li>
+                    </c:forEach>
+                </ul>
+            </nav>
+                    -->
 
                 </div>
             </div>

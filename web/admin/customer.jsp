@@ -60,7 +60,7 @@
 
                 <!-- Conditionally Display Menu Items -->
                 <c:if test="${sessionScope.user.isAdmin}">
-                    <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý khách hàng</span></a></li>
+                    <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý người dùng</span></a></li>
                     <li><a class="app-menu__item" href="reportmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý phản hồi</span></a></li>
                     <li><a class="app-menu__item" href="aboutmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý trang giới thiệu</span></a></li>
                     <li><a class="app-menu__item" href="commentmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý bình luận</span></a></li>
@@ -81,11 +81,14 @@
                         <div class="tile-body">
 
                             <div class="row element-button">
-                                <div class="col-sm-2">
-                                    <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                                            class="fas fa-print"></i> In dữ liệu</a>
+                                <c:if test="${sessionScope.user.isAdmin.equalsIgnoreCase('true')}"><div class="col-sm-2">
+                                        <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
+                                                class="fas fa-folder-plus"></i> Thêm nhân viên</a></div></c:if>
+                                    <div class="col-sm-2">
+                                        <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
+                                                class="fas fa-print"></i> In dữ liệu</a>
+                                    </div>
                                 </div>
-                            </div>
                             <c:if test="${sessionScope.user.isAdmin.equalsIgnoreCase('true')}">
                                 <div class="form-group">
                                     <label for="userRoleFilter"></label>
@@ -201,6 +204,41 @@
                 </div>
             </div>
         </c:forEach>
+        <div class="modal fade" id="adddanhmuc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+             data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group  col-md-12">
+                                <span class="thong-tin-thanh-toan">
+                                    <h5>Thêm mới nhân viên </h5>
+                                </span>
+                            </div>
+
+                            <div class="form-group col-md-12" >
+
+                                <h2 style="color: red; padding-left: 10px">
+                                    ${error}</h2>
+                               
+                                <form name="insertCate" action="customermanager?action=insertStaff" method="post"> 
+                                     <label class="control-label">Tên</label>
+                                    <input class="form-control" type="text" name="name" required>
+                                    <label class="control-label">Email</label>
+                                    <input class="form-control" type="email" name="email" required>
+                                    <br>
+                                    <button class="btn btn-save" type="submit">Lưu lại</button>
+                                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Essential javascripts for application to work-->
         <script src="admin/js/jquery-3.2.1.min.js"></script>
         <script src="admin/js/popper.min.js"></script>

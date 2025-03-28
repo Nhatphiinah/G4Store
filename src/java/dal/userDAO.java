@@ -34,6 +34,7 @@ public class userDAO extends DBContext {
         }
         return null;
     }
+
     //NhanPNTCe180453- Edit user
     public void updateUser(int user_id, String user_name, String user_pass, String dateOfBirth, String address, String phoneNumner) {
         String sql = "update users set user_name =? , user_pass = ?,dateOfBirth = ?,address = ?,phoneNumber = ? where user_id = ?";
@@ -50,6 +51,7 @@ public class userDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+
     //NhanPNTCE180453-Delete User
     public void deleteUser(int user_id) {
         String sql = "DELETE FROM users WHERE user_id = ?";
@@ -98,6 +100,7 @@ public class userDAO extends DBContext {
         } catch (Exception e) {
         };
     }
+
     //NhanPNTCE180453-View User
     public List<User> getUser() {
         List<User> list = new ArrayList<>();
@@ -129,6 +132,7 @@ public class userDAO extends DBContext {
             e.printStackTrace();
         }
     }
+
     //NhanPNTCE180453-set role
     public void setAdmin(int user_id, String isAdmin) {
         String sql = "update users set isAdmin= ? where user_id = ?";
@@ -142,6 +146,7 @@ public class userDAO extends DBContext {
         }
 
     }
+
     //NhanPNTCE1800453-Ban User
     public void banUser(int user_id) {
         String sql = "UPDATE users SET banned = 1 WHERE user_id = ?";
@@ -154,6 +159,7 @@ public class userDAO extends DBContext {
             System.out.println(e);
         }
     }
+
     //NhanPNTCE180453-Unban User
     public void unbanUser(int user_id) {
         String sql = "UPDATE users SET banned = 0 WHERE user_id = ?";
@@ -194,6 +200,24 @@ public class userDAO extends DBContext {
         } catch (Exception e) {
             e.printStackTrace();
 
+        }
+    }
+    //NhanPNTCE180453-Addstaff
+
+    public void addStaff(User u) {
+        try {
+            String query = "insert into users([user_name],[user_email],[user_pass],[isAdmin],[banned],[isStoreStaff]) values(?,?,?,?,?,?)";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, u.getUser_name());
+            ps.setString(2, u.getUser_email());
+            ps.setString(3, u.getUser_pass());
+            ps.setString(4, u.getIsAdmin());
+            ps.setBoolean(5, u.isBanned());
+            ps.setString(6, u.getIsStoreStaff());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
