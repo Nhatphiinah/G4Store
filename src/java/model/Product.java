@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  *
- * @author Doanh
+ * @author 
  */
 
 public class Product {
@@ -24,6 +24,16 @@ public class Product {
     List<Size> size = new ArrayList<>();
     List<Color> color = new ArrayList<>();
     Product_Active active;
+    float discount;
+
+    public float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(float discount) {
+        this.discount = discount;
+    }
+    
 
     public Product() {
     }
@@ -51,6 +61,16 @@ public class Product {
         this.product_id = product_id;
         this.product_name = product_name;
         this.img = img;
+    }
+
+    public Product(String product_id, String product_name, Float product_price, String product_describe, int quantity, String img, float discount) {
+        this.product_id = product_id;
+        this.product_name = product_name;
+        this.product_price = product_price;
+        this.product_describe = product_describe;
+        this.quantity = quantity;
+        this.img = img;
+        this.discount = discount;
     }
 
     public Category getCate() {
