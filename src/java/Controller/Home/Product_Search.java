@@ -39,30 +39,30 @@ public class Product_Search extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
-        if (action.equalsIgnoreCase("listByCategory")) {
-            String category_id = request.getParameter("category_id");
-//            int category_id1 = Integer.parseInt(category_id);
-            HttpSession session = request.getSession();
-//            session.setAttribute("selectedCategoryId", category_id1);
-            productDAO c = new productDAO();
-//            List<model.Product> productList = c.getProductByCategory(category_id1);
-            List<model.Product> productList;
-            List<Category> category = c.getCategory();
-            if (category_id == null || category_id.equals("all")) {
-                // Xử lý cho "Tất cả" sản phẩm
-                session.removeAttribute("selectedCategoryId");
-                productList = c.getProduct(); // Giả sử đây là phương thức lấy tất cả sản phẩm
-            } else {
-                // Xử lý cho danh mục cụ thể
-                int category_id1 = Integer.parseInt(category_id);
-                session.setAttribute("selectedCategoryId", category_id1);
-                productList = c.getProductByCategory(category_id1);
-            }
-
-            request.setAttribute("CategoryData", category);
-            request.setAttribute("ProductData", productList);
-            request.getRequestDispatcher("shop_category.jsp").forward(request, response);
-        }
+//        if (action.equalsIgnoreCase("listByCategory")) {
+//            String category_id = request.getParameter("category_id");
+////            int category_id1 = Integer.parseInt(category_id);
+//            HttpSession session = request.getSession();
+////            session.setAttribute("selectedCategoryId", category_id1);
+//            productDAO c = new productDAO();
+////            List<model.Product> productList = c.getProductByCategory(category_id1);
+//            List<model.Product> productList;
+//            List<Category> category = c.getCategory();
+//            if (category_id == null || category_id.equals("all")) {
+//                // Xử lý cho "Tất cả" sản phẩm
+//                session.removeAttribute("selectedCategoryId");
+//                productList = c.getProduct(); // Giả sử đây là phương thức lấy tất cả sản phẩm
+//            } else {
+//                // Xử lý cho danh mục cụ thể
+//                int category_id1 = Integer.parseInt(category_id);
+//                session.setAttribute("selectedCategoryId", category_id1);
+//                productList = c.getProductByCategory(category_id1);
+//            }
+//
+//            request.setAttribute("CategoryData", category);
+//            request.setAttribute("ProductData", productList);
+//            request.getRequestDispatcher("shop_category.jsp").forward(request, response);
+//        }
         if (action.equalsIgnoreCase("productdetail")) {
             String product_id = request.getParameter("product_id");
             productDAO c = new productDAO();
@@ -118,7 +118,7 @@ public class Product_Search extends HttpServlet {
                 sort = (sort == null || sort.equals("")) ? "asc" : sort;
                 String priceRange = request.getParameter("price");
                 String saleOff = request.getParameter("saleOff");
-                priceRange = (priceRange == null || priceRange.equals("")) ? "0" : priceRange;
+                priceRange = (priceRange == null || priceRange.equals("")) ? "5" : priceRange;
 
                 cID = (cID == null || cID.equals("all")) ? null : Integer.parseInt(cID) + "";
                 int pageSize = getPageSize(numberProductPerPage,  c.searchWithPaging(txtSearch, cID, sort, priceRange, saleOff, null, numberProductPerPage).size());
@@ -404,29 +404,29 @@ public class Product_Search extends HttpServlet {
 //            request.setAttribute("ProductData", productList);
 //            request.getRequestDispatcher("shop_category.jsp").forward(request, response);
 //    }
-        if (action.equalsIgnoreCase("SaleOff")) {
-            productDAO c = new productDAO();
-            List<model.Product> productList = c.getProductSaleOff();
-            List<Category> category = c.getCategory();
-            int page, numperpage = 9;
-            int size = productList.size();
-            int num = (size % 9 == 0 ? (size / 9) : ((size / 9)) + 1);//so trang
-            String xpage = request.getParameter("page");
-            if (xpage == null) {
-                page = 1;
-            } else {
-                page = Integer.parseInt(xpage);
-            }
-            int start, end;
-            start = (page - 1) * numperpage;
-            end = Math.min(page * numperpage, size);
-            List<model.Product> product = c.getListByPage(productList, start, end);
-            request.setAttribute("page", page);
-            request.setAttribute("num", num);
-            request.setAttribute("CategoryData", category);
-            request.setAttribute("ProductData", productList);
-            request.getRequestDispatcher("shop_category.jsp").forward(request, response);
-        }
+//        if (action.equalsIgnoreCase("SaleOff")) {
+//            productDAO c = new productDAO();
+//            List<model.Product> productList = c.getProductSaleOff();
+//            List<Category> category = c.getCategory();
+//            int page, numperpage = 9;
+//            int size = productList.size();
+//            int num = (size % 9 == 0 ? (size / 9) : ((size / 9)) + 1);//so trang
+//            String xpage = request.getParameter("page");
+//            if (xpage == null) {
+//                page = 1;
+//            } else {
+//                page = Integer.parseInt(xpage);
+//            }
+//            int start, end;
+//            start = (page - 1) * numperpage;
+//            end = Math.min(page * numperpage, size);
+//            List<model.Product> product = c.getListByPage(productList, start, end);
+//            request.setAttribute("page", page);
+//            request.setAttribute("num", num);
+//            request.setAttribute("CategoryData", category);
+//            request.setAttribute("ProductData", productList);
+//            request.getRequestDispatcher("shop_category.jsp").forward(request, response);
+//        }
     }
 
     public int getPageSize(int numberProduct, int allProduct) {
