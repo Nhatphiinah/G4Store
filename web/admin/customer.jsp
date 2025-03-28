@@ -137,8 +137,6 @@
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                             </td>
-
-
                                             <td>
 
                                                 <c:if test="${!u.banned}">
@@ -149,7 +147,6 @@
                                                     </c:if>
                                             </td>
                                         </tr>
-
                                     </c:forEach>
                                 </tbody>
                             </table>
