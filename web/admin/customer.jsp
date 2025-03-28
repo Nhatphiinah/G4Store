@@ -132,11 +132,11 @@
                                             <td>${u.banned ? 'Bị cấm' : 'Hoạt động'}</td>
                                             <td>${u.adminReason}</td>
                                             <td class="text-center">
-    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-        data-target="#ModalUP${u.user_id}">
-        <i class="fas fa-edit"></i>
-    </button>
-</td>
+                                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                                        data-target="#ModalUP${u.user_id}">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
 
 
                                             <td>
@@ -223,9 +223,9 @@
 
                                 <h2 style="color: red; padding-left: 10px">
                                     ${error}</h2>
-                               
+
                                 <form name="insertCate" action="customermanager?action=insertStaff" method="post"> 
-                                     <label class="control-label">Tên</label>
+                                    <label class="control-label">Tên</label>
                                     <input class="form-control" type="text" name="name" required>
                                     <label class="control-label">Email</label>
                                     <input class="form-control" type="email" name="email" required>
@@ -256,7 +256,7 @@
         <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript">$('#sampleTable').DataTable();</script>
         <script>
-            
+
 
             //Thời Gian
             function time() {
