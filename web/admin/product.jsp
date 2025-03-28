@@ -24,7 +24,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-       <script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script>
 
 
 
@@ -61,10 +61,10 @@
                 <li><a class="app-menu__item" href="categorymanager"><i class='app-menu__icon bx bxs-category'></i><span class="app-menu__label">Quản lý danh mục</span></a></li>
                 <li><a class="app-menu__item" href="productmanager"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
                 <li><a class="app-menu__item" href="ordermanager"><i class='app-menu__icon bx bx-task'></i><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
-
+                <li><a class="app-menu__item" href="saleoff"><i class='app-menu__icon bx bxs-discount'></i><span class="app-menu__label">Quản lý khuyến mãi</span></a></li>
                 <!-- Conditionally Display Menu Items -->
                 <c:if test="${sessionScope.user.isAdmin}">
-                    <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý khách hàng</span></a></li>
+                    <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý người dùng</span></a></li>
                     <li><a class="app-menu__item" href="reportmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý phản hồi</span></a></li>
                     <li><a class="app-menu__item" href="aboutmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý trang giới thiệu</span></a></li>
                     <li><a class="app-menu__item" href="commentmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý bình luận</span></a></li>
@@ -156,10 +156,8 @@
                                                 <td>${p.product_name}</td>
                                                 <td>${p.product_price}</td>
                                                 <td>
-                                                    <c:forEach items="${SizeData}" var="s">
-                                                        <c:if test="${p.product_id==s.product_id}">
-                                                            ${s.size}   
-                                                        </c:if>
+                                                    <c:forEach items="${p.size}" var="s">
+                                                        ${s.size}   
                                                     </c:forEach>
                                                 </td>
 
@@ -171,7 +169,11 @@
                                                     </c:forEach>
                                                 </td>
                                                 <td>${p.product_describe}</td>
-                                                <td>${p.quantity}</td>
+                                                <td>
+                                                    <c:forEach items="${p.size}" var="s">
+                                                        ${s.quantity}   
+                                                    </c:forEach>
+                                                </td>
                                                 <td><img src="${p.img}" alt="" width="100px;"></td>
                                                 <td>
                                                     <c:forEach items="${ActiveData}" var="s">
@@ -233,7 +235,19 @@
                                                                 </div>
                                                                 <div class="form-group col-md-6">
                                                                     <label class="control-label">Màu</label>
-                                                                    <input class="form-control" name="product_color" type="text" value="<c:forEach items="${ColorData}" var="c"><c:if test="${p.product_id==c.product_id}">${c.color},</c:if></c:forEach>">
+                                                                    <select class="form-control" name="product_color">
+                                                                        <c:forEach items="${ColorData}" var="c"><c:if test="${p.product_id==c.product_id}">
+                                                                        <option value="White" <c:if test="${c.color eq 'White'}">selected</c:if>>White</option>
+                                                                        <option value="Black" <c:if test="${c.color eq 'Black'}">selected</c:if>>Black</option>
+                                                                        <option value="Green" <c:if test="${c.color eq 'Green'}">selected</c:if>>Green</option>
+                                                                        <option value="Yellow" <c:if test="${c.color eq 'Yellow'}">selected</c:if>>Yellow</option>
+                                                                        <option value="Brown" <c:if test="${c.color eq 'Brown'}">selected</c:if>>Brown</option>
+                                                                        <option value="Blue" <c:if test="${c.color eq 'Blue'}">selected</c:if>>Blue</option>
+                                                                        <option value="Red" <c:if test="${c.color eq 'Red'}">selected</c:if>>Red</option></c:if></c:forEach>
+                                                                        </select>
+                                                                                                        <!--<input class="form-control" name="product_color" type="text" value="
+                                                                        <%--<c:forEach items="${ColorData}" var="c"><c:if test="${p.product_id==c.product_id}">${c.color},</c:if></c:forEach>--%>
+                                                                                                        ">-->
                                                                         </div>
 
                                                                         <div class="form-group col-md-6">
@@ -257,15 +271,19 @@
                                                                     </select>
                                                                 </div>
 
-                                                                <div class="form-group col-md-6">
+                                                                <!--                                                                <div class="form-group col-md-6">
+                                                                                                                                    <label class="control-label">Số lượng</label>
+                                                                                                                                    <input class="form-control" type="number" min="1" name="product_quantity" value="${p.quantity}">
+                                                                                                                                </div>-->
+                                                                <div class="form-group  col-md-6">
                                                                     <label class="control-label">Số lượng</label>
-                                                                    <input class="form-control" type="number" min="1" name="product_quantity" value="${p.quantity}">
-                                                                </div>
-                                                                <!--anh san pham-->
-                                                                <div class="form-group col-md-12">
-                                                                    <label class="control-label">Ảnh sản phẩm</label>
-                                                                    <div id="myfileupload">
-                                                                        <input type="file" id="uploadfile" name="product_img" value="${p.img}" onchange="readURL(this);" />
+                                                                    <input class="form-control" name="product_quantity" placeholder="10,100,..." type="text" value="<c:forEach items="${SizeData}" var="s"><c:if test="${p.product_id==s.product_id}">${s.quantity},</c:if></c:forEach>"  oninput="validateQuantity(this)">
+                                                                        </div>
+                                                                        <!--anh san pham-->
+                                                                        <div class="form-group col-md-12">
+                                                                            <label class="control-label">Ảnh sản phẩm</label>
+                                                                            <div id="myfileupload">
+                                                                                <input type="file" id="uploadfile" name="product_img" value="${p.img}" onchange="readURL(this);" />
                                                                     </div>
                                                                     <div id="thumbbox">
                                                                         <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
@@ -329,75 +347,75 @@
         <!-- Data table plugin-->
         <script type="text/javascript" src="admin/js/plugins/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
-         <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var insertStatus = "<%= (session.getAttribute("insertStatus") != null) ? session.getAttribute("insertStatus") : "default" %>";
-        var insertStatus = "<%= (session.getAttribute("insertStatus") != null) ? session.getAttribute("insertStatus") : "default" %>";
-        if (insertStatus==="succ") {
-            swal({
-                title: 'Thành công!',
-                text: 'Thêm thành công!',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        }
-        if (insertStatus==="err") {
-            swal({
-                title: 'Lỗi!',
-                text: 'Thêm thất bại',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        }
-    });
-                                        </script>
-                                        <%
-                                            if (session.getAttribute("insertStatus") != null) {
-                                                session.removeAttribute("insertStatus");
-                                            }
-                                        %>
+        <script>
+                                           document.addEventListener('DOMContentLoaded', function () {
+                                               var insertStatus = "<%= (session.getAttribute("insertStatus") != null) ? session.getAttribute("insertStatus") : "default" %>";
+                                               var insertStatus = "<%= (session.getAttribute("insertStatus") != null) ? session.getAttribute("insertStatus") : "default" %>";
+                                               if (insertStatus === "succ") {
+                                                   swal({
+                                                       title: 'Thành công!',
+                                                       text: 'Thêm thành công!',
+                                                       icon: 'success',
+                                                       confirmButtonText: 'OK'
+                                                   });
+                                               }
+                                               if (insertStatus === "err") {
+                                                   swal({
+                                                       title: 'Lỗi!',
+                                                       text: 'Thêm thất bại',
+                                                       icon: 'error',
+                                                       confirmButtonText: 'OK'
+                                                   });
+                                               }
+                                           });
+        </script>
+        <%
+            if (session.getAttribute("insertStatus") != null) {
+                session.removeAttribute("insertStatus");
+            }
+        %>
         <script type="text/javascript">
-                                          $('#sampleTable').DataTable();
-                                          //Thời Gian
-                                          function time() {
-                                              var today = new Date();
-                                              var weekday = new Array(7);
-                                              weekday[0] = "Chủ Nhật";
-                                              weekday[1] = "Thứ Hai";
-                                              weekday[2] = "Thứ Ba";
-                                              weekday[3] = "Thứ Tư";
-                                              weekday[4] = "Thứ Năm";
-                                              weekday[5] = "Thứ Sáu";
-                                              weekday[6] = "Thứ Bảy";
-                                              var day = weekday[today.getDay()];
-                                              var dd = today.getDate();
-                                              var mm = today.getMonth() + 1;
-                                              var yyyy = today.getFullYear();
-                                              var h = today.getHours();
-                                              var m = today.getMinutes();
-                                              var s = today.getSeconds();
-                                              m = checkTime(m);
-                                              s = checkTime(s);
-                                              nowTime = h + " giờ " + m + " phút " + s + " giây";
-                                              if (dd < 10) {
-                                                  dd = '0' + dd
-                                              }
-                                              if (mm < 10) {
-                                                  mm = '0' + mm
-                                              }
-                                              today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                                              tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                                                      '</span>';
-                                              document.getElementById("clock").innerHTML = tmp;
-                                              clocktime = setTimeout("time()", "1000", "Javascript");
+            $('#sampleTable').DataTable();
+            //Thời Gian
+            function time() {
+                var today = new Date();
+                var weekday = new Array(7);
+                weekday[0] = "Chủ Nhật";
+                weekday[1] = "Thứ Hai";
+                weekday[2] = "Thứ Ba";
+                weekday[3] = "Thứ Tư";
+                weekday[4] = "Thứ Năm";
+                weekday[5] = "Thứ Sáu";
+                weekday[6] = "Thứ Bảy";
+                var day = weekday[today.getDay()];
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1;
+                var yyyy = today.getFullYear();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                m = checkTime(m);
+                s = checkTime(s);
+                nowTime = h + " giờ " + m + " phút " + s + " giây";
+                if (dd < 10) {
+                    dd = '0' + dd
+                }
+                if (mm < 10) {
+                    mm = '0' + mm
+                }
+                today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+                tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                        '</span>';
+                document.getElementById("clock").innerHTML = tmp;
+                clocktime = setTimeout("time()", "1000", "Javascript");
 
-                                              function checkTime(i) {
-                                                  if (i < 10) {
-                                                      i = "0" + i;
-                                                  }
-                                                  return i;
-                                              }
-                                          }
+                function checkTime(i) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    return i;
+                }
+            }
         </script>
         <script>
 
@@ -442,29 +460,42 @@
                 rowsAdded = -1;
             }
         }
-    %>
+        %>
         <script>
-        $(document).ready(function () {
-            // Use Java code to embed the number of rows added
-            var rowsAdded = <%= rowsAdded %>;
+            $(document).ready(function () {
+                // Use Java code to embed the number of rows added
+                var rowsAdded = <%= rowsAdded %>;
 
-            // If 'rowsAdded' is greater than zero, show the notification
-            if (rowsAdded > 0) {
-                swal({
-                    title: "Thành công",
-                    text: rowsAdded + " sản phẩm đã được thêm mới!",
-                    icon: "success"
-                });
-            }if(rowsAdded === 0){
-                swal({
-                    title: "Thất bại",
-                    text: rowsAdded + " 0 sản phẩm đã được thêm mới!",
-                    icon: "error"
-                });
+                // If 'rowsAdded' is greater than zero, show the notification
+                if (rowsAdded > 0) {
+                    swal({
+                        title: "Thành công",
+                        text: rowsAdded + " sản phẩm đã được thêm mới!",
+                        icon: "success"
+                    });
+                }
+                if (rowsAdded === 0) {
+                    swal({
+                        title: "Thất bại",
+                        text: rowsAdded + " 0 sản phẩm đã được thêm mới!",
+                        icon: "error"
+                    });
+                }
+            });
+        </script>
+        <script>
+            function validateQuantity(input) {
+                let value = input.value;
+                let newValue = '';
+                for (let char of value) {
+                    if (/[0-9,]/.test(char)) {
+                        newValue += char;
+                    }
+                }
+                input.value = newValue;
             }
-        });
-    </script>
 
+        </script>
     </body>
 
 </html>
