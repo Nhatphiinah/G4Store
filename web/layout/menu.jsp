@@ -205,25 +205,34 @@
     <!--header middel end-->
 
     <!--header bottom satrt-->
-    <div class="header_bottom sticky-header">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12">
-                    <div class="main_menu_inner">
-                        <div class="main_menu"> 
-                            <nav>  
-                                <ul>
-                                    <li class="active"><a href="home">Trang chủ</a></li>
-                                    <li><a href="product">Sản phẩm</a></li>
-                                    <li><a href="about">Chúng tôi</a></li>
-                                    <li><a href="contact">Liên hệ</a></li>
-                                </ul>   
-                            </nav> 
-                        </div>
-                    </div> 
-                </div>
+   <div class="header_bottom sticky-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <div class="main_menu_inner">
+                    <div class="main_menu"> 
+                        <nav>  
+                            <ul>
+                                <li class="active"><a href="home">Trang chủ</a></li>
+                                <li><a href="product">Sản phẩm</a></li>
+                                <li><a href="about">Chúng tôi</a></li>
+                                <li><a href="contact">Liên hệ</a></li>
+                            </ul>   
+                        </nav> 
+                    </div>
+                </div> 
             </div>
         </div>
     </div>
+</div>
+
+<style>
+.header_bottom.sticky-header {
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(5px); 
+    transition: background 0.3s ease-in-out;
+}
+</style>
+
     <!--header bottom end-->
 </header>
