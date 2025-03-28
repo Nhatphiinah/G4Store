@@ -14,7 +14,7 @@ import model.About;
 
 /**
  *
- * @author Le Tran Bao Phu
+ * @author 
  */
 public class aboutDAO extends DBContext {
 
@@ -38,6 +38,7 @@ public class aboutDAO extends DBContext {
         }
         return list;
     }
+
     public void addAbout(String title,String img,String content) {
         String sql = "INSERT INTO [dbo].[About]\n"
                 + "           ([Title]\n"
@@ -54,7 +55,18 @@ public class aboutDAO extends DBContext {
         } catch (Exception e) {
         }
     }
-    
+
+    public void DeleteAbout(String AboutId) {
+        String sql = "DELETE FROM [dbo].[About] Where AboutId= ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, AboutId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     public void UpdateAbout(About about) {
         try {
@@ -72,19 +84,6 @@ public class aboutDAO extends DBContext {
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }   
-
-    
-    public void DeleteAbout(String AboutId) {
-        String sql = "DELETE FROM [dbo].[About] Where AboutId= ?";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, AboutId);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e);
         }
     }
 
