@@ -170,7 +170,7 @@ x<%@page contentType="text/html" pageEncoding="UTF-8"%>
             this.value = this.value.slice(0, 10);
         }
 
-        // Validate the number
+        //NhuanPPCE180878 Validate the number
         const phoneNumber = this.value;
         isPhoneValid = phoneNumber.length === 10 && phoneNumber.startsWith('0');
 
