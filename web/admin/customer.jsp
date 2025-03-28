@@ -132,9 +132,7 @@
                                             <td>${u.banned ? 'Bị cấm' : 'Hoạt động'}</td>
                                             <td>${u.adminReason}</td>
                                             <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                                                        data-target="#ModalUP${u.user_id}"><i class="fas fa-edit"></i></button>
-                                                <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" value="${u.user_id}"><i
-                                                        class="fas fa-trash-alt"></i>
+                                                        data-target="#ModalUP${u.user_id}"><i class="fas fa-edit"></i></button>       
                                             </td>
 
                                             <td>
@@ -254,27 +252,7 @@
         <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript">$('#sampleTable').DataTable();</script>
         <script>
-            $(document).ready(function () {
-                $('#sampleTable').DataTable();
-
-                // Event delegation for delete button
-                jQuery(document).on("click", ".trash", function () {
-                    swal({
-                        title: "Cảnh báo",
-                        text: "Bạn có chắc chắn muốn xóa nhân viên này?",
-                        buttons: ["Hủy bỏ", "Đồng ý"],
-                    }).then((willDelete) => {
-                        if (willDelete) {
-                            var userId = $(this).val();
-                            window.location = "customermanager?action=delete&user_id=" + userId;
-                            // Optionally show a success message after deletion
-                            swal("Đã xóa thành công!", {
-                                icon: "success",
-                            });
-                        }
-                    });
-                });
-            });
+            
 
             //Thời Gian
             function time() {

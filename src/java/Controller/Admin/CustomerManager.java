@@ -54,13 +54,6 @@ public class CustomerManager extends HttpServlet {
                     dao.setAdmin(id, isAdmin, isStoreStaff, adminReason);
                     response.sendRedirect("customermanager");
                     return;
-                } else if (action.equals("delete")) {
-                    String user_id = request.getParameter("user_id");
-                    int id = Integer.parseInt(user_id);
-                    userDAO dao = new userDAO();
-                    dao.deleteUser(id);
-                    response.sendRedirect("customermanager");
-                    return;
                 } else if (action.equals("ban")) {
                     int banUserId = Integer.parseInt(request.getParameter("user_id"));
                     userDAO dao = new userDAO();
