@@ -213,10 +213,41 @@
                     <div class="main_menu"> 
                         <nav>  
                             <ul>
-                                <li><a href="home">Trang chủ</a></li>
-                                <li><a href="product">Sản phẩm</a></li>
-                                <li><a href="about">Chúng tôi</a></li>
-                                <li><a href="contact">Liên hệ</a></li>
+                                <ul class="menu">
+    <li><a href="home">Trang chủ</a></li>
+    <li><a href="product">Sản phẩm</a></li>
+    <li><a href="about">Chúng tôi</a></li>
+    <li><a href="contact">Liên hệ</a></li>
+</ul>
+
+<style>
+/* Định dạng menu */
+.menu {
+    display: flex; /* Dàn đều các mục theo hàng ngang */
+    justify-content: space-around; /* Canh đều khoảng cách giữa các mục */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    list-style: none; /* Bỏ dấu chấm */
+    padding: 0;
+    margin: 0;
+}
+
+/* Định dạng chữ trong menu */
+/*.menu li a {
+    font-size: 15px;  Làm chữ to hơn 
+    font-weight: bold;  Chữ đậm hơn 
+    text-decoration: none;  Bỏ gạch chân 
+    color: black;  Màu chữ 
+    padding: 15px 20px;  Tạo khoảng cách giữa các mục 
+    display: block;  Đảm bảo toàn bộ vùng click được áp dụng 
+    transition: color 0.3s ease-in-out;
+}*/
+
+/* Khi hover vào menu 
+.menu li a:hover {
+    color: orange;  Khi di chuột vào sẽ đổi màu cam 
+}*/
+</style>
+
                             </ul>   
                         </nav> 
                     </div>
