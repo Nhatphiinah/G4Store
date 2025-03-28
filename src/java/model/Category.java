@@ -16,6 +16,8 @@ public class Category {
     int count;
     private ArrayList<Product> product = new ArrayList<>();
     
+    private boolean status;
+    
     public Category() {
     }
 
@@ -27,6 +29,12 @@ public class Category {
         this.category_id = category_id;
         this.category_name = category_name;
         this.count = count;
+    }
+
+    public Category(int category_id, String category_name, boolean status) {
+        this.category_id = category_id;
+        this.category_name = category_name;
+        this.status = status;
     }
     
     public Category(String category_name) {
@@ -65,6 +73,14 @@ public class Category {
 
     public void setProduct(ArrayList<Product> product) {
         this.product = product;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     

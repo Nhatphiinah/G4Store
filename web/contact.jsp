@@ -58,7 +58,7 @@
                             <h3>Liên hệ</h3>
                             <ul>
                                 <li><i class="fa fa-fax"></i>  Đại học FPT</li>
-                                <li><i class="fa fa-envelope-o"> </i> <a href="mailto:doanhtnhe172637@fpt.edu.vn">doanhtnhe172637@fpt.edu.vn</a></li>
+                                <li><i class="fa fa-envelope-o"> </i> <a href="mailto:phinvnce181599@fpt.edu.vn">phinvnce181599@fpt.edu.vn</a></li>
                                 <li><i class="fa fa-phone"></i> 0348956373</li>                        
                             </ul>             
                         </div> 
