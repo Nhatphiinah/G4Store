@@ -1,4 +1,4 @@
-
+ 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -165,10 +165,10 @@
                 <li><a class="app-menu__item" href="categorymanager"><i class='app-menu__icon bx bxs-category'></i><span class="app-menu__label">Quản lý danh mục</span></a></li>
                 <li><a class="app-menu__item" href="productmanager"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
                 <li><a class="app-menu__item" href="ordermanager"><i class='app-menu__icon bx bx-task'></i><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
-
+                <li><a class="app-menu__item" href="saleoff"><i class='app-menu__icon bx bxs-discount'></i><span class="app-menu__label">Quản lý khuyến mãi</span></a></li>
                 <!-- Conditionally Display Menu Items -->
                 <c:if test="${sessionScope.user.isAdmin}">
-                    <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý khách hàng</span></a></li>
+                    <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý người dùng</span></a></li>
                     <li><a class="app-menu__item" href="reportmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý phản hồi</span></a></li>
                     <li><a class="app-menu__item" href="aboutmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý trang giới thiệu</span></a></li>
                     <li><a class="app-menu__item" href="commentmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý bình luận</span></a></li>
@@ -233,11 +233,20 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Màu</label>
-                                    <input class="form-control" placeholder="Blue,Gray,..." name="color" type="text">
+                                    <select class="form-control" name="color">
+                                        <option value="White">White</option>
+                                        <option value="Black">Black</option>
+                                        <option value="Green">Green</option>
+                                        <option value="Yellow">Yellow</option>
+                                        <option value="Brown">Brown</option>
+                                        <option value="Blue">Blue</option>
+                                        <option value="Red">Red</option>
+                                    </select>
+                                    <!--<input class="form-control" placeholder="Blue,Gray,..." name="color" type="text">-->
                                 </div>
                                 <div class="form-group  col-md-3">
                                     <label class="control-label">Số lượng</label>
-                                    <input class="form-control" name="quantity" type="number" min="1" oninput="validateQuantity(this)">
+                                    <input class="form-control" name="quantity" placeholder="10,100,..." type="text"  oninput="validateQuantity(this)">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label class="control-label">Ảnh sản phẩm</label>
@@ -353,9 +362,14 @@
         </script>
         <script>
             function validateQuantity(input) {
-                if (input.value < 1) {
-                    input.value = 1;
+                let value = input.value;
+                let newValue = '';
+                for (let char of value) {
+                    if (/[0-9,]/.test(char)) {
+                        newValue += char;
+                    }
                 }
+                input.value = newValue;
             }
 
         </script>
