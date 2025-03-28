@@ -27,7 +27,6 @@ public class reportDAO extends DBContext {
             while (rs.next()) {
                 list.add(new Report(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
-
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -64,7 +63,6 @@ public class reportDAO extends DBContext {
             e.printStackTrace();
         }
     }
-
     public static void main(String[] args) {
         reportDAO dao = new reportDAO();
         System.out.println(dao.getAll().get(0).getUser_email());
