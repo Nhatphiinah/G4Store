@@ -76,10 +76,10 @@ public class billDAO extends DBContext {
         } catch (Exception e) {
         }
     }
-     public void addOrder1(User u, Cart cart, String payment, String address, int phone, int status) {
+     public int addOrder1(User u, Cart cart, String payment, String address, int phone, int status) {
         LocalDate curDate = java.time.LocalDate.now();
         String date = curDate.toString();
-
+        int bill_id = 0;
         try {
             String sql = "insert into [bill] values(?,?,?,?,?,?,?)";
             conn = new DBContext().getConnection();
@@ -98,7 +98,7 @@ public class billDAO extends DBContext {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                int bill_id = rs.getInt(1);
+                bill_id = rs.getInt(1);
                 for (Item i : cart.getItems()) {
                     String sql2 = "insert into [bill_detail] values(?,?,?,?,?,?)";
                     double total = i.getQuantity() * i.getProduct().getProduct_price();
@@ -123,7 +123,9 @@ public class billDAO extends DBContext {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
+        return bill_id;
     }
          public void updateBill(int Id, int status) {
         try {
@@ -269,14 +271,14 @@ public class billDAO extends DBContext {
 
     public List<Bill> getBillByID(int user_id) {
         List<Bill> list = new ArrayList<>();
-        String sql = "select b.bill_id, b.date,b.total,b.payment, b.address, b.phone from bill b where user_id = ?";
+        String sql = "select b.bill_id, b.date,b.total,b.payment, b.address, b.phone, b.status from bill b where user_id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, user_id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Bill(rs.getInt(1), rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getDate(2), rs.getInt(6)));
+                list.add(new Bill(rs.getInt(1), rs.getFloat(3), rs.getString(4), rs.getString(5), rs.getDate(2), rs.getInt(6),rs.getInt(7)));
             }
         } catch (Exception e) {
         }

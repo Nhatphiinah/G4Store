@@ -64,6 +64,16 @@
             </div>
             <c:remove var="orderSuccessMessage" scope="session"/>
         </c:if>
+        
+        <c:if test="${not empty sessionScope.orderErrorMessage}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ${sessionScope.orderErrorMessage}
+                <a href="user?action=myaccount" class="alert-link">Kiểm tra lịch sử đặt hàng của bạn tại đây.</a>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </c:if>
         <div class="off_canvars_overlay"></div>
 
         <jsp:include page="layout/menu.jsp"/>
