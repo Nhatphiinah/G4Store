@@ -174,7 +174,7 @@ x<%@page contentType="text/html" pageEncoding="UTF-8"%>
         const phoneNumber = this.value;
         isPhoneValid = phoneNumber.length === 10 && phoneNumber.startsWith('0');
 
-        // Update visual feedback
+        //NhuanPPCE180878 Update visual feedback
         if (isPhoneValid) {
             
           
