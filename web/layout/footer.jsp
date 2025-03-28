@@ -53,18 +53,6 @@
                         <h5 class="text-uppercase mb-4">Cửa hàng Thể Thao G4-Store</h5>
                         <p>Văn phòng: Cần Thơ</p>
                     </div>
-
-                    <!-- Newsletter -->
-                    <div class="col-md-3 mb-4">
-                        <h5 class="text-uppercase mb-4">Bản tin</h5>
-                        <form>
-<!--                            <div class="input-group mb-3">
-                                <input type="email" class="form-control" placeholder="Nhập email của bạn" aria-label="Email" aria-describedby="button-addon2">
-                                <button class="btn btn-outline-light" type="submit" id="button-addon2">Đăng ký</button>
-                            </div>-->
-                        </form>
-                    </div>
-
                     <!-- Company Links -->
                     <div class="col-md-3 mb-4">
                         <h5 class="text-uppercase mb-4">Công ty</h5>
