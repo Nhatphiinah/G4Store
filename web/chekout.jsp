@@ -128,7 +128,7 @@ x<%@page contentType="text/html" pageEncoding="UTF-8"%>
                                     </div>-->
                                     <div class="panel-default">
                                         <input id="payment_defult" value="vnpay" name="payment_method" type="radio"
-                                               data-target="createp_account" />
+                                               data-target="createp_account" checked=""/>
                                         <label for="payment_defult" data-toggle="collapse" data-target="#collapsedefult"
                                                aria-controls="collapsedefult">VN Pay <img src="assets/img/icon/vnpay.jpg"
                                                                                    alt="" style="margin-left: 50px"></label>
@@ -165,16 +165,16 @@ x<%@page contentType="text/html" pageEncoding="UTF-8"%>
     phoneInput.addEventListener('input', function() {
         this.value = this.value.replace(/\D/g, '');
         
-        //NhuanPPCE180878 Limit to 10 digits
+        // Limit to 10 digits
         if (this.value.length > 10) {
             this.value = this.value.slice(0, 10);
         }
 
-        //NhuanPPCE180878 Validate the number
+        // Validate the number
         const phoneNumber = this.value;
         isPhoneValid = phoneNumber.length === 10 && phoneNumber.startsWith('0');
 
-        //NhuanPPCE180878 Update visual feedback
+        // Update visual feedback
         if (isPhoneValid) {
             
           
