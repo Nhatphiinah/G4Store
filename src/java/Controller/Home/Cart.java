@@ -1,5 +1,6 @@
 package Controller.Home;
 
+import dal.cartDAO;
 import dal.productDAO;
 import model.Item;
 import model.Product;
@@ -23,6 +24,7 @@ public class Cart extends HttpServlet {
             request.getRequestDispatcher("search?action=productdetail&product_id=" + request.getParameter("product_id")).forward(request, response);
             return;
         }
+        cartDAO cartDao = new cartDAO();
         model.Cart cart = null;
         Object o = session.getAttribute("cart");
 
@@ -31,6 +33,10 @@ public class Cart extends HttpServlet {
         } else {
             cart = new model.Cart();
         }
+        if(user != null){
+            cart.setUserId(user.getUser_id()+"");
+        }
+        
         if (action == null || action.equalsIgnoreCase("addtocart")) {
             addToCart(request, cart);
             List<Item> list = cart.getItems();
@@ -51,6 +57,7 @@ public class Cart extends HttpServlet {
         } else if (action.equals("deletecart")) {
             String product_id = request.getParameter("product_id");
             cart.removeItem(product_id);
+            cartDao.DeleteProductInCart(product_id, user.getUser_id()+"");
             List<Item> list = cart.getItems();
             session.setAttribute("cart", cart);
             session.setAttribute("total", cart.getTotalMoney());
@@ -62,6 +69,8 @@ public class Cart extends HttpServlet {
             int quantity = Integer.parseInt(request.getParameter("quantity"));
 
             cart.updateQuantity(productId, quantity);
+            
+            cartDao.UpdateQuantity(cart);
             session.setAttribute("cart", cart);
             double total = cart.getTotalMoney();
             session.setAttribute("total", total);
@@ -75,6 +84,7 @@ public class Cart extends HttpServlet {
     }
 
     private void addToCart(HttpServletRequest request, model.Cart cart) {
+        cartDAO cd = new cartDAO();
         String Squantity = request.getParameter("quantity");
         String product_id = request.getParameter("product_id");
         String size = request.getParameter("size");
@@ -85,6 +95,13 @@ public class Cart extends HttpServlet {
             Product product = pdao.getProductByID(product_id);
             Item item = new Item(product, quantity, size, color);
             cart.addItem(item);
+            if(cart.getUserId() != null){
+                if(cd.GetUserProductInCart( product_id, cart.getUserId()) == null){
+                    cd.AddCart(cart);
+                }else{
+                    cd.UpdateQuantity(cart);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
