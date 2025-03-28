@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author Doanh
+ * @author 
  */
 public class About {
 
