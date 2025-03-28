@@ -232,7 +232,7 @@
 }
 
 /* Định dạng chữ trong menu */
-/*.menu li a {
+.menu li a {
     font-size: 15px;  Làm chữ to hơn 
     font-weight: bold;  Chữ đậm hơn 
     text-decoration: none;  Bỏ gạch chân 
@@ -240,7 +240,7 @@
     padding: 15px 20px;  Tạo khoảng cách giữa các mục 
     display: block;  Đảm bảo toàn bộ vùng click được áp dụng 
     transition: color 0.3s ease-in-out;
-}*/
+}
 
 /* Khi hover vào menu 
 .menu li a:hover {
