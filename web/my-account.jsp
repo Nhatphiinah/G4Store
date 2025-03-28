@@ -212,6 +212,7 @@
                                                     <th>Hình thức GD</th>
                                                     <th>Địa chỉ</th>
                                                     <th>Tổng đơn</th>
+                                                    <th>Trạng thái</th>
                                                     <th>Actions</th>	 	 	 	
                                                 </tr>
                                             </thead>
@@ -223,6 +224,17 @@
                                                         <td><span class="success">${b.payment}</span></td>
                                                         <td>${b.address}</td>
                                                         <td>${b.total}</td>
+                                                        <td>
+                                                            <c:if test="${b.status == 1}">
+                                                                Chưa thanh toán
+                                                            </c:if>
+                                                            <c:if test="${b.status == 2}">
+                                                                Đã thanh toán
+                                                            </c:if>
+                                                            <c:if test="${b.status == 3}">
+                                                                Đã nhận hàng
+                                                            </c:if>
+                                                        </td>
                                                         <td><a href="user?action=showdetail&bill_id=${b.bill_id}" class="view">view</a></td>
                                                     </tr>
                                                 </c:forEach>
