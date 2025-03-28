@@ -60,7 +60,7 @@
         <div class="cart_area">
             <div class="cart_link">
                 <c:if test="${!user.isAdmin == 'True' && !user.isStoreStaff=='True'}">
-                <a href="cart?action=showcart"><i class="fa fa-shopping-basket">${sessionScope.size}</i>Giỏ Hàng</a>
+                    <a href="cart?action=showcart"><i class="fa fa-shopping-basket">${sessionScope.size}</i>Giỏ Hàng</a>
                 </c:if>
             </div>
         </div>
@@ -169,7 +169,7 @@
                         <div class="cart_area">
                             <div class="cart_link">
                                 <c:if test="${!user.isAdmin == 'True' && !user.isStoreStaff=='True'}">
-                                <a href="cart?action=showcart"><i class="fa fa-shopping-basket"></i>${sessionScope.size} Giỏ hàng</a>
+                                    <a href="cart?action=showcart"><i class="fa fa-shopping-basket"></i>${sessionScope.size} Giỏ hàng</a>
                                 </c:if>
                             </div>
                         </div>
@@ -205,66 +205,66 @@
     <!--header middel end-->
 
     <!--header bottom satrt-->
-   <div class="header_bottom sticky-header">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-12">
-                <div class="main_menu_inner">
-                    <div class="main_menu"> 
-                        <nav>  
-                            <ul>
-                                <ul class="menu">
-    <li><a href="home">Trang chủ</a></li>
-    <li><a href="product">Sản phẩm</a></li>
-    <li><a href="about">Chúng tôi</a></li>
-    <li><a href="contact">Liên hệ</a></li>
-</ul>
+    <div class="header_bottom sticky-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <div class="main_menu_inner">
+                        <div class="main_menu"> 
+                            <nav>  
+                                <ul>
+                                    <ul class="menu">
+                                        <li><a href="home">Trang chủ</a></li>
+                                        <li><a href="product">Sản phẩm</a></li>
+                                        <li><a href="about">Chúng tôi</a></li>
+                                        <li><a href="contact">Liên hệ</a></li>
+                                    </ul>
 
-<style>
-/* Định dạng menu */
-.menu {
-    display: flex; /* Dàn đều các mục theo hàng ngang */
-    justify-content: space-around; /* Canh đều khoảng cách giữa các mục */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    list-style: none; /* Bỏ dấu chấm */
-    padding: 0;
-    margin: 0;
-    background-color: #f8f9fa; /* Nền menu (có thể đổi màu tùy ý) */
-}
+                                    <style>
+                                        /* Định dạng menu */
+                                        .menu {
+                                            display: flex; /* Dàn đều các mục theo hàng ngang */
+                                            justify-content: space-around; /* Canh đều khoảng cách giữa các mục */
+                                            align-items: center; /* Căn giữa theo chiều dọc */
+                                            list-style: none; /* Bỏ dấu chấm */
+                                            padding: 0;
+                                            margin: 0;
+                                            background-color: #f8f9fa; /* Nền menu (có thể đổi màu tùy ý) */
+                                        }
 
-/* Định dạng chữ trong menu */
-.menu li a {
-    font-size: 20px; /* Làm chữ to hơn */
-    font-weight: bold; /* Chữ đậm hơn */
-    text-decoration: none; /* Bỏ gạch chân */
-    color: black; /* Màu chữ */
-    padding: 15px 20px; /* Tạo khoảng cách giữa các mục */
-    display: block; /* Đảm bảo toàn bộ vùng click được áp dụng */
-    transition: color 0.3s ease-in-out;
-}
+                                        /* Định dạng chữ trong menu */
+                                        .menu li a {
+                                            font-size: 20px; /* Làm chữ to hơn */
+                                            font-weight: bold; /* Chữ đậm hơn */
+                                            text-decoration: none; /* Bỏ gạch chân */
+                                            color: black; /* Màu chữ */
+                                            padding: 15px 20px; /* Tạo khoảng cách giữa các mục */
+                                            display: block; /* Đảm bảo toàn bộ vùng click được áp dụng */
+                                            transition: color 0.3s ease-in-out;
+                                        }
 
-/* Khi hover vào menu */
-.menu li a:hover {
-    color: orange; /* Khi di chuột vào sẽ đổi màu cam */
-}
-</style>
+                                        /* Khi hover vào menu */
+                                        .menu li a:hover {
+                                            color: orange; /* Khi di chuột vào sẽ đổi màu cam */
+                                        }
+                                    </style>
 
-                            </ul>   
-                        </nav> 
-                    </div>
-                </div> 
+                                </ul>   
+                            </nav> 
+                        </div>
+                    </div> 
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<style>
-.header_bottom.sticky-header {
-    background: rgba(255, 255, 255, 0.2); 
-    backdrop-filter: blur(5px); 
-    transition: background 0.3s ease-in-out;
-}
-</style>
+    <style>
+        .header_bottom.sticky-header {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            transition: background 0.3s ease-in-out;
+        }
+    </style>
 
     <!--header bottom end-->
 </header>
