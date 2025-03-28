@@ -14,7 +14,7 @@ import model.About;
 
 /**
  *
- * @author Phung An
+ * @author 
  */
 public class aboutDAO extends DBContext {
 
