@@ -16,7 +16,7 @@ import model.User;
 
 /**
  *
- * @author PhuLTBCE180808
+ * @author ASUS
  */
 public class cartDAO {
     Connection conn = null;
@@ -56,6 +56,9 @@ public class cartDAO {
             e.printStackTrace();
         }
     }
+    
+    
+    
     public Cart GetCartByUser(int userId){
         String sql = "SELECT [cart_id]\n" +
                     "      ,[product_id]\n" +
@@ -100,7 +103,8 @@ public class cartDAO {
         }
         return null;
     }
-   public Cart GetUserProductInCart(String productId, String userId){
+    
+     public Cart GetUserProductInCart(String productId, String userId){
         String sql = "SELECT [cart_id]\n" +
                     "      ,[product_id]\n" +
                     "      ,[product_name]\n" +
@@ -144,7 +148,8 @@ public class cartDAO {
         } catch (Exception e) {
         }
         return null;
-    }  
+    }
+    
     public void UpdateQuantity(Cart c){
         String sql = "UPDATE [dbo].[cart]\n" +
                         "   SET [quantity] = ?,\n" +
@@ -179,5 +184,4 @@ public class cartDAO {
         } catch (Exception e) {
         }
     }
-    
 }
