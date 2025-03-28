@@ -52,18 +52,7 @@ public class userDAO extends DBContext {
         }
     }
 
-    //NhanPNTCE180453-Delete User
-    public void deleteUser(int user_id) {
-        String sql = "DELETE FROM users WHERE user_id = ?";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, user_id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+    
 
     public User checkAcc(String user_email) {
         try {
