@@ -215,7 +215,6 @@
                                     <h5>Thêm mới nhân viên </h5>
                                 </span>
                             </div>
-
                             <div class="form-group col-md-12" >
 
                                 <h2 style="color: red; padding-left: 10px">
@@ -236,8 +235,6 @@
                 </div>
             </div>
         </div>
-
-
         <!-- Essential javascripts for application to work-->
         <script src="admin/js/jquery-3.2.1.min.js"></script>
         <script src="admin/js/popper.min.js"></script>
@@ -253,8 +250,6 @@
         <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript">$('#sampleTable').DataTable();</script>
         <script>
-
-
             //Thời Gian
             function time() {
                 var today = new Date();
@@ -305,7 +300,6 @@
                     win.print();
                 }
             }
-
             $(document).ready(function () {
                 $('#sampleTable').DataTable();
 
@@ -326,7 +320,6 @@
                         }
                     });
                 });
-
                 // Event delegation for ban button
                 jQuery(document).on("click", ".ban", function () {
                     swal({
@@ -344,7 +337,6 @@
                         }
                     });
                 });
-
                 // Event delegation for unban button
                 jQuery(document).on("click", ".unban", function () {
                     swal({
@@ -405,7 +397,6 @@
                     }
                 });
             }
-
             document.getElementById('userStatusFilter').addEventListener('change', function () {
                 var statusFilter = this.value.toLowerCase();
                 var table = document.getElementById('sampleTable');
