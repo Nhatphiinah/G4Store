@@ -16,7 +16,7 @@ import model.User;
 
 /**
  *
- * @author PhuLTBCE180808
+ * @author ASUS
  */
 public class cartDAO {
     Connection conn = null;
@@ -32,9 +32,10 @@ public class cartDAO {
 "           ,[product_price]\n" +
 "           ,[total]\n" +
 "           ,[quantity]\n" +
-"           ,[user_id])\n" +
+"           ,[user_id],[size]\n" +
+"      ,[color])\n" +
 "     VALUES\n" +
-"           (?,?,?,?,?,?,?)";
+"           (?,?,?,?,?,?,?,?,?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -47,12 +48,17 @@ public class cartDAO {
                 ps.setFloat(5, p.getProduct_price() * item.getQuantity());
                 ps.setFloat(6, item.getQuantity());
                 ps.setString(7, c.getUserId());
-                
+                ps.setString(8, item.getSize());
+                ps.setString(9, item.getColor());
                 ps.executeUpdate();
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+    
+    
+    
     public Cart GetCartByUser(int userId){
         String sql = "SELECT [cart_id]\n" +
                     "      ,[product_id]\n" +
@@ -61,7 +67,8 @@ public class cartDAO {
                     "      ,[product_price]\n" +
                     "      ,[total]\n" +
                     "      ,[quantity]\n" +
-                    "      ,[user_id]\n" +
+                    "      ,[user_id],[size]\n" +
+"      ,[color]\n" +
                     "  FROM [ShopYouAndMeVersionFinal].[dbo].[cart]\n" +
                     "  Where user_id = ?";
         
@@ -86,7 +93,8 @@ public class cartDAO {
               
               item.setProduct(p);
               item.setQuantity(rs.getInt("quantity"));
-              
+              item.setColor(rs.getString("color"));
+              item.setSize(rs.getString("size"));
               items.add(item);
             }
             c.setItems(items);
@@ -95,7 +103,8 @@ public class cartDAO {
         }
         return null;
     }
-   public Cart GetUserProductInCart(String productId, String userId){
+    
+     public Cart GetUserProductInCart(String productId, String userId){
         String sql = "SELECT [cart_id]\n" +
                     "      ,[product_id]\n" +
                     "      ,[product_name]\n" +
@@ -139,7 +148,8 @@ public class cartDAO {
         } catch (Exception e) {
         }
         return null;
-    }  
+    }
+    
     public void UpdateQuantity(Cart c){
         String sql = "UPDATE [dbo].[cart]\n" +
                         "   SET [quantity] = ?,\n" +
@@ -158,6 +168,7 @@ public class cartDAO {
                 ps.executeUpdate();
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
@@ -173,5 +184,4 @@ public class cartDAO {
         } catch (Exception e) {
         }
     }
-    
 }
