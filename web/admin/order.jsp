@@ -137,7 +137,7 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-12">
                                                             <span class="thong-tin-thanh-toan">
-                                                                <h5>Chỉnh sửa danh mục</h5>
+                                                                <h5>Chỉnh sửa Trạng thái đơn hàng</h5>
                                                             </span>
                                                         </div>
                                                     </div>
