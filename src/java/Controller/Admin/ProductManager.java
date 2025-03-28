@@ -37,6 +37,10 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+/**
+ *
+ * @author NhatPhi
+ */
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 2,
         maxFileSize = 1024 * 1024 * 10,
@@ -68,7 +72,7 @@ public class ProductManager extends HttpServlet {
             if (user != null && user.getIsAdmin().equalsIgnoreCase("true") || user.getIsStoreStaff().equalsIgnoreCase("true")) {
                 if (action == null || action.equals("")) {
                     productDAO c = new productDAO();
-                    List<Product> product = c.getProduct();
+                    List<Product> product = c.getProductBySize();
                     List<Size> size = c.getSize();
                     List<Color> color = c.getColor();
                     List<Category> category = c.getCategory();
@@ -128,19 +132,29 @@ public class ProductManager extends HttpServlet {
                             String product_img = "images/" + request.getParameter("product_img");
                             String product_describe = request.getParameter("describe");
                             String active = request.getParameter("permission");
-                            int quantity = Integer.parseInt(product_quantity);
+                            active = "True";
+                            //int quantity = Integer.parseInt(product_quantity);
                             Float price = Float.parseFloat(product_price);
                             int cid = Integer.parseInt(category_id);
                             productDAO dao = new productDAO();
                             Category cate = new Category(cid);
                             String[] size_rw = product_size.split("\\s*,\\s*");
                             String[] color_rw = product_color.split("\\s*,\\s*");
-
+                            String[] quantity_rw = product_quantity.split("\\s*,\\s*");
+                            int quantity = 0;
                             List<Size> list = new ArrayList<>();
-                            for (String s : size_rw) {
-                                list.add(new Size(product_id, s));
-                            }
+//                            for (String s : size_rw) {
+//                                list.add(new Size(product_id, s));
+//                            }
 
+                            for (int i = 0; i < size_rw.length; i++) {
+                                String size = size_rw[i];
+                                if(i >= quantity_rw.length ) break;
+                                int qua = Integer.parseInt(quantity_rw[i]);
+                                quantity += qua;
+                                list.add(new Size(product_id, size, qua));
+                            }
+                            
                             List<Color> list2 = new ArrayList<>();
                             for (String c : color_rw) {
                                 list2.add(new Color(product_id, c));
@@ -197,10 +211,10 @@ public class ProductManager extends HttpServlet {
                     }
                     else{
                     //lỗi do các căp key bị null
-                    int quantity = Integer.parseInt(product_quantity);
-                    if (quantity < 0) {
-                        quantity = 1;
-                    }
+//                    int quantity = Integer.parseInt(product_quantity);
+//                    if (quantity < 0) {
+//                        quantity = 1;
+//                    }
                     Float price = Float.parseFloat(product_price);
                     int cid = Integer.parseInt(category_id);
                     productDAO dao = new productDAO();
@@ -209,18 +223,30 @@ public class ProductManager extends HttpServlet {
 
                     String[] size_rw = product_size.split("\\s*,\\s*");
                     String[] color_rw = product_color.split("\\s*,\\s*");
-
+                    String[] quantity_rw = product_quantity.split("\\s*,\\s*");
                     //size
                     List<Size> list = new ArrayList<>();
 
-                    for (String s : size_rw) {
-                        list.add(new Size(product_id, s));
+//                    for (String s : size_rw) {
+//                        list.add(new Size(product_id, s));
+//                    }
+                    int quantity = 0;
+                     for (int i = 0; i < size_rw.length; i++) {
+                        String size = size_rw[i];
+                        if(i >= quantity_rw.length ) break;
+                        int qua = Integer.parseInt(quantity_rw[i]);
+                        quantity += qua;
+                        list.add(new Size(product_id, size, qua));
                     }
+                    
+                    
                     //color
                     List<Color> list2 = new ArrayList<>();
                     for (String c : color_rw) {
                         list2.add(new Color(product_id, c));
                     }
+                    
+                    
                     Product_Active activep = new Product_Active(product_id, active);
                     Product product = new Product();
                     product.setCate(cate);
@@ -422,13 +448,18 @@ public class ProductManager extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
-     * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     public int BUFFER_SIZE = 1024 * 1000;
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
