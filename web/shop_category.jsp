@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
     <head>
@@ -109,6 +110,9 @@
             .breadcrumb_content ul li a:hover {
                 color: #ff6a28;
             }
+            .category.active{
+                background-color: #007bff;
+            }
         </style>
 
 
@@ -132,64 +136,73 @@
                     <div class="sidebar mb-4">
                         <h2><i class="fas fa-th-list mr-2"></i>Danh mục</h2>
                         <ul>
-                            <li><a href="search?action=listByCategory&category_id=all">TẤT CẢ</a></li>
+                            <li class="category active"><a href="#" data-category="all">TẤT CẢ</a></li>
                                 <c:forEach items="${CategoryData}" var="c">
-                                <li><a href="search?action=listByCategory&category_id=${c.category_id}">${c.category_name}</a></li>
+                                <li class="category ${categoryId == c.category_id ? 'active' : ''}"><a href="#" data-category="${c.category_id}">${c.category_name}</a></li>
                                 </c:forEach>
                         </ul>
 
                         <h2 class="mt-4"><i class="fas fa-money-bill mr-2"></i>Giá</h2>
-                        <form action="search?action=searchByPrice" method="POST">
+                        <div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="price" value="0" id="price1">
+                                <input class="form-check-input" type="radio" name="price" value="5" id="price5" ${priceRange eq '5' ? 'checked' : ''}>
+                                <label class="form-check-label" for="price1">Tất cả</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="price" value="0" id="price1" ${priceRange eq '0' ? 'checked' : ''}>
                                 <label class="form-check-label" for="price1">Dưới 50.000Vnđ</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="price" value="1" id="price2">
+                                <input class="form-check-input" type="radio" name="price" value="1" id="price2" ${priceRange eq '1' ? 'checked' : ''}>
                                 <label class="form-check-label" for="price2">Từ 50.000Vnđ - 200.000Vnđ</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="price" value="2" id="price3">
+                                <input class="form-check-input" type="radio" name="price" value="2" id="price3" ${priceRange eq '2' ? 'checked' : ''}>
                                 <label class="form-check-label" for="price3">Từ 200.000Vnđ - 500.000Vnđ</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="price" value="3" id="price4">
+                                <input class="form-check-input" type="radio" name="price" value="3" id="price4" ${priceRange eq '3' ? 'checked' : ''}>
                                 <label class="form-check-label" for="price4">Từ 500.000 Vnđ - 1.000.000 Vnđ</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="price" value="4" id="price5">
+                                <input class="form-check-input" type="radio" name="price" value="4" id="price5" ${priceRange eq '4' ? 'checked' : ''}>
                                 <label class="form-check-label" for="price5">1 triệu Vnđ trở lên</label>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-sm mt-3">Tìm kiếm</button>
-                        </form>
-                        <h2 class="mt-4"><i class="fas fa-money-bill mr-2"></i>Trạng thái</h2>
-                        <div class="status-menu">
-                            <ul>
-                                <li><a href="search?action=NoSoldOut">Sản phẩm còn hàng</a></li>
-                                <li><a href="search?action=SoldOut">Sản phẩm hết hàng</a></li>
-                            </ul>
                         </div>
 
-                        <h2 class="mt-4"><i class="fas fa-palette mr-2"></i>Màu Sắc</h2>
-                        <form action="search?action=SearchByColor" method="POST">
+                        <h2 class="mt-4"><i class="fas fa-money-bill mr-2"></i>Trạng thái</h2>
+                        <div class="status-menu">
+                            <!--                            <ul>
+                                                            <li><a href="search?action=NoSoldOut">Sản phẩm còn hàng</a></li>
+                                                            <li><a href="search?action=SoldOut">Sản phẩm hết hàng</a></li>
+                                                            <li><a href="search?action=SaleOff">Sản phẩm Sale off</a></li>
+                                                        </ul>-->
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="colors" value="0" id="color1">
-                                <label class="form-check-label" for="color1">Đỏ</label>
+                                <input class="form-check-input" type="checkbox" name="saleOff" id="saleOff">
+                                <label class="form-check-label" for="saleOff">Sale off</label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="colors" value="1" id="color2">
-                                <label class="form-check-label" for="color2">Xanh</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="colors" value="2" id="color3">
-                                <label class="form-check-label" for="color3">Trắng</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="colors" value="3" id="color4">
-                                <label class="form-check-label" for="color4">Đen</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-sm mt-3">Lọc</button>
-                        </form>
+                        </div>
+
+                        <!--                        <h2 class="mt-4"><i class="fas fa-palette mr-2"></i>Màu Sắc</h2>
+                                                <form action="search?action=SearchByColor" method="POST">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="colors" value="0" id="color1">
+                                                        <label class="form-check-label" for="color1">Đỏ</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="colors" value="1" id="color2">
+                                                        <label class="form-check-label" for="color2">Xanh</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="colors" value="2" id="color3">
+                                                        <label class="form-check-label" for="color3">Trắng</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="colors" value="3" id="color4">
+                                                        <label class="form-check-label" for="color4">Đen</label>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary btn-sm mt-3">Lọc</button>
+                                                </form>-->
                     </div>
                 </div>
 
@@ -198,20 +211,20 @@
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <p class="mb-0">Hiển thị ${ProductData.size()} sản phẩm</p>
                         <div class="dropdown">
-                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Sắp xếp
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="search?action=sort&type=low">Giá từ thấp đến cao</a>
-                                <a class="dropdown-item" href="search?action=sort&type=high">Giá từ cao xuống thấp</a>
-                                <a class="dropdown-item" href="search?action=sort&type=a-z">A-Z</a>
-                            </div>
+                            <!--                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Sắp xếp
+                                                        </button>-->
+                            <select id="dropdownMenuButton" class="form-control">
+                                <!--<option>Mặc định</option>-->
+                                <option value="asc" ${sort eq 'asc' ? 'selected' : ''}>Giá từ thấp đến cao</option>
+                                <option value="desc" ${sort eq 'desc' ? 'selected' : ''}>Giá từ cao đến thấp</option>
+                            </select>
                         </div>
                     </div>
 
 
 
-                    <div class="row">
+                    <div class="row" id="product-list">
                         <c:choose>
                             <c:when test="${empty ProductData}">
                                 <div class="col-12 text-center">
@@ -226,34 +239,41 @@
                                             <img src="${p.img}" class="card-img-top product-img" alt="${p.product_name}">
                                             <div class="card-body">
                                                 <h5 class="card-title product-title">${p.product_name}</h5>
-                                                <p class="card-text product-price">${p.product_price} VNĐ</p>
+                                                <c:choose>
+                                                    <c:when test="${p.discount > 0}">
+                                                        <p class="card-text product-price">
+                                                            Giá gốc: <del><fmt:formatNumber value="${p.product_price}" pattern="#,##0" /> VNĐ</del>
+                                                        </p>
+                                                        <p class="card-text product-final-price">
+                                                            Giá sau giảm: <strong>
+                                                                <c:set var="discountedPrice" value="${p.product_price - (p.product_price * p.discount / 100)}" />
+                                                                <fmt:formatNumber value="${discountedPrice}" pattern="#,##0" /> VNĐ
+                                                            </strong>
+                                                        </p>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <p class="card-text product-final-price">
+                                                            Giá gốc: <strong><fmt:formatNumber value="${p.product_price}" pattern="#,##0" /> VNĐ</strong>
+                                                        </p>
+                                                    </c:otherwise>
+                                                </c:choose>
                                                 <a href="search?action=productdetail&product_id=${p.product_id}" class="btn btn-primary btn-sm">Xem chi tiết</a>
                                             </div>
                                         </div>
                                     </div>
                                 </c:forEach>
+                                <nav aria-label="navigation">
+                                    <ul class="pagination justify-content-end mt-50" id="paging">
+                                        <c:forEach begin="1" end="${totalPage}" var="i">
+                                            <li class="page-item ${pageIndex == i ? "active":""}"><a
+                                                    class="page-link"
+                                                    href="#" data-page="${i}">${i}</a></li>
+                                            </c:forEach>
+                                    </ul>
+                                </nav>
                             </c:otherwise>
                         </c:choose>
                     </div>
-                    <!-- 
-                                      <nav aria-label="Page navigation" class="mt-4">
-                        <ul class="pagination justify-content-center">
-                    <c:forEach begin="${1}" end="${num}" var="i">
-                        <li class="page-item ${i==page?'active':''}">
-                        <c:choose>
-                            <c:when test="${not empty sessionScope.selectedCategoryId}">
-                                <a class="page-link" href="search?action=listByCategory&category_id=${sessionScope.selectedCategoryId}&page=${i}">${i}</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="page-link" href="search?action=listByCategory&category_id=all&page=${i}">${i}</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </li>
-                    </c:forEach>
-                </ul>
-            </nav>
-                    -->
-
                 </div>
             </div>
         </div>
@@ -264,5 +284,59 @@
 
         <!-- Main JS -->
         <script src="assets/js/main.js"></script>
+        <script>
+            $(document).ready(function () {
+                function loadProducts(page = 1, category = null) {
+                    category = category || $(".category.active a").data("category") || "all";
+                    let search = $("#search-input").val();
+                    let sort = $("#dropdownMenuButton").val();
+                    let price = $("input[name='price']:checked").val();
+                    let saleOff = $("#saleOff").is(":checked") ? "true" : "false";
+
+                    $.ajax({
+                        url: "products",
+                        method: "GET",
+                        data: {category, search, sort, price, saleOff, pageIndex: page},
+                        success: function (response) {
+                            console.log("success");
+                            $("#product-list").html(response);
+                        },
+                        error: function (error) {
+                            console.error("AJAX Error:", error);
+                        }
+                    });
+                }
+
+                $(document).on("click", ".category a", function (e) {
+                    e.preventDefault(); // Ngăn chặn chuyển hướng trang
+
+                    $(".category").removeClass("active"); // Xóa class active cũ
+                    $(this).parent().addClass("active"); // Gán class active cho danh mục mới
+
+                    let category = $(this).data("category"); // Lấy category từ phần tử vừa click
+                    loadProducts(1, category); // Gọi hàm với category mới
+                });
+
+
+                $("input[name='price'], #saleOff").on("click change", function () {
+                    loadProducts();
+                });
+                $("#dropdownMenuButton").on("change", function () {
+                    loadProducts();
+                });
+
+                $("#search-input").on("keyup", function () {
+                    loadProducts();
+                });
+
+                $(document).on("click", ".pagination a", function (e) {
+                    e.preventDefault();
+                    let page = $(this).data("page");
+                    loadProducts(page);
+                });
+            });
+
+
+        </script>
     </body>
 </html>
