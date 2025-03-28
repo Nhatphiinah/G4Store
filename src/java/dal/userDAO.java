@@ -35,24 +35,44 @@ public class userDAO extends DBContext {
         return null;
     }
 
-    //NhanPNTCe180453- Edit user
-    public void updateUser(int user_id, String user_name, String user_pass, String dateOfBirth, String address, String phoneNumner) {
-        String sql = "update users set user_name =? , user_pass = ?,dateOfBirth = ?,address = ?,phoneNumber = ? where user_id = ?";
+    public void updateUser(int user_id, String user_name, String dateOfBirth, String address, String phoneNumner) {
+        String sql = "update users set user_name =? , dateOfBirth = ?,address = ?,phoneNumber = ? where user_id = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, user_name);
-            ps.setString(2, user_pass);
-            ps.setString(3, dateOfBirth);
-            ps.setString(4, address);
-            ps.setString(5, phoneNumner);
-            ps.setInt(6, user_id);
+            ps.setString(2, dateOfBirth);
+            ps.setString(3, address);
+            ps.setString(4, phoneNumner);
+            ps.setInt(5, user_id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void changePass(int user_id, String pass) {
+        String sql = "update users set [user_pass] =? where user_id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, pass);
+            ps.setInt(2, user_id);
             ps.executeUpdate();
         } catch (Exception e) {
         }
     }
 
-    
+    public void deleteUser(int user_id) {
+        String sql = "DELETE FROM users WHERE user_id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, user_id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     public User checkAcc(String user_email) {
         try {
@@ -90,7 +110,6 @@ public class userDAO extends DBContext {
         };
     }
 
-    //NhanPNTCE180453-View User
     public List<User> getUser() {
         List<User> list = new ArrayList<>();
         String sql = "select *, CAST(banned AS BIT) AS banned FROM users";
@@ -122,7 +141,6 @@ public class userDAO extends DBContext {
         }
     }
 
-    //NhanPNTCE180453-set role
     public void setAdmin(int user_id, String isAdmin) {
         String sql = "update users set isAdmin= ? where user_id = ?";
         try {
@@ -136,7 +154,6 @@ public class userDAO extends DBContext {
 
     }
 
-    //NhanPNTCE1800453-Ban User
     public void banUser(int user_id) {
         String sql = "UPDATE users SET banned = 1 WHERE user_id = ?";
         try {
@@ -149,7 +166,6 @@ public class userDAO extends DBContext {
         }
     }
 
-    //NhanPNTCE180453-Unban User
     public void unbanUser(int user_id) {
         String sql = "UPDATE users SET banned = 0 WHERE user_id = ?";
         try {
@@ -175,7 +191,6 @@ public class userDAO extends DBContext {
 //            e.printStackTrace();
 //        }
 //    }
-    //NhanPNTCE180453-Set role
     public void setAdmin(int user_id, String isAdmin, String isStoreStaff, String adminReason) {
         String sql = "UPDATE users SET isAdmin = ?, isStoreStaff = ?, adminReason = ? WHERE user_id = ?";
         try {
@@ -191,8 +206,7 @@ public class userDAO extends DBContext {
 
         }
     }
-    //NhanPNTCE180453-Addstaff
-
+    
     public void addStaff(User u) {
         try {
             String query = "insert into users([user_name],[user_email],[user_pass],[isAdmin],[banned],[isStoreStaff]) values(?,?,?,?,?,?)";

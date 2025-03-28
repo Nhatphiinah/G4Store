@@ -6,6 +6,7 @@
 package Controller.Home;
 
 import dal.billDAO;
+import dal.cartDAO;
 import dal.userDAO;
 import model.BillDetail;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import model.Item;
 
 public class User extends HttpServlet {
 
@@ -73,6 +75,13 @@ public class User extends HttpServlet {
                 response.addCookie(email);
                 response.addCookie(pass);
                 response.addCookie(rem);
+
+                cartDAO cDao = new cartDAO();
+                model.Cart cart = cDao.GetCartByUser(user.getUser_id());
+                List<Item> list = cart.getItems();
+                session.setAttribute("cart", cart);
+                session.setAttribute("total", cart.getTotalMoney());
+                session.setAttribute("size", list.size());
                 response.sendRedirect("home");
             }
         }
@@ -80,6 +89,9 @@ public class User extends HttpServlet {
         if (action.equals("logout")) {
             HttpSession session = request.getSession();
             session.removeAttribute("user");
+            session.removeAttribute("cart");
+            session.removeAttribute("total");
+            session.removeAttribute("size");
             session.setAttribute("logoutMessage", "Đăng xuất thành công!");
             response.sendRedirect("home");
         }
@@ -116,7 +128,6 @@ public class User extends HttpServlet {
                 model.User user = (model.User) session.getAttribute("user");
                 if (user != null) {
                     String user_name = request.getParameter("user_name").replaceAll(" {2,}", " ");
-                    String user_pass = request.getParameter("user_pass");
                     String dateOfBirth = request.getParameter("dateOfBirth");
                     String address = request.getParameter("address").replaceAll(" {2,}", " ");
                     String phoneNumber = request.getParameter("phoneNumber");
@@ -133,28 +144,46 @@ public class User extends HttpServlet {
 
                     }
 
-                    //Check if the password has a capital initials and contains at least 1 number
-                    boolean isValidPassword = false;
-                    if (user_pass != null && !user_pass.isEmpty()) {
-                        boolean hasUpperCase = !user_pass.equals(user_pass.toLowerCase());
-                        boolean hasNumber = user_pass.matches("(?=.*\\d).{6,}");
-                        isValidPassword = hasUpperCase && hasNumber;
+                    int user_id = user.getUser_id();
+                    if (user_name.trim().isEmpty() || address.trim().isEmpty()) {
+                        session.setAttribute("errorNull", "Tên và thông tin không thể rỗng");
+                        response.sendRedirect("user?action=myaccount");
+                        return;
+                    } else if (!phoneNumber.matches("^\\d{9,11}$")) {
+                        session.setAttribute("errorPhone", "Vui lòng nhập đúng điện thoại");
+                        response.sendRedirect("user?action=myaccount");
+                        return;
                     }
+                    userDAO dao = new userDAO();
+                    dao.updateUser(user_id, user_name, dateOfBirth, address, phoneNumber);
+                    model.User user1 = new model.User(user.getUser_id(), user_name, user.getUser_email(), user.getUser_pass(), user.getIsAdmin(), dateOfBirth, address, phoneNumber, user.isBanned(), user.getAdminReason(), user.getIsStoreStaff());
+                    session.setAttribute("user", user1);
+                    session.setAttribute("updateMessage", "Cập nhật thông tin thành công!");
+                    response.sendRedirect("user?action=myaccount");
+                } else {
 
-                    if (isValidPassword) {
-                        int user_id = user.getUser_id();
+                    response.sendRedirect("user?action=login");
+                }
+            } catch (Exception e) {
+
+                response.sendRedirect("user?action=login");
+            }
+        }
+
+        if (action.equals("changepass")) {
+            try {
+                HttpSession session = request.getSession();
+                model.User user = (model.User) session.getAttribute("user");
+                if (user != null) {
+                    String user_pass = request.getParameter("new_pass");
+                    String old_pass = request.getParameter("old_pass");
+                    String passwordRegex = "^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{6,}$";
+                    if (user_pass.matches(passwordRegex) && old_pass.matches(passwordRegex)) {
                         userDAO dao = new userDAO();
-                        if (user_name.trim().isEmpty() || address.trim().isEmpty()) {
-                            session.setAttribute("errorNull", "Tên và thông tin không thể rỗng");
-                            response.sendRedirect("user?action=myaccount");
-                            return;
-                        } else if (!phoneNumber.matches("^\\d{9,11}$")) {
-                             session.setAttribute("errorPhone", "Vui lòng nhập đúng điện thoại");
-                            response.sendRedirect("user?action=myaccount");
-                           return;
-                        }
-                        dao.updateUser(user_id, user_name, user_pass, dateOfBirth, address, phoneNumber);
-                        model.User user1 = new model.User(user.getUser_id(), user_name, user.getUser_email(), user_pass, user.getIsAdmin(), dateOfBirth, address, phoneNumber, user.isBanned(), user.getAdminReason(), user.getIsStoreStaff());
+
+                        int user_id = user.getUser_id();
+                        dao.changePass(user_id, user_pass);
+                        model.User user1 = new model.User(user.getUser_id(), user.getUser_name(), user.getUser_email(), user_pass, user.getIsAdmin(), user.getDateOfBirth(), user.getAddress(), user.getPhoneNumber(), user.isBanned(), user.getAdminReason(), user.getIsStoreStaff());
                         session.setAttribute("user", user1);
                         session.setAttribute("updateMessage", "Cập nhật thông tin thành công!");
                         response.sendRedirect("user?action=myaccount");
@@ -172,7 +201,51 @@ public class User extends HttpServlet {
             }
         }
 
-//      
+        if (action.equals("signup")) {
+            HttpSession session = request.getSession();
+            userDAO da = new userDAO();
+            String email = request.getParameter("user_email");
+            String pass = request.getParameter("user_pass");
+            String repass = request.getParameter("re_pass");
+//            String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+//            System.out.println(gRecaptchaResponse);
+//            boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+            String passwordRegex = "^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{6,}$";
+            if (!pass.matches(passwordRegex)) {
+                session.setAttribute("error_match", "Mật khẩu phải có ít nhất 6 ký tự, bao gồm ít nhất một chữ cái viết hoa và một chữ số");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+//            if (!verify) {
+//                session.setAttribute("Recaptcha", "Vui lòng xác nhận mã captcha");
+//                request.getRequestDispatcher("login.jsp").forward(request, response);
+//                return;
+//            }
+
+            if (!pass.equals(repass)) {
+                session.setAttribute("error_rePass", "Vui lòng nhập lại mật khẩu cho đúng");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else {
+                model.User a = da.checkAcc(email);
+                if (a == null) {
+                    // Check verify
+                    SendEmail sm = new SendEmail();
+                    String code = sm.getRandom();
+                    UserC userc = new UserC(code, email);
+                    boolean test = sm.sendEmail1(userc);
+                    if (test == true && userc != null) {
+                        session.setAttribute("userc", userc);
+                        session.setAttribute("email", email);
+                        session.setAttribute("pass", pass);
+                        response.sendRedirect("verify.jsp");
+                        return;
+                    }
+                } else {
+                    session.setAttribute("msg", "Email đã tồn tại");
+                    response.sendRedirect("user?action=login");
+                }
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
