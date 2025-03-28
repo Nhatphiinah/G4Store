@@ -131,9 +131,13 @@
                                             <td>${u.phoneNumber}</td>
                                             <td>${u.banned ? 'Bị cấm' : 'Hoạt động'}</td>
                                             <td>${u.adminReason}</td>
-                                            <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                                                        data-target="#ModalUP${u.user_id}"><i class="fas fa-edit"></i></button>       
-                                            </td>
+                                            <td class="text-center">
+    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+        data-target="#ModalUP${u.user_id}">
+        <i class="fas fa-edit"></i>
+    </button>
+</td>
+
 
                                             <td>
 
