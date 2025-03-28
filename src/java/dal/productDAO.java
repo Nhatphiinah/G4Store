@@ -24,7 +24,7 @@ public class productDAO extends DBContext {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-//PhiNVNCE181599
+
     public List<Product> getProduct() {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT c.category_name, p.product_id, p.product_name, p.product_price, "
@@ -37,7 +37,7 @@ public class productDAO extends DBContext {
                 + "INNER JOIN category c ON p.category_id = c.category_id ";
 
         //String sqlSize = "Select * from listByCategory Where product_id = ?";
-        try (Connection conn = new DBContext().getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+        try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(sql);  ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Category c = new Category(rs.getInt(8), rs.getString(1));
@@ -77,7 +77,7 @@ public class productDAO extends DBContext {
                 + "INNER JOIN category c ON p.category_id = c.category_id\n"
                 + "LEFT JOIN product_size ps ON p.product_id = ps.product_id;";
 
-        try (Connection conn = new DBContext().getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+        try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(sql);  ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Category c = new Category(rs.getInt(8), rs.getString(1));
@@ -105,7 +105,7 @@ public class productDAO extends DBContext {
                 + "FROM dbo.product_saleOFF\n"
                 + "WHERE product_id = ? ";
 
-        try (Connection conn = new DBContext().getConnection()) {
+        try ( Connection conn = new DBContext().getConnection()) {
             ps = conn.prepareStatement(sql);
             ps.setString(1, pid);
             rs = ps.executeQuery();
@@ -139,7 +139,7 @@ public class productDAO extends DBContext {
         }
         return list;
     }
-//PhiNVNCE181599
+
     public List<Product> getProductASoldOut() {
         List<Product> list = new ArrayList<>();
         String sql = "select c.category_name ,  p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img, p.category_id from  \n"
@@ -189,7 +189,7 @@ public class productDAO extends DBContext {
                 + "WHERE CAST(GETDATE() AS DATE) BETWEEN CAST(s.start_date AS DATE) AND CAST(s.end_date AS DATE) "
                 + "AND s.discount_percentage > 0";
 
-        try (Connection conn = new DBContext().getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+        try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(sql);  ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Category c = new Category(rs.getInt(8), rs.getString(1));
@@ -303,7 +303,7 @@ public class productDAO extends DBContext {
         }
         return list;
     }
-//PhiNVNCE181599
+
     public void insertProduct(Product product) {
         String sql = "insert into product (product_id,category_id,product_name,product_price,product_describe,quantity,img) values(?,?,?,?,?,?,?)";
         try {
@@ -349,7 +349,7 @@ public class productDAO extends DBContext {
             Product_Active i = product.getActive();
             ps = conn.prepareStatement(sql3);
             ps.setString(1, product.getProduct_id());
-            ps.setBoolean(2, true);
+            ps.setString(2, "True");
             ps.executeUpdate();
         } catch (Exception e) {
         }
@@ -886,7 +886,7 @@ public class productDAO extends DBContext {
         List<Product> list = new ArrayList<>();
         String query = "select p.*, ps.discount_percentage from product p\n"
                 + "left join product_active pa on p.product_id = pa.product_id\n"
-                + "left join category c on p.category_id = c.category_id\n"
+                + "left join category c on p.category_id = c.category_id and c.status = 1\n"
                 + "left join product_saleOFF ps on p.product_id = ps.product_id AND GETDATE() BETWEEN ps.start_date AND ps.end_date\n"
                 + "where pa.active = 'True' \n"
                 + "and p.product_name like ?\n"
@@ -925,6 +925,11 @@ public class productDAO extends DBContext {
                     ps.setFloat(4, 1000000);
                     ps.setFloat(5, Float.MAX_VALUE);
                     break;
+                default:
+                    ps.setFloat(4, 0);
+                    ps.setFloat(5, Float.MAX_VALUE);
+                    break;
+
             }
             if (saleOff != null && saleOff.equals("true")) {
                 ps.setString(6, "true");  // Chỉ lấy sản phẩm có sale
