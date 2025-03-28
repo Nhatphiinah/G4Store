@@ -108,9 +108,6 @@
                     <div class="col-md-6 text-center text-md-start">
                         <p>&copy; 2024 You&Me Vietnam. All rights reserved.</p>
                     </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <img src="path_to_certification_image.png" alt="Chứng nhận đã khai báo với Bộ Công Thương" width="153" height="58">
-                    </div>
                 </div>
             </div>
         </footer>
