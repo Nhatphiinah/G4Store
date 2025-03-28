@@ -184,4 +184,17 @@ public class cartDAO {
         } catch (Exception e) {
         }
     }
+    
+    public  void ClearCartByUser(int userId){
+        String sql = "DELETE FROM [dbo].[cart]\n" +
+                        "WHERE user_id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

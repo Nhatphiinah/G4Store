@@ -2,6 +2,7 @@ package Controller.Home;
 
 import VnPayCommon.Config;
 import dal.billDAO;
+import dal.cartDAO;
 import dal.productDAO;
 import model.*;
 import jakarta.servlet.ServletException;
@@ -176,6 +177,7 @@ public class Checkout extends HttpServlet {
         }
         dao.addOrder1(acc, cart, "COD", address, Integer.parseInt(phone), 1);
 //        new cartDAO().DeleteProductInCart(cart.getId(),acc.getUser_id());
+        new cartDAO().ClearCartByUser(acc.getUser_id());
         session.removeAttribute("cart");
         session.setAttribute("size", 0);
         session.setAttribute("orderSuccessMessage", "Đơn hàng của bạn đã được đặt thành công!");
