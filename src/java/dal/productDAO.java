@@ -24,7 +24,7 @@ public class productDAO extends DBContext {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-
+//PhiNVNCE181599
     public List<Product> getProduct() {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT c.category_name, p.product_id, p.product_name, p.product_price, "
@@ -139,7 +139,7 @@ public class productDAO extends DBContext {
         }
         return list;
     }
-
+//PhiNVNCE181599
     public List<Product> getProductASoldOut() {
         List<Product> list = new ArrayList<>();
         String sql = "select c.category_name ,  p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img, p.category_id from  \n"
@@ -303,7 +303,7 @@ public class productDAO extends DBContext {
         }
         return list;
     }
-
+//PhiNVNCE181599
     public void insertProduct(Product product) {
         String sql = "insert into product (product_id,category_id,product_name,product_price,product_describe,quantity,img) values(?,?,?,?,?,?,?)";
         try {
