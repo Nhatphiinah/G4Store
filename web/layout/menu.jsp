@@ -213,7 +213,7 @@
                     <div class="main_menu"> 
                         <nav>  
                             <ul>
-                                <li class="active"><a href="home">Trang chủ</a></li>
+                                <li><a href="home">Trang chủ</a></li>
                                 <li><a href="product">Sản phẩm</a></li>
                                 <li><a href="about">Chúng tôi</a></li>
                                 <li><a href="contact">Liên hệ</a></li>
