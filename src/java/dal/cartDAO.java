@@ -163,6 +163,7 @@ public class cartDAO {
                 ps.executeUpdate();
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
