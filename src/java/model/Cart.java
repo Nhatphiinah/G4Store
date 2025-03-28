@@ -6,7 +6,7 @@
 package model;
 /**
  *
- * @author phultbce180808
+ * @author 
  */
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,7 @@ public class Cart {
     public int getQuantityById(String id) {
         return getItemById(id).getQuantity();
     }
-    
+
     private Item getItemById(String id) {
         for (Item i : items) {
             if (i.getProduct().getProduct_id().equals(id)) {
