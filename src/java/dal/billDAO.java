@@ -138,21 +138,7 @@ public class billDAO extends DBContext {
         }
     }
 
-//    public List<Bill> getBillInfo() {
-//        List<Bill> list = new ArrayList<>();
-//        String sql = "select b.bill_id, u.user_name,b.phone,b.address,b.date,b.total,b.payment from bill b inner join users u on b.user_id = u.user_id";
-//        try {
-//            conn = new DBContext().getConnection();
-//            ps = conn.prepareStatement(sql);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                User u = new User(rs.getString(2));
-//                list.add(new Bill(rs.getInt(1), u, rs.getFloat(6), rs.getString(7), rs.getString(4), rs.getDate(5), rs.getInt(3)));
-//            }
-//        } catch (Exception e) {
-//        }
-//        return list;
-//    }
+
     public List<Bill> getBillInfo(String paymentMethod) {
         List<Bill> list = new ArrayList<>();
         String sql = "SELECT b.bill_id, u.user_name, b.phone, b.address, b.date, b.total, b.payment "
