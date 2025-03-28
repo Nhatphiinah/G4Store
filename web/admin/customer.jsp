@@ -252,27 +252,7 @@
         <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript">$('#sampleTable').DataTable();</script>
         <script>
-            $(document).ready(function () {
-                $('#sampleTable').DataTable();
-
-                // Event delegation for delete button
-                jQuery(document).on("click", ".trash", function () {
-                    swal({
-                        title: "Cảnh báo",
-                        text: "Bạn có chắc chắn muốn xóa nhân viên này?",
-                        buttons: ["Hủy bỏ", "Đồng ý"],
-                    }).then((willDelete) => {
-                        if (willDelete) {
-                            var userId = $(this).val();
-                            window.location = "customermanager?action=delete&user_id=" + userId;
-                            // Optionally show a success message after deletion
-                            swal("Đã xóa thành công!", {
-                                icon: "success",
-                            });
-                        }
-                    });
-                });
-            });
+            
 
             //Thời Gian
             function time() {
