@@ -58,10 +58,10 @@
                 <li><a class="app-menu__item" href="categorymanager"><i class='app-menu__icon bx bxs-category'></i><span class="app-menu__label">Quản lý danh mục</span></a></li>
                 <li><a class="app-menu__item" href="productmanager"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
                 <li><a class="app-menu__item" href="ordermanager"><i class='app-menu__icon bx bx-task'></i><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
-
+                <li><a class="app-menu__item" href="saleoff"><i class='app-menu__icon bx bxs-discount'></i><span class="app-menu__label">Quản lý khuyến mãi</span></a></li>
                 <!-- Conditionally Display Menu Items -->
                 <c:if test="${sessionScope.user.isAdmin}">
-                    <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý khách hàng</span></a></li>
+                    <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý người dùng</span></a></li>
                     <li><a class="app-menu__item" href="reportmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý phản hồi</span></a></li>
                     <li><a class="app-menu__item" href="aboutmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý trang giới thiệu</span></a></li>
                     <li><a class="app-menu__item" href="commentmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý bình luận</span></a></li>
@@ -95,6 +95,7 @@
                                 <tr>
                                     <th>ID danh mục</th>
                                     <th>Tên danh mục</th>
+                                    <th>Trạng thái</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
@@ -103,10 +104,12 @@
                                     <tr>
                                         <td>${c.category_id}</td>
                                         <td>${c.category_name}</td>
+                                        <td>${c.status == true ? 'Active' : 'InActive'}</td>
                                         <td>
                                             <button class="btn btn-primary btn-sm edit" type="button" data-toggle="modal" data-target="#ModalEditCategory${c.category_id}" title="Sửa"><i class="fas fa-edit"></i></button>
+                                            <c:if test="${c.status == true}">
                                             <button class="btn btn-primary btn-sm trash" type="button" title="xóa" value="${c.category_id}">
-                                                <i class="fas fa-trash"></i></button></td>
+                                                <i class="fas fa-trash"></i></button></c:if></td>
 
                                     </tr>
                                 <div class="modal fade" id="ModalEditCategory${c.category_id}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -130,6 +133,13 @@
                                                         <div class="form-group col-md-12">
                                                             <label class="control-label">Tên danh mục</label>
                                                             <input class="form-control" type="text" name="category_name" value="${c.category_name}">
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label class="control-label">Trạng thái</label>
+                                                            <select class="form-control" name="status">
+                                                                <option ${c.status == true ? 'selected' : ''} value="1">Active</option>
+                                                                <option ${c.status == false ? 'selected' : ''} value="0">InActive</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <button class="btn btn-save" type="submit">Lưu lại</button>
@@ -284,9 +294,9 @@
                 }).then((willDelete) => {
                     if (willDelete) {
                         window.location = "categorymanager?action=delete&category_id=" + categoryId;
-                        swal("Đã xóa thành công!", {
-                            icon: "success",
-                        });
+//                        swal("Đã xóa thành công!", {
+//                            icon: "success",
+//                        });
                     }
                 });
             });
@@ -341,7 +351,10 @@
                 win.print();
             }
         }
+        
+       
     </script>
+    
 </body>
 
 </html>

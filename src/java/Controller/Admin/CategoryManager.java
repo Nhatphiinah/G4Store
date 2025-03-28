@@ -21,7 +21,7 @@ import model.User;
 
 /**
  *
- * @author ZZ
+ * @author
  */
 @WebServlet(name = "CategoryManager", urlPatterns = {"/categorymanager"})
 public class CategoryManager extends HttpServlet {
@@ -74,26 +74,27 @@ public class CategoryManager extends HttpServlet {
                 } else if (action.equalsIgnoreCase("updatecategory")) {
                     String category_id = request.getParameter("category_id");
                     String category_name = request.getParameter("category_name");
-                     if(category_name.trim().isEmpty()){
+                    boolean status = request.getParameter("status").equals("1");
+                    if (category_name.trim().isEmpty()) {
                         session.setAttribute("errorNull", "Vui lòng không nhập khoảng trắng");
                         response.sendRedirect("categorymanager");
                         return;
-                    }else{
-                         categoryDAO cateDao = new categoryDAO();
-                         List<Category> list = cateDao.getCategory();
-                         for (Category i : list) {
-                             if(category_name.trim().equalsIgnoreCase(i.getCategory_name())){
-                                 session.setAttribute("errorNull", "Tên danh mục đã tồn tại!");
-                                 response.sendRedirect("categorymanager");
-                                    return;
-                             }
-                         }
-                     }
+                    } else {
+                        categoryDAO cateDao = new categoryDAO();
+                        List<Category> list = cateDao.getCategory();
+                        for (Category i : list) {
+                            if (i.getCategory_id() != Integer.parseInt(category_id) && category_name.trim().equalsIgnoreCase(i.getCategory_name())) {
+                                session.setAttribute("errorNull", "Tên danh mục đã tồn tại!");
+                                response.sendRedirect("categorymanager");
+                                return;
+                            }
+                        }
+                    }
                     if (category_id != null && category_name != null && !category_id.isEmpty() && !category_name.isEmpty()) {
                         try {
                             int categoryId = Integer.parseInt(category_id);
                             categoryDAO dao = new categoryDAO();
-                            dao.updateCategory(categoryId, category_name);
+                            dao.updateCategory(categoryId, category_name, status);
                             response.sendRedirect("categorymanager");
                             return;
                         } catch (NumberFormatException e) {

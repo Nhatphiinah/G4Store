@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Category;
 import model.Product;
 
@@ -32,7 +34,7 @@ public class categoryDAO extends DBContext {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Category(rs.getInt(1), rs.getString(2)));
+                list.add(new Category(rs.getInt(1), rs.getString(2), rs.getBoolean(3)));
             }
 
         } catch (Exception e) {
@@ -52,13 +54,14 @@ public class categoryDAO extends DBContext {
         }
     }
 
-    public void updateCategory(int categoryId, String categoryName) {
+    public void updateCategory(int categoryId, String categoryName, boolean status) {
         try {
-            String sql = "UPDATE category SET category_name = ? WHERE category_id = ?";
+            String sql = "UPDATE category SET category_name = ?, status = ? WHERE category_id = ?";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, categoryName);
-            ps.setInt(2, categoryId);
+            ps.setBoolean(2, status);
+            ps.setInt(3, categoryId);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,14 +69,14 @@ public class categoryDAO extends DBContext {
     }
 
     public void deleteCategory(int categoryId) {
+        String sql = "UPDATE category set status = 0 WHERE category_id = ?";
         try {
-            String sql = "DELETE FROM category WHERE category_id = ?";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, categoryId);
             ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            Logger.getLogger(categoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
