@@ -70,8 +70,8 @@
                     <a href="home" style="text-decoration: none">Trang chủ</a>
                 </li>
                 <li class="active">
-                    <a href="product">Sản phẩm</a>
-
+                    <!--<a href="search?action=listByCategory&category_id=all">Sản phẩm</a>-->
+                    <a href="search?action=view">Sản phẩm</a>
                 </li>
                 <li class="menu-item-has-children">
                     <a href="about">Chúng tôi</a>
@@ -154,9 +154,9 @@
                 <div class="row align-items-center">
                     <div class="col-lg-4">
                         <div class="search_bar">
-                            <form action="search?action=search" method="POST">
-                                <input name="text" placeholder="Tìm kiếm..." type="text">
-                                <button type="submit"><i class="ion-ios-search-strong"></i></button>
+                            <form>
+                                <input name="text" placeholder="Tìm kiếm..." type="text" id="search-input" value="${searchValue}">
+                                <button type="button"><i class="ion-ios-search-strong"></i></button>
                             </form>
                         </div>
                     </div>
@@ -183,7 +183,7 @@
                             <ul>
                                 <li><a href="home">Trang chủ<i class="fa"></i></a>
                                 </li>
-                                <li class="mega_items"><a href="product">Sản phẩm</a>
+                                <li class="mega_items"><a href="search?action=view">Sản phẩm</a>
                                 </li>
                             </ul> 
                         </nav> 
@@ -205,34 +205,25 @@
     <!--header middel end-->
 
     <!--header bottom satrt-->
-   <div class="header_bottom sticky-header">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-12">
-                <div class="main_menu_inner">
-                    <div class="main_menu"> 
-                        <nav>  
-                            <ul>
-                                <li class="active"><a href="home">Trang chủ</a></li>
-                                <li><a href="product">Sản phẩm</a></li>
-                                <li><a href="about">Chúng tôi</a></li>
-                                <li><a href="contact">Liên hệ</a></li>
-                            </ul>   
-                        </nav> 
-                    </div>
-                </div> 
+    <div class="header_bottom sticky-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <div class="main_menu_inner">
+                        <div class="main_menu"> 
+                            <nav>  
+                                <ul>
+                                    <li class="active"><a href="home">Trang chủ</a></li>
+                                    <li><a href="search?action=view">Sản phẩm</a></li>
+                                    <li><a href="about">Chúng tôi</a></li>
+                                    <li><a href="contact">Liên hệ</a></li>
+                                </ul>   
+                            </nav> 
+                        </div>
+                    </div> 
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<style>
-.header_bottom.sticky-header {
-    background: rgba(255, 255, 255, 0.2); 
-    backdrop-filter: blur(5px); 
-    transition: background 0.3s ease-in-out;
-}
-</style>
-
     <!--header bottom end-->
 </header>
