@@ -50,7 +50,7 @@ public class SaleOffServlet extends HttpServlet {
     if (discountPercentage >= 100) {
         request.setAttribute("msg", "Discount Percentage must be less than 100%");
     } else if (saleOffDAO.checkProductExists(productId)) {
-        request.setAttribute("msg", "Product already has a sale off!");
+        request.setAttribute("msg", "Sản phẩm đã được giảm giá!");
     } else {
         SaleOff saleOff = new SaleOff(saleId, productId, discountPercentage, startDate, endDate);
         saleOffDAO.insertSaleOff(saleOff);

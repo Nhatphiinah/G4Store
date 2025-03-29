@@ -76,13 +76,13 @@
         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
-                    <li class="breadcrumb-item active"><a href="#"><b>Sale Off Management</b></a></li>
+                    <li class="breadcrumb-item active"><a href="#"><b>Quản lý giảm giá</b></a></li>
                 </ul>
                 <div id="clock"></div>
             </div>
 
             <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addModal">
-                Add New Sale Off
+                Thêm khuyến mại mới
             </button>
             <table border="1">
                 <thead>
@@ -113,7 +113,7 @@
                                         data-toggle="modal" 
                                         data-target="#updateModal" 
                                         onclick="showUpdateModal('${sale.sale_id}', '${sale.discount_percentage}', '${sale.start_date}', '${sale.end_date}')">
-                                    Update
+                                    Sửa
                                 </button>
 
                                 <!-- Update Modal -->
@@ -169,7 +169,7 @@
                                 <form action="saleoff" method="get">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="saleId" value="${sale.sale_id}">
-                                    <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this sale off?')" style="background-color: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
+                                    <input type="submit" value="Xóa" onclick="return confirm('Are you sure you want to delete this sale off?')" style="background-color: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
                                 </form>
 
                             </td>
