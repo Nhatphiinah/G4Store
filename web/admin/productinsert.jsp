@@ -227,10 +227,34 @@
                                     <label class="control-label">Giá bán</label>
                                     <input class="form-control" name="price" type="number" min="0">
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label class="control-label">Size</label>
-                                    <input class="form-control" name="size" type="text" placeholder="S,L,XL,...">
-                                </div>
+<div class="form-group col-md-3">
+    <label class="control-label">Size</label>
+    <div id="sizeCheckboxes">
+        <label><input type="checkbox" value="S" onclick="updateSizeInput()"> S</label>
+        <label><input type="checkbox" value="M" onclick="updateSizeInput()"> M</label>
+        <label><input type="checkbox" value="L" onclick="updateSizeInput()"> L</label>
+        <label><input type="checkbox" value="XL" onclick="updateSizeInput()"> XL</label>
+        <label><input type="checkbox" value="XXL" onclick="updateSizeInput()"> XXL</label>
+        <label><input type="checkbox" value="XXXL" onclick="updateSizeInput()"> XXXL</label>
+    </div>
+    <input type="hidden" name="size" id="sizeInput">
+</div>
+
+<script>
+function updateSizeInput() {
+    const checkboxes = document.querySelectorAll("#sizeCheckboxes input[type='checkbox']");
+    const selectedSizes = Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value);
+    
+    // Cập nhật giá trị vào input ẩn
+    document.getElementById("sizeInput").value = selectedSizes.join(",");
+}
+</script>
+
+
+
+
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Màu</label>
                                     <select class="form-control" name="color">

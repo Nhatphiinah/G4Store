@@ -100,36 +100,66 @@
                                             <tbody>
                                                 <c:set var="o" value="${sessionScope.cart}" />
                                                 <c:forEach items="${o.items}" var="i">
-                                                    <tr>
-                                                        <td class="product_remove"><a href="cart?action=deletecart&product_id=${i.product.product_id}"><i class="fa fa-trash-o"></i></a></td>
-                                                        <td class="product_thumb"><a href="product?action=productdetail&product_id=${i.product.product_id}"><img src="${i.product.img}" alt=""></a></td>
-                                                        <td class="product_name"><a href="product?action=productdetail&product_id=${i.product.product_id}">${i.product.product_name}</a></td>
-                                                        <td class="product-price"><fmt:formatNumber pattern="##########" value="${i.product.product_price}" /></td>
-                                                        <td class="product-price">${i.size}</td>
-                                                        <td class="product-price">${i.color}</td>
-                                                        <td class="product_quantity">
-                                                            <input name="quantity" min="1" max="${i.product.quantity}" value="${i.quantity}" type="number" 
-                                                                   onchange="updateQuantity('${i.product.product_id}', this.value, ${i.product.product_price})">
-                                                            <script>
-                                                                let input = document.querySelector('input[name="quantity"]');
-                                                                let maxQuantity = ${i.product.quantity};
+    <tr>
+        <td class="product_remove">
+            <a href="cart?action=deletecart&product_id=${i.product.product_id}">
+                <i class="fa fa-trash-o"></i>
+            </a>
+        </td>
+        <td class="product_thumb">
+            <a href="product?action=productdetail&product_id=${i.product.product_id}">
+                <img src="${i.product.img}" alt="">
+            </a>
+        </td>
+        <td class="product_name">
+            <a href="product?action=productdetail&product_id=${i.product.product_id}">
+                ${i.product.product_name}
+            </a>
+        </td>
 
-                                                                input.addEventListener('input', function () {
-                                                                    let value = parseInt(this.value);
-                                                                    if (isNaN(value) || value < 1) {
-                                                                        this.value = 1;
-                                                                    } else if (value > maxQuantity) {
-                                                                        this.value = 1;
-                                                                    }
-                                                                });
+        <!-- Tính giá thực tế -->
+        <c:choose>
+            <c:when test="${i.product.discount > 0}">
+                <c:set var="actualPrice" 
+                    value="${i.product.product_price - (i.product.product_price * i.product.discount / 100)}" />
+            </c:when>
+            <c:otherwise>
+                <c:set var="actualPrice" value="${i.product.product_price}" />
+            </c:otherwise>
+        </c:choose>
 
-                                                            </script>
-                                                        </td>
-                                                        <td class="product_total" id="total_${i.product.product_id}">
-                                                            <fmt:formatNumber pattern="##########" value="${i.product.product_price * i.quantity}" /> VNĐ
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
+        <!-- Hiển thị giá (đã tính giảm nếu có) -->
+        <td class="product-price">
+            <c:choose>
+                <c:when test="${i.product.discount > 0}">
+                    <del>
+                        <fmt:formatNumber pattern="##########" value="${i.product.product_price}" />
+                    </del>
+                    <br />
+                    <strong>
+                        <fmt:formatNumber pattern="##########" value="${actualPrice}" />
+                    </strong>
+                </c:when>
+                <c:otherwise>
+                    <fmt:formatNumber pattern="##########" value="${actualPrice}" />
+                </c:otherwise>
+            </c:choose>
+        </td>
+
+        <td class="product-price">${i.size}</td>
+        <td class="product-price">${i.color}</td>
+
+        <td class="product_quantity">
+            <input name="quantity" min="1" max="${i.product.quantity}" value="${i.quantity}" 
+                   type="number" onchange="updateQuantity('${i.product.product_id}', this.value, ${actualPrice})">
+        </td>
+
+        <!-- Tổng tiền = actualPrice * quantity -->
+        <td class="product_total" id="total_${i.product.product_id}">
+            <fmt:formatNumber pattern="##########" value="${actualPrice * i.quantity}" /> VNĐ
+        </td>
+    </tr>
+</c:forEach>
                                             </tbody>
                                         </table>
 

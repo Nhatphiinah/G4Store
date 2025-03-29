@@ -92,13 +92,29 @@
                                         <tbody>
                                             <c:set var="o" value="${sessionScope.cart}"/>
                                             <c:forEach items="${o.items}" var="i">
-                                                <tr>
-                                                    <td> ${i.product.product_name} <strong> × ${i.quantity}</strong></td>
-                                                    <td> ${i.size}</td>
-                                                    <td> ${i.color}</td>
-                                                    <td> ${i.product.product_price * i.quantity }</td>
-                                                </tr>
-                                            </c:forEach>
+    <tr>
+        <td> 
+            ${i.product.product_name} <strong> × ${i.quantity}</strong>
+        </td>
+        <td> ${i.size}</td>
+        <td> ${i.color}</td>
+
+        <!-- Sửa phần tính giá từng dòng -->
+        <c:choose>
+            <c:when test="${i.product.discount > 0}">
+                <c:set var="actualPrice" value="${i.product.product_price - (i.product.product_price * i.product.discount / 100)}" />
+            </c:when>
+            <c:otherwise>
+                <c:set var="actualPrice" value="${i.product.product_price}" />
+            </c:otherwise>
+        </c:choose>
+
+        <td>
+            <!-- Hiển thị đơn giá * quantity (đã giảm nếu discount > 0) -->
+            <fmt:formatNumber value="${actualPrice * i.quantity}" pattern="###,###,###"/> VNĐ
+        </td>
+    </tr>
+</c:forEach>
                                         </tbody>
                                         <c:if test="${sessionScope.cart!=null}">
                                             <tfoot>

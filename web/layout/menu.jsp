@@ -74,7 +74,7 @@
 
                 </li>
                 <li class="menu-item-has-children">
-                    <a href="about">Chúng tôi</a>
+                    <a href="about">Tin Tức</a>
                 </li>
                 <li class="menu-item-has-children">
                     <a href="contact">Liên hệ</a> 
@@ -162,7 +162,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="logo">
-                            <a "><img src="assets/img/logo/shopofDoanh.jpg" alt="" width="200px" ></a>
+                            <a "><img src="assets/img/logo/logo.jpg" alt="" width="200px" ></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -193,7 +193,7 @@
                     <div class="main_menu"> 
                         <nav>  
                             <ul>
-                                <li><a href="about">Chúng tôi</a></li>
+                                <li><a href="about">Tin Tức</a></li>
                                 <li><a href="contact">Liên hệ</a></li>
                             </ul> 
                         </nav> 
@@ -216,7 +216,7 @@
                                     <ul class="menu">
                                         <li><a href="home">Trang chủ</a></li>
                                         <li><a href="search?action=view">Sản phẩm</a></li>
-                                        <li><a href="about">Chúng tôi</a></li>
+                                        <li><a href="about">Tin Tức</a></li>
                                         <li><a href="contact">Liên hệ</a></li>
                                     </ul>
 

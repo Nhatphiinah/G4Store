@@ -6,11 +6,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Trang Chủ  |  You&Me</title>
+        <title>Trang Chủ  |  G4Store</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo.jpg">
         <!-- Plugins CSS -->
         <link rel="stylesheet" href="assets/css/plugins.css">
         <!-- Main Style CSS -->
@@ -104,7 +104,7 @@
                     </div>
                 </div>
             </div>
-            <div class="single_slider" data-bgimg="assets/img/slider/banner3.jpg">
+            <div class="single_slider" data-bgimg="assets/img/slider/bannervip.jpg">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-12">
@@ -147,54 +147,56 @@
                     </div>
                 </div>
             </div>-->
-        <section class="banner_section banner_section_three">
-            <div class="container-fluid">
-                <div class="row ">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="banner_area">
-                            <div class="banner_thumb">
-                                <a href="product"><img src="assets/img/bg/banner13.jpg" alt="#"></a>
-                                <div class="banner_content">                                  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="banner_area">
-                            <div class="banner_thumb">
-                                <a href="product"><img src="assets/img/bg/banner14.jpg" alt="#"></a>
-                                <div class="banner_content">                                   
-                                </div>
-                            </div>
+<section class="banner_section banner_section_three">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="banner_area">
+                    <div class="banner_thumb">
+                        <a href="product"><img src="assets/img/bg/bannergoat.jpg" alt="#" style="max-height: 800px; width: 100%; object-fit: cover;"></a>
+                        <div class="banner_content">                                  
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="banner_section banner_section_three">
-            <div class="container-fluid">
-                <div class="row ">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="banner_area">
-                            <div class="banner_thumb">
-                                <a href="product"><img src="assets/img/bg/banner16.jpg" alt="#"></a>
-                                <div class="banner_content">                                  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="banner_area">
-                            <div class="banner_thumb">
-                                <a href="product"><img src="assets/img/bg/banner17.jpg" alt="#"></a>
-                                <div class="banner_content">                                   
-                                </div>
-                            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="banner_area">
+                    <div class="banner_thumb">
+                        <a href="product"><img src="assets/img/bg/banner18.jpg" alt="#" style="max-height: 800px; width: 100%; object-fit: cover;"></a>
+                        <div class="banner_content">                                   
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+<section class="banner_section banner_section_three">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="banner_area">
+                    <div class="banner_thumb">
+                        <a href="product"><img src="assets/img/bg/banner13.jpg" alt="#" style="max-height: 800px; width: 100%; object-fit: cover;"></a>
+                        <div class="banner_content">                                  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="banner_area">
+                    <div class="banner_thumb">
+                        <a href="product"><img src="assets/img/bg/banner20.jpg" alt="#" style="max-height: 800px; width: 100%; object-fit: cover;"></a>
+                        <div class="banner_content">                                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
         <!--banner area end-->
 
         <!--product section area start-->
@@ -234,29 +236,30 @@
         </section>
         <!--banner area start-->
         <section class="banner_section banner_section_three">
-            <div class="container-fluid">
-                <div class="row ">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="banner_area">
-                            <div class="banner_thumb">
-                                <a href="product"><img src="assets/img/bg/banner_fashion3.jpg" alt="#"></a>
-                                <div class="banner_content">                                  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="banner_area">
-                            <div class="banner_thumb">
-                                <a href="product"><img src="assets/img/bg/banner_fashion4.jpg" alt="#"></a>
-                                <div class="banner_content">                                   
-                                </div>
-                            </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="banner_area">
+                    <div class="banner_thumb">
+                        <a href="product"><img src="assets/img/bg/banner22.jpg" alt="#" style="max-height: 800px; width: 100%; object-fit: cover;"></a>
+                        <div class="banner_content">                                  
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+            <div class="col-lg-6 col-md-6">
+                <div class="banner_area">
+                    <div class="banner_thumb">
+                        <a href="product"><img src="assets/img/bg/bannercachot.jpg" alt="#" style="max-height: 800px; width: 100%; object-fit: cover;"></a>
+                        <div class="banner_content">                                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
         <!--banner area end-->
 
         <!--product section area start-->
@@ -296,30 +299,36 @@
         </section>
 
 
-        <section class="banner_section banner_section_three">
-            <div class="container-fluid">
-                <div class="row ">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="banner_area">
-                            <div class="banner_thumb">
-                                <a href="product"><img src="assets/img/bg/banner16.jpg" alt="#"></a>
-                                <div class="banner_content">                                  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="banner_area">
-                            <div class="banner_thumb">
-                                <a href="product"><img src="assets/img/bg/banner17.jpg" alt="#"></a>
-                                <div class="banner_content">                                   
-                                </div>
-                            </div>
+    <section class="banner_section banner_section_three">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
+                <div class="banner_area w-100">
+                    <div class="banner_thumb">
+                        <a href="product">
+                            <img src="assets/img/bg/banner3anhem.jpg" alt="#" style="width: 100%; max-height: 800px; object-fit: cover;">
+                        </a>
+                        <div class="banner_content">                                  
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+            <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
+                <div class="banner_area w-100">
+                    <div class="banner_thumb">
+                        <a href="product">
+                            <img src="assets/img/bg/banneranhtan1.jpg" alt="#" style="width: 100%; max-height: 800px; object-fit: cover;">
+                        </a>
+                        <div class="banner_content">                                   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        
 
 
 

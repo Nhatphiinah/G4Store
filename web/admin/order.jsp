@@ -89,7 +89,6 @@
                                 <option value="">Tất cả</option>
                                 <option value="COD">COD</option>
                                 <option value="VNPAY">VNPAY</option>
-                                <option value="MOMO">MOMO</option>
                                 <!-- Add more options as needed -->
                             </select>
                         </div>
@@ -148,16 +147,17 @@
                                                         </div>
                                                         <div class="form-group col-md-12">
                                                             <label class="control-label">Trạng thái đơn hàng</label>
-                                                            <select class="form-control" name="status">
+                                                            <select class="form-control" name="status" ${b.status == 3 ? 'disabled' : ''}>
                                                                 <option value="1" ${b.status == 1 ? 'selected' : ''}>Chưa thanh toán</option>
                                                                 <option value="2" ${b.status == 2 ? 'selected' : ''}>Đã thanh toán</option>
                                                                 <option value="3" ${b.status == 3 ? 'selected' : ''}>Đã Giao Hàng</option>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <button class="btn btn-save" type="submit">Lưu lại</button>
+                                                    <button class="btn btn-save" type="submit" ${b.status == 3 ? 'disabled' : ''}>Lưu lại</button>
                                                     <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
                                                 </form>
+
                                             </div>
                                         </div>
                                     </div>

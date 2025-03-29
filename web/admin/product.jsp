@@ -184,9 +184,9 @@
                                                 </td>
 
                                                 <td>
-                                                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" value="${p.product_id}"><i
+<!--                                                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" value="${p.product_id}"><i
                                                             class="fas fa-trash-alt"></i>
-                                                    </button>
+                                                    </button>-->
                                                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
                                                             data-toggle="modal" data-target="#ModalUP${p.product_id}"><i class="fas fa-edit"></i>
                                                     </button>

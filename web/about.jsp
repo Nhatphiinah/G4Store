@@ -7,8 +7,8 @@
         <!-- Meta Tags -->
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Giới Thiệu | You&Me</title>
-        <meta name="description" content="Giới thiệu về You&Me Shop - Thương hiệu thời trang Việt Nam với sản phẩm chất lượng cao và thiết kế độc đáo.">
+        <title>Giới Thiệu | G4Store</title>
+        <!--<meta name="description" content="Giới thiệu về G4Store Shop - Thương hiệu thời trang Việt Nam với sản phẩm chất lượng cao và thiết kế độc đáo.">-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -29,7 +29,7 @@
                             <ul>
                                 <li><a href="home">Trang chủ</a></li>
                                 <li>/</li>
-                                <li>Giới thiệu</li>
+                                <li>Tin Tức</li>
                             </ul>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div class="about_thumb">
-                            <img src=${c.img} alt="Hình ảnh về You&Me Shop">
+                            <img src=${c.img} alt="Hình ảnh về G4Store Shop">
                         </div>
                     </div>
                 </div>

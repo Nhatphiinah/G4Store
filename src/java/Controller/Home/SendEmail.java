@@ -24,7 +24,7 @@ public class SendEmail {
     public String getRandom() {
         Random rnd = new Random();
         int number = rnd.nextInt(999999);
-        return String.format("%06d", number);
+               return "Dq" + String.format("%06d", number);
     }
 
     public boolean sendEmail1(UserC userc) {

@@ -51,29 +51,30 @@ public class billDAO extends DBContext {
             if (rs.next()) {
                 int bill_id = rs.getInt(1);
                 for (Item i : cart.getItems()) {
+                    // Lấy giá gốc và discount từ sản phẩm
+                    double productPrice = i.getProduct().getProduct_price();
+                    float discount = i.getProduct().getDiscount();  // Lấy discount từ đối tượng Product
+                    if (discount > 0) {
+                        productPrice = productPrice * (1 - discount / 100.0);
+                    }
+                    double total = i.getQuantity() * productPrice;
+
                     String sql2 = "insert into [bill_detail] values(?,?,?,?,?,?)";
-                    double total = i.getQuantity() * i.getProduct().getProduct_price();
                     ps = conn.prepareStatement(sql2);
                     ps.setInt(1, bill_id);
                     ps.setString(2, i.getProduct().getProduct_id());
                     ps.setInt(3, i.getQuantity());
                     ps.setString(4, i.getSize());
                     ps.setString(5, i.getColor());
+                    // Lưu tổng tiền đã tính giảm vào bill_detail
                     ps.setDouble(6, total);
                     ps.executeUpdate();
                 }
             }
-
-            String sql3 = "update product set quantity = quantity - ? "
-                    + "where product_id = ?";
-            ps = conn.prepareStatement(sql3);
-            for (Item i : cart.getItems()) {
-                ps.setInt(1, i.getQuantity());
-                ps.setString(2, i.getProduct().getProduct_id());
-                ps.executeUpdate();
-            }
-
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Đóng tài nguyên ở đây nếu cần
         }
     }
      public int addOrder1(User u, Cart cart, String payment, String address, int phone, int status) {
@@ -100,17 +101,25 @@ public class billDAO extends DBContext {
             if (rs.next()) {
                 bill_id = rs.getInt(1);
                 for (Item i : cart.getItems()) {
+                    double productPrice = i.getProduct().getProduct_price();
+                    float discount = i.getProduct().getDiscount();  // Lấy discount từ đối tượng Product
+                    if (discount > 0) {
+                        productPrice = productPrice * (1 - discount / 100.0);
+                    }
+                    double total = i.getQuantity() * productPrice;
+
                     String sql2 = "insert into [bill_detail] values(?,?,?,?,?,?)";
-                    double total = i.getQuantity() * i.getProduct().getProduct_price();
                     ps = conn.prepareStatement(sql2);
                     ps.setInt(1, bill_id);
                     ps.setString(2, i.getProduct().getProduct_id());
                     ps.setInt(3, i.getQuantity());
                     ps.setString(4, i.getSize());
                     ps.setString(5, i.getColor());
+                    // Lưu giá đã giảm
                     ps.setDouble(6, total);
                     ps.executeUpdate();
                 }
+
             }
 
             String sql3 = "update product set quantity = quantity - ? "
@@ -241,21 +250,37 @@ public class billDAO extends DBContext {
 
     public List<BillDetail> getDetail(int bill_id) {
         List<BillDetail> list = new ArrayList<>();
-        String sql = "select d.detail_id, p.product_id, p.product_name, p.img, d.quantity, d.size, d.color, d.price from bill_detail d "
-                + "inner join product p on d.product_id = p.product_id where d.bill_id = ?";
+        String sql = "select d.detail_id, p.product_id, p.product_name, p.img, "
+                + "d.quantity, d.size, d.color, d.price "
+                + "from bill_detail d inner join product p on d.product_id = p.product_id "
+                + "where d.bill_id = ?";
+
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, bill_id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Product p = new Product(rs.getString(2), rs.getString(3), rs.getString(4));
-                list.add(new BillDetail(rs.getInt(1), p, rs.getInt(5), rs.getString(6), rs.getString(7), rs.getFloat(8)));
+                Product p = new Product(
+                        rs.getString(2), // product_id
+                        rs.getString(3), // product_name
+                        rs.getString(4) // img
+                );
+                list.add(new BillDetail(
+                        rs.getInt(1), // detail_id
+                        p,
+                        rs.getInt(5), // quantity
+                        rs.getString(6), // size
+                        rs.getString(7), // color
+                        rs.getFloat(8) // price
+                ));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
     }
+
 
     public void updatePayment(String payment, int bill_id) {
         String sql = "update bill set payment= ? where bill_id = ?";

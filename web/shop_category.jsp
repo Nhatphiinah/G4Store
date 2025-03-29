@@ -6,7 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sản Phẩm  | You&Me</title>
+        <title>Sản Phẩm  | G4Store</title>
         <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -209,7 +209,7 @@
                 <div class="col-lg-9">
                     <h1 class="mb-4">Sản phẩm</h1>
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <p class="mb-0">Hiển thị ${ProductData.size()} sản phẩm</p>
+<!--                        <p class="mb-0">Hiển thị ${ProductData.size()} sản phẩm</p>-->
                         <div class="dropdown">
                             <!--                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             Sắp xếp
