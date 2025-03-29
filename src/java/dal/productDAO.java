@@ -36,8 +36,10 @@ public class productDAO extends DBContext {
                 + "FROM product p "
                 + "INNER JOIN category c ON p.category_id = c.category_id ";
 
-        //String sqlSize = "Select * from listByCategory Where product_id = ?";
-        try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(sql);  ResultSet rs = ps.executeQuery()) {
+        // String sqlSize = "Select * from listByCategory Where product_id = ?";
+        try (Connection conn = new DBContext().getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Category c = new Category(rs.getInt(8), rs.getString(1));
@@ -77,7 +79,9 @@ public class productDAO extends DBContext {
                 + "INNER JOIN category c ON p.category_id = c.category_id\n"
                 + "LEFT JOIN product_size ps ON p.product_id = ps.product_id;";
 
-        try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(sql);  ResultSet rs = ps.executeQuery()) {
+        try (Connection conn = new DBContext().getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Category c = new Category(rs.getInt(8), rs.getString(1));
@@ -105,7 +109,7 @@ public class productDAO extends DBContext {
                 + "FROM dbo.product_saleOFF\n"
                 + "WHERE product_id = ? ";
 
-        try ( Connection conn = new DBContext().getConnection()) {
+        try (Connection conn = new DBContext().getConnection()) {
             ps = conn.prepareStatement(sql);
             ps.setString(1, pid);
             rs = ps.executeQuery();
@@ -131,7 +135,8 @@ public class productDAO extends DBContext {
             while (rs.next()) {
                 Category c = new Category(rs.getInt(8), rs.getString(1));
 
-                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6),
+                        rs.getString(7)));
             }
 
         } catch (Exception e) {
@@ -150,7 +155,8 @@ public class productDAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getInt(8), rs.getString(1));
-                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6),
+                        rs.getString(7)));
             }
 
         } catch (Exception e) {
@@ -169,7 +175,8 @@ public class productDAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getInt(8), rs.getString(1));
-                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6),
+                        rs.getString(7)));
             }
 
         } catch (Exception e) {
@@ -189,7 +196,9 @@ public class productDAO extends DBContext {
                 + "WHERE CAST(GETDATE() AS DATE) BETWEEN CAST(s.start_date AS DATE) AND CAST(s.end_date AS DATE) "
                 + "AND s.discount_percentage > 0";
 
-        try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(sql);  ResultSet rs = ps.executeQuery()) {
+        try (Connection conn = new DBContext().getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Category c = new Category(rs.getInt(8), rs.getString(1));
@@ -209,7 +218,7 @@ public class productDAO extends DBContext {
         return list;
     }
 
-    //search by price
+    // search by price
     public List<Product> getProductByPrice(double a, double b) {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT c.category_name, p.product_id, p.product_name, p.product_price, p.product_describe, p.quantity, p.img, p.category_id "
@@ -224,7 +233,8 @@ public class productDAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getInt(8), rs.getString(1));
-                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6),
+                        rs.getString(7)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -249,14 +259,16 @@ public class productDAO extends DBContext {
     public List<Product> getProductByPrice(int a) {
         List<Product> list = new ArrayList<>();
         String sql = "select c.category_name ,  p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img, p.category_id from  \n"
-                + "product p inner join category c on p.category_id = c.category_id inner join product_active pa on pa.product_id = p.product_id Where pa.active ='True' And p.product_price >=" + a + " Order By p.product_price";
+                + "product p inner join category c on p.category_id = c.category_id inner join product_active pa on pa.product_id = p.product_id Where pa.active ='True' And p.product_price >="
+                + a + " Order By p.product_price";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getInt(8), rs.getString(1));
-                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6),
+                        rs.getString(7)));
             }
 
         } catch (Exception e) {
@@ -282,7 +294,8 @@ public class productDAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getInt(8), rs.getString(1));
-                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6),
+                        rs.getString(7)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -410,7 +423,8 @@ public class productDAO extends DBContext {
     public void updateProduct(Product product, int cid, List<Color> listColor, List<Size> listSize) {
         try {
             // Update product details
-            String sql = "UPDATE product SET category_id=?, product_name=?, product_price=?, product_describe=?, quantity=?" + (!product.getImg().equalsIgnoreCase("images/") ? ", img=?" : "") + " WHERE product_id=?";
+            String sql = "UPDATE product SET category_id=?, product_name=?, product_price=?, product_describe=?, quantity=?"
+                    + (!product.getImg().equalsIgnoreCase("images/") ? ", img=?" : "") + " WHERE product_id=?";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, cid);
@@ -447,7 +461,7 @@ public class productDAO extends DBContext {
                 ps.setInt(3, size.getQuantity());
                 ps.executeUpdate();
             }
-            //Insert new Active
+            // Insert new Active
             String insertActiveSQL = "INSERT INTO product_active (product_id, active) VALUES (?, ?)";
             ps = conn.prepareStatement(insertActiveSQL);
             ps.setString(1, product.getProduct_id());
@@ -577,7 +591,8 @@ public class productDAO extends DBContext {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getInt(5), rs.getString(6)));
+                list.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getInt(5),
+                        rs.getString(6)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -594,7 +609,8 @@ public class productDAO extends DBContext {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getInt(5), rs.getString(6)));
+                list.add(new Product(rs.getString(1), rs.getString(2), rs.getFloat(3), rs.getString(4), rs.getInt(5),
+                        rs.getString(6)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -602,7 +618,8 @@ public class productDAO extends DBContext {
         return list;
     }
 
-    public List<Product> getNewProducts(int limit) {;
+    public List<Product> getNewProducts(int limit) {
+        ;
         List<Product> list = new ArrayList<>();
         String sql = "SELECT TOP  p.product_id , p.product_name, p.product_price, p.product_describe, p.quantity,p.img FROM product p inner join bill_detail bd on p.product_id = bd.product_id\n"
                 + "ORDER BY bd.quantity";
@@ -613,7 +630,8 @@ public class productDAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getString(1));
-                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6),
+                        rs.getString(7)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -630,7 +648,8 @@ public class productDAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getString(1));
-                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6),
+                        rs.getString(7)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -647,7 +666,8 @@ public class productDAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getString(1));
-                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6),
+                        rs.getString(7)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -664,7 +684,8 @@ public class productDAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getString(1));
-                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6),
+                        rs.getString(7)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -691,7 +712,8 @@ public class productDAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getString(1));
-                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6),
+                        rs.getString(7)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -709,7 +731,8 @@ public class productDAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getInt(1), rs.getString(2));
-                return (new Product(c, rs.getString(3), rs.getString(4), rs.getFloat(5), rs.getString(6), rs.getInt(7), rs.getString(8)));
+                return (new Product(c, rs.getString(3), rs.getString(4), rs.getFloat(5), rs.getString(6), rs.getInt(7),
+                        rs.getString(8)));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -734,7 +757,9 @@ public class productDAO extends DBContext {
     }
 
     public Size getQuatityBySize(String product_id, String size) {
-        String sql = "select * from product_size where product_id=? And size=?";
+        String sql = "select * from product_size ps\n" + //
+                "left join product_active pa on ps.product_id = pa.product_id\n" + //
+                "where ps.product_id = ? and ps.size = ? and pa.active = 'True'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
@@ -861,7 +886,8 @@ public class productDAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Category c = new Category(rs.getString(1));
-                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+                list.add(new Product(c, rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getString(5), rs.getInt(6),
+                        rs.getString(7)));
             }
         } catch (Exception e) {
         }
@@ -882,24 +908,26 @@ public class productDAO extends DBContext {
         }
     }
 
-    public List<Product> searchWithPaging(String txtSearch, String cID, String sort, String priceRange, String saleOff, Integer pageIndex, int pageSize) {
+    public List<Product> searchWithPaging(String txtSearch, String cID, String sort, String priceRange, String saleOff,
+            Integer pageIndex, int pageSize) {
         List<Product> list = new ArrayList<>();
         String query = "select p.*, ps.discount_percentage from product p\n"
                 + "left join product_active pa on p.product_id = pa.product_id\n"
-                + "left join category c on p.category_id = c.category_id and c.status = 1\n"
+                + "left join category c on p.category_id = c.category_id\n"
                 + "left join product_saleOFF ps on p.product_id = ps.product_id AND GETDATE() BETWEEN ps.start_date AND ps.end_date\n"
                 + "where pa.active = 'True' \n"
                 + "and p.product_name like ?\n"
                 + "and ( ? is null or c.category_id = ?)\n"
                 + "and p.product_price between ? and ?\n"
-                + "AND ((? = 'true' AND ps.product_id IS NOT NULL) OR ? = 'false') order by p.product_price " + (sort.equals("desc") ? "DESC" : "ASC");
+                + "AND ((? = 'true' AND ps.product_id IS NOT NULL) OR ? = 'false') and c.status = 1 order by p.product_price "
+                + (sort.equals("desc") ? "DESC" : "ASC");
 
         if (pageIndex != null) {
             query += " OFFSET (?*?-?) ROWS FETCH NEXT ? ROWS ONLY";
         }
         try {
-            conn = new DBContext().getConnection(); //mo ket noi toi sql
-            ps = conn.prepareStatement(query);//nem cau lenh query sang sql
+            conn = new DBContext().getConnection(); // mo ket noi toi sql
+            ps = conn.prepareStatement(query);// nem cau lenh query sang sql
 
             ps.setString(1, "%" + (txtSearch == null ? "" : txtSearch) + "%");
             ps.setString(2, cID);
@@ -932,7 +960,7 @@ public class productDAO extends DBContext {
 
             }
             if (saleOff != null && saleOff.equals("true")) {
-                ps.setString(6, "true");  // Chỉ lấy sản phẩm có sale
+                ps.setString(6, "true"); // Chỉ lấy sản phẩm có sale
                 ps.setString(7, "true");
             } else {
                 ps.setString(6, "false"); // Lấy tất cả sản phẩm
@@ -946,7 +974,7 @@ public class productDAO extends DBContext {
                 ps.setInt(11, pageSize);
             }
 
-            rs = ps.executeQuery();//chay cau lenh query, nhan ket qua tra ve
+            rs = ps.executeQuery();// chay cau lenh query, nhan ket qua tra ve
             while (rs.next()) {
                 Product p = new Product(rs.getString(1),
                         rs.getString(3),

@@ -31,7 +31,7 @@ public class Checkout extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-
+        
         HttpSession session = request.getSession();
         model.Cart cart = (model.Cart) session.getAttribute("cart");
         model.User acc = (model.User) session.getAttribute("user");
@@ -53,9 +53,10 @@ public class Checkout extends HttpServlet {
             Size productSize = proDAO.getQuatityBySize(i.getProduct().getProduct_id(), i.getSize());
             System.out.println(productSize);
             if (productSize == null || i.getQuantity() > productSize.getQuantity()) {
-                session.setAttribute("orderfailedMessage", "Sản phẩm " + i.getProduct().getProduct_id()
+                session.setAttribute("orderErrorMessage", "Sản phẩm " + i.getProduct().getProduct_id()
                         + " chỉ còn " + (productSize != null ? productSize.getQuantity() : 0) + " chiếc.");
                 response.sendRedirect("cart?action=showcart");
+                return;
             }
         }
 

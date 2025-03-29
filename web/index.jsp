@@ -73,6 +73,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+                <c:remove var="orderErrorMessage" scope="session"/>
         </c:if>
         <div class="off_canvars_overlay"></div>
 

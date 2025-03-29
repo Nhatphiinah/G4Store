@@ -26,6 +26,14 @@ public class Product {
     Product_Active active;
     float discount;
 
+    String sizeStr;
+
+    public Product(String product_id, int quantity, String sizeStr) {
+        this.product_id = product_id;
+        this.quantity = quantity;
+        this.sizeStr = sizeStr;
+    }
+    
     public float getDiscount() {
         return discount;
     }
@@ -150,6 +158,14 @@ public class Product {
 
     public void setActive(Product_Active active) {
         this.active = active;
+    }
+
+    public String getSizeStr() {
+        return sizeStr;
+    }
+
+    public void setSizeStr(String sizeStr) {
+        this.sizeStr = sizeStr;
     }
 
 
