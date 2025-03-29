@@ -70,7 +70,7 @@
                     <a href="home" style="text-decoration: none">Trang chủ</a>
                 </li>
                 <li class="active">
-                    <a href="product">Sản phẩm</a>
+                    <a href="search?action=view">Sản phẩm</a>
 
                 </li>
                 <li class="menu-item-has-children">
@@ -183,7 +183,7 @@
                             <ul>
                                 <li><a href="home">Trang chủ<i class="fa"></i></a>
                                 </li>
-                                <li class="mega_items"><a href="product">Sản phẩm</a>
+                                <li class="mega_items"><a href="search?action=view">Sản phẩm</a>
                                 </li>
                             </ul> 
                         </nav> 
@@ -215,7 +215,7 @@
                                 <ul>
                                     <ul class="menu">
                                         <li><a href="home">Trang chủ</a></li>
-                                        <li><a href="product">Sản phẩm</a></li>
+                                        <li><a href="search?action=view">Sản phẩm</a></li>
                                         <li><a href="about">Chúng tôi</a></li>
                                         <li><a href="contact">Liên hệ</a></li>
                                     </ul>
