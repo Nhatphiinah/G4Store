@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
     <head>
         <title>Sale Off Management</title>
@@ -21,6 +22,15 @@
         <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     </head>
 
     <body onload="time()" class="app sidebar-mini rtl">
@@ -53,13 +63,13 @@
                 <li><a class="app-menu__item" href="productmanager"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
                 <li><a class="app-menu__item" href="ordermanager"><i class='app-menu__icon bx bx-task'></i><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
                 <li><a class="app-menu__item" href="saleoff"><i class='app-menu__icon bx bxs-discount'></i><span class="app-menu__label">Quản lý khuyến mãi</span></a></li>
-               <li><a class="app-menu__item" href="saleoff"><i class='app-menu__icon bx bxs-discount'></i><span class="app-menu__label">Quản lý khuyến mãi</span></a></li>
-               
                 <!-- Conditionally Display Menu Items -->
                 <c:if test="${sessionScope.user.isAdmin}">
                     <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý người dùng</span></a></li>
                     <li><a class="app-menu__item" href="reportmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý phản hồi</span></a></li>
                     <li><a class="app-menu__item" href="aboutmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý trang giới thiệu</span></a></li>
+                    <li><a class="app-menu__item" href="commentmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý bình luận</span></a></li>
+                    <li><a class="app-menu__item" href="saleoff"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý sale</span></a></li>
                             </c:if>
             </ul>
         </aside>
@@ -70,77 +80,169 @@
                 </ul>
                 <div id="clock"></div>
             </div>
-            <h2>Current Sale Offs</h2>
+
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addModal">
+                Add New Sale Off
+            </button>
             <table border="1">
-                <tr>
-                    <th>Sale ID</th>
-                    <th>Product ID</th>
-                    <th>Discount Percentage</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Action</th>
-                </tr>
-                <c:forEach var="saleOff" items="${saleOffs}">
+                <thead>
                     <tr>
-                        <td>${saleOff.sale_id}</td>
-                        <td>${saleOff.product_id}</td>
-                        <td>${saleOff.discount_percentage}</td>
-                        <td>${saleOff.start_date}</td>
-                        <td>${saleOff.end_date}</td>
-                        <td>
-                            <form action="saleoff" method="post">
-                                <input type="hidden" name="action" value="update">
-                                <input type="hidden" name="saleId" value="${saleOff.sale_id}">
-                                <input type="number" name="discountPercentage" value="${saleOff.discount_percentage}" step="0.01" required>
-                                <input type="date" name="startDate" value="${saleOff.start_date}" required>
-                                <input type="date" name="endDate" value="${saleOff.end_date}" required>
-                                <input type="submit" value="Update">
-                                <a href="saleoff?saleId=${saleOff.sale_id}&action=delete" ><input type="button" value="Delete"></a>
-                            </form>
-                                
-                        </td>
+                        <th>Sale ID</th>
+                        <th>Product Name</th>
+                        <th>Discount Percentage</th>
+                        <th>Before Sale Price</th>
+                        <th>After Sale Price</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Action</th>
                     </tr>
-                </c:forEach>
+                </thead>
+                <tbody>
+                    <c:forEach items="${saleOffs}" var="sale">
+                        <tr>
+                            <td>${sale.sale_id}</td>
+                            <td>${sale.product_name}</td>
+                            <td>${sale.discount_percentage} %</td>
+                            <td>${sale.beforeSalePrice}</td>
+                            <td>${sale.afterSalePrice}</td>
+                            <td><fmt:formatDate value="${sale.start_date}" pattern="yyyy-MM-dd" /></td>
+                            <td><fmt:formatDate value="${sale.end_date}" pattern="yyyy-MM-dd" /></td>
+                            <td>
+                                <!-- Update Button -->
+                                <button type="button" class="btn btn-warning btn-sm" 
+                                        data-toggle="modal" 
+                                        data-target="#updateModal" 
+                                        onclick="showUpdateModal('${sale.sale_id}', '${sale.discount_percentage}', '${sale.start_date}', '${sale.end_date}')">
+                                    Update
+                                </button>
+
+                                <!-- Update Modal -->
+                                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+
+                                            <form action="saleoff" method="post">
+                                                <input type="hidden" name="action" value="update">
+                                                <input type="hidden" name="saleId" id="update-saleId">
+
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Update Sale Off</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+
+                                                    <label>Discount Percentage:</label>
+                                                    <input type="number" name="discountPercentage" id="update-discountPercentage" step="0.01" max="99.99" class="form-control" required>
+
+                                                    <label>Start Date:</label>
+                                                    <input type="date" name="startDate" id="update-startDate" class="form-control" required>
+
+                                                    <label>End Date:</label>
+                                                    <input type="date" name="endDate" id="update-endDate" class="form-control" required>
+
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <input type="submit" class="btn btn-success" value="Update">
+                                                </div>
+
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function showUpdateModal(saleId, discountPercentage, startDate, endDate) {
+                                        // Gán giá trị vào form trong modal
+                                        document.getElementById('update-saleId').value = saleId;
+                                        document.getElementById('update-discountPercentage').value = discountPercentage;
+                                        document.getElementById('update-startDate').value = startDate;
+                                        document.getElementById('update-endDate').value = endDate;
+                                    }
+                                </script>
+
+                                <form action="saleoff" method="get">
+                                    <input type="hidden" name="action" value="delete">
+                                    <input type="hidden" name="saleId" value="${sale.sale_id}">
+                                    <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this sale off?')" style="background-color: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
+                                </form>
+
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
             </table>
+
             <br/>
-            <h2>Add New Sale Off</h2>
-<form action="saleoff" method="post" class="p-4 bg-light rounded shadow-sm w-50 mx-auto">
-    <input type="hidden" name="action" value="insert">
-    
-    <div class="mb-3">
-        <label class="form-label">Sale ID:</label>
-        <input type="text" name="saleId" class="form-control" required>
-    </div>
+            <!-- Add Modal -->
+            <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
 
-    <div class="mb-3">
-        <label class="form-label">Product:</label>
-        <select name="productId" class="form-select" required>
-            <c:forEach var="p" items="${products}">
-                <option value="${p.product_id}">${p.product_name}</option>
-            </c:forEach>
-        </select>
-    </div>
+                        <form action="saleoff" method="post">
+                            <input type="hidden" name="action" value="insert">
 
-    <div class="mb-3">
-        <label class="form-label">Discount Percentage:</label>
-        <input type="number" name="discountPercentage" step="0.01" class="form-control" required>
-    </div>
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add New Sale Off</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
 
-    <div class="mb-3">
-        <label class="form-label">Start Date:</label>
-        <input type="date" name="startDate" class="form-control" required>
-    </div>
+                            <div class="modal-body">
 
-    <div class="mb-3">
-        <label class="form-label">End Date:</label>
-        <input type="date" name="endDate" class="form-control" required>
-    </div>
+                                <div class="form-group">
+                                    <label>Sale ID:</label>
+                                    <input type="text" name="saleId" class="form-control" required>
+                                </div>
 
-    <button type="submit" class="btn btn-primary w-100">Add Sale Off</button>
-</form>
+                                <div class="form-group">
+                                    <label>Product:</label>
+                                    <select name="productId" class="form-control" required>
+                                        <c:forEach var="p" items="${products}">
+                                            <option value="${p.product_id}">${p.product_name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Discount Percentage:</label>
+                                    <input type="number" name="discountPercentage" step="0.01" max="99.99" class="form-control" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Start Date:</label>
+                                    <input type="date" name="startDate" id="add-startDate" class="form-control" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>End Date:</label>
+                                    <input type="date" name="endDate" class="form-control" required>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <input type="submit" class="btn btn-success" value="Add Sale Off">
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <c:if test="${not empty msg}">
+                <p style="color:red">${msg}</p>
+            </c:if>
 
         </main>
-
 
 
     </body>

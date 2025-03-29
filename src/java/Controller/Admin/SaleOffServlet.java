@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Product;
 
+
 @WebServlet(name = "SaleOffServlet", urlPatterns = {"/saleoff"})
 public class SaleOffServlet extends HttpServlet {
 
@@ -40,17 +41,30 @@ public class SaleOffServlet extends HttpServlet {
             saleOffDAO.updateSaleOff(saleOff);
             response.sendRedirect("saleoff");
         } else if (action.equals("insert")) {
-            String saleId = request.getParameter("saleId");
-            String productId = request.getParameter("productId");
-            float discountPercentage = Float.parseFloat(request.getParameter("discountPercentage"));
-            Date startDate = parseDate(request.getParameter("startDate"));
-            Date endDate = parseDate(request.getParameter("endDate"));
+    String saleId = request.getParameter("saleId");
+    String productId = request.getParameter("productId");
+    float discountPercentage = Float.parseFloat(request.getParameter("discountPercentage"));
+    Date startDate = parseDate(request.getParameter("startDate"));
+    Date endDate = parseDate(request.getParameter("endDate"));
 
-            SaleOff saleOff = new SaleOff(saleId, productId, discountPercentage, startDate, endDate);
-            saleOffDAO.insertSaleOff(saleOff);
-
-            response.sendRedirect("saleoff");
-        } else if (action.equals("delete")) {
+    if (discountPercentage >= 100) {
+        request.setAttribute("msg", "Discount Percentage must be less than 100%");
+    } else if (saleOffDAO.checkProductExists(productId)) {
+        request.setAttribute("msg", "Product already has a sale off!");
+    } else {
+        SaleOff saleOff = new SaleOff(saleId, productId, discountPercentage, startDate, endDate);
+        saleOffDAO.insertSaleOff(saleOff);
+        response.sendRedirect("saleoff");
+        return;
+    }
+    // Load lại nếu có lỗi
+    List<SaleOff> saleOffs = saleOffDAO.getAllSaleOffs();
+    List<Product> products = PdAao.getProduct();
+    request.setAttribute("products", products);
+    request.setAttribute("saleOffs", saleOffs);
+    request.getRequestDispatcher("admin/saleoff.jsp").forward(request, response);
+}
+ else if (action.equals("delete")) {
             String saleId = request.getParameter("saleId");
             saleOffDAO.deleteSaleOff(saleId);
             response.sendRedirect("saleoff");

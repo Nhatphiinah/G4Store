@@ -170,7 +170,12 @@ public class User extends HttpServlet {
             }
         }
 
-        if (action.equals("changepass")) {
+            if (action.equals("changepass")) {
+            if(!request.getParameter("new_pass").equals(request.getParameter("re_enter_pass"))){
+                request.setAttribute("re_enter_mess", "Hai mật không trùng nhau");
+                request.getRequestDispatcher("my-account.jsp").forward(request, response);
+                return;
+            }
             try {
                 HttpSession session = request.getSession();
                 model.User user = (model.User) session.getAttribute("user");
@@ -200,6 +205,7 @@ public class User extends HttpServlet {
                 response.sendRedirect("user?action=login");
             }
         }
+
 
         if (action.equals("signup")) {
             HttpSession session = request.getSession();
