@@ -76,6 +76,7 @@ public class billDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+    //NhuanPPCE180878 update status
      public void addOrder1(User u, Cart cart, String payment, String address, int phone, int status) {
         LocalDate curDate = java.time.LocalDate.now();
         String date = curDate.toString();
