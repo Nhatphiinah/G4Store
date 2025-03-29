@@ -107,7 +107,7 @@
                 <!-- Bottom Footer -->
                 <div class="row align-items-center">
                     <div class="col-md-6 text-center text-md-start">
-                        <p>&copy; 2024 You&Me Vietnam. All rights reserved.</p>
+                        <p>&copy; 2025 G4-Store. All rights reserved.</p>
                     </div>
                 </div>
             </div>

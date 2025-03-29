@@ -5,6 +5,7 @@
  */
 package Controller.Admin;
 
+import Controller.Home.SendEmail;
 import dal.userDAO;
 import model.User;
 import jakarta.servlet.RequestDispatcher;
@@ -67,6 +68,24 @@ public class CustomerManager extends HttpServlet {
                     dao.unbanUser(id);
                     response.sendRedirect("customermanager");
                     return;
+                }
+                else if (action.equals("insertStaff")) {
+                    userDAO da = new userDAO();
+                    String name = request.getParameter("name");
+                    String email = request.getParameter("email");
+                    String defaultPass = "Abc@123";
+                    model.User a = da.checkAcc(email);
+                    if (a == null) {
+                        User u = new User(name, email, defaultPass, "FALSE", false, "TRUE");
+                        da.addStaff(u);
+                        SendEmail sm = new SendEmail();
+                        sm.sendEmail3(email, "Staff Account", "Admin create a account for you. Your password is: " + defaultPass);
+                        response.sendRedirect("customermanager");
+                        return;
+                    } else {
+                        request.setAttribute("error", "Email đã tồn tại");
+                        request.getRequestDispatcher("customermanager").forward(request, response);
+                    }
                 }
             } else {
                 response.sendRedirect("user?action=login");
