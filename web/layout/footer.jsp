@@ -42,9 +42,19 @@
         </style>
     </head>
     <body>
-<!--        <div class="map-area">                         
-            <iframe id="googleMap" src="https://www.google.com/maps/place/%C4%90%E1%BA%A1i+H%E1%BB%8Dc+FPT/@10.0125653,105.7300141,17z/data=!4m14!1m7!3m6!1s0x31a08900318d0db3:0x7aa54681cde47b0b!2zxJDhuqFpIEjhu41jIEZQVA!8m2!3d10.01256!4d105.732589!16s%2Fg%2F11qsmk_wjx!3m5!1s0x31a08900318d0db3:0x7aa54681cde47b0b!8m2!3d10.01256!4d105.732589!16s%2Fg%2F11qsmk_wjx?entry=ttu&g_ep=EgoyMDI1MDIyNi4xIKXMDSoASAFQAw%3D%3D" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>-->
+<div class="map-area">                         
+    <iframe 
+        id="googleMap" 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.0519803167535!2d105.73001407450853!3d10.01256527281942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a08900318d0db3%3A0x7aa54681cde47b0b!2zxJDhuqFpIEjhu41jIEZQVA!5e0!3m2!1sen!2s!4v1743228770865!5m2!1sen!2s" 
+        width="600" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</div>
+
         <footer class="bg-dark text-light py-5">
             <div class="container">
                 <div class="row justify-content-between">
