@@ -73,7 +73,7 @@ public class CustomerManager extends HttpServlet {
                     userDAO da = new userDAO();
                     String name = request.getParameter("name");
                     String email = request.getParameter("email");
-                    String defaultPass = "Abc@123";
+                    String defaultPass = "Abc123";
                     model.User a = da.checkAcc(email);
                     if (a == null) {
                         User u = new User(name, email, defaultPass, "FALSE", false, "TRUE");
