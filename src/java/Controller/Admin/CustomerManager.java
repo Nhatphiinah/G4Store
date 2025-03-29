@@ -57,10 +57,20 @@ public class CustomerManager extends HttpServlet {
                     return;
                 } else if (action.equals("ban")) {
                     int banUserId = Integer.parseInt(request.getParameter("user_id"));
-                    userDAO dao = new userDAO();
-                    dao.banUser(banUserId);
-                    response.sendRedirect("customermanager");
-                    return;
+                    User currentUser = (User) session.getAttribute("user");
+
+                    if (currentUser.getUser_id() == banUserId) {
+                        request.setAttribute("error", "Bạn không thể tự ban chính mình!");
+                        userDAO dao = new userDAO();
+                        List<User> user1 = dao.getUser();
+                        request.setAttribute("user", user1);
+                        page = "admin/customer.jsp";
+                    } else {
+                        userDAO dao = new userDAO();
+                        dao.banUser(banUserId);
+                        response.sendRedirect("customermanager");
+                        return;
+                    }
                 } else if (action.equals("unban")) {
                     String user_id = request.getParameter("user_id");
                     int id = Integer.parseInt(user_id);
