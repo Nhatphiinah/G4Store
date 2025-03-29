@@ -411,7 +411,7 @@
                                         <label>Mô tả sản phẩm: </label>
                                         <p>${ProductData.product_describe}</p>
                                                  <label>Số lượng sản phẩm: </label>
-                                        <p>${ProductData.quantity}</p>
+                                        <p id="quantity">${ProductData.quantity}</p>
                                     </div>
                                 </div>
 
@@ -427,11 +427,12 @@
                                 <div class="product_variant size">
                                     <h3>Chọn size :</h3>
                                     <div class="size-selection-container">
-                                        <select class="niceselect_option" id="size" name="size">
-                                            <c:forEach items="${SizeData}" var="s">
-                                                <option value="${s.size}">${s.size}</option>
-                                            </c:forEach>
-                                        </select>
+                                        <select class="niceselect_option" id="size" name="size" onchange="handleChange(this)" required="">
+                                            <option disabled="true" selected="true" value="">Size</option>
+                                                <c:forEach items="${SizeData}" var="s">
+                                                    <option value="${s.size}" data-quantity="${s.quantity}">${s.size}</option>
+                                                </c:forEach>
+                                            </select>
                                         <a href="#" id="size-guide-link">
                                             <i class="fas fa-ruler"></i> Hướng dẫn chọn size
                                         </a>
@@ -441,10 +442,9 @@
 
                                 <div class="product_variant quantity">
                                     <label>Số lượng :</label>
-                                    <input min="1" max="${ProductData.quantity}" name="quantity" type="number" value="1">
+                                    <input min="1" id="inputQuantity" name="quantity" type="number" value="1">
                                     <div class="product-buttons">
                                         <button class="button" type="submit">Thêm vào giỏ hàng</button>
-                                        
                                     </div>
                                 </div>
 
@@ -542,10 +542,10 @@
         <!-- Main JS -->
         <script src="assets/js/main.js"></script>
         <script>
-                                            function setActionAndSubmit(action) {
-                                                document.getElementById('action').value = action;
-                                                document.getElementById('productForm').submit();
-                                            }
+            function setActionAndSubmit(action) {
+                document.getElementById('action').value = action;
+                document.getElementById('productForm').submit();
+            }
         </script>
         <div id="size-guide-popup" style="display: none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid black; z-index: 1000;">
 
@@ -617,6 +617,15 @@
         </div>
 
         <script>
+            
+            function handleChange(select) {
+                var selectedOption = select.options[select.selectedIndex]; 
+                var quantity = selectedOption.getAttribute("data-quantity"); 
+                console.log("Số lượng có sẵn:", quantity);
+                document.getElementById('inputQuantity').max = quantity;
+                document.getElementById('quantity').innerText = quantity;
+            }
+            
             function showNotification(message, isSuccess) {
                 Swal.fire({
                     title: isSuccess ? 'Thành công!' : 'Lỗi!',
