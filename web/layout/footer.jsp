@@ -68,11 +68,11 @@
     <div class="col-md-3 mb-4 text-center">
     <h5 class="text-uppercase mb-4 border-bottom pb-2">Công ty</h5>
     <ul class="list-unstyled text-start">
-        <li><a href="about.jsp" class="text-light">Giới thiệu về G4-Store</a></li>
+        <li><a href="" class="text-light">Giới thiệu về G4-Store</a></li>
         <li><a href="" class="text-light">Tuyển dụng</a></li>
-        <li><a href="/tin-thoi-trang" class="text-light">Tin thời trang</a></li>
+        <li><a href="" class="text-light">Tin thời trang</a></li>
         <li><a href="" class="text-light">Hợp tác nhượng quyền</a></li>
-        <li><a href="/thong-tin-lien-he" class="text-light">Liên hệ</a></li>
+        <li><a href="" class="text-light">Liên hệ</a></li>
     </ul>
 </div>
 
@@ -100,8 +100,6 @@
         </div>
     </div>
 </div>
-
-
                 <hr class="my-4">
 
                 <!-- Bottom Footer -->

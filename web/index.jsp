@@ -81,7 +81,7 @@
 
         <!--slider area start-->
         <div class="slider_area slider_style home_three_slider owl-carousel">
-            <div class="single_slider" data-bgimg="assets/img/slider/slider10.jpg">
+            <div class="single_slider" data-bgimg="assets/img/slider/banner1.jpg">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-12">
@@ -92,7 +92,7 @@
                     </div>
                 </div>    
             </div>
-            <div class="single_slider" data-bgimg="assets/img/slider/slider11.jpg">
+            <div class="single_slider" data-bgimg="assets/img/slider/banner2.jpg">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-12">
@@ -104,7 +104,7 @@
                     </div>
                 </div>
             </div>
-            <div class="single_slider" data-bgimg="assets/img/slider/slider12.jpg">
+            <div class="single_slider" data-bgimg="assets/img/slider/banner3.jpg">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-12">
