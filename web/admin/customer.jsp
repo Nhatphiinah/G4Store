@@ -89,6 +89,10 @@
                                                 class="fas fa-print"></i> In dữ liệu</a>
                                     </div>
                                 </div>
+                                <div>
+                                    <h2 style="color: red; padding-left: 10px">
+                                    ${error}</h2>
+                            </div>
                             <c:if test="${sessionScope.user.isAdmin.equalsIgnoreCase('true')}">
                                 <div class="form-group">
                                     <label for="userRoleFilter"></label>
@@ -137,6 +141,7 @@
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                             </td>
+
                                             <td>
 
                                                 <c:if test="${!u.banned}">
@@ -147,6 +152,7 @@
                                                     </c:if>
                                             </td>
                                         </tr>
+
                                     </c:forEach>
                                 </tbody>
                             </table>
@@ -215,10 +221,10 @@
                                     <h5>Thêm mới nhân viên </h5>
                                 </span>
                             </div>
+
                             <div class="form-group col-md-12" >
 
-                                <h2 style="color: red; padding-left: 10px">
-                                    ${error}</h2>
+
 
                                 <form name="insertCate" action="customermanager?action=insertStaff" method="post"> 
                                     <label class="control-label">Tên</label>
@@ -235,6 +241,8 @@
                 </div>
             </div>
         </div>
+
+
         <!-- Essential javascripts for application to work-->
         <script src="admin/js/jquery-3.2.1.min.js"></script>
         <script src="admin/js/popper.min.js"></script>
@@ -250,6 +258,7 @@
         <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript">$('#sampleTable').DataTable();</script>
         <script>
+
             //Thời Gian
             function time() {
                 var today = new Date();
@@ -300,6 +309,7 @@
                     win.print();
                 }
             }
+
             $(document).ready(function () {
                 $('#sampleTable').DataTable();
 
@@ -320,6 +330,7 @@
                         }
                     });
                 });
+
                 // Event delegation for ban button
                 jQuery(document).on("click", ".ban", function () {
                     swal({
@@ -337,6 +348,7 @@
                         }
                     });
                 });
+
                 // Event delegation for unban button
                 jQuery(document).on("click", ".unban", function () {
                     swal({
@@ -397,6 +409,7 @@
                     }
                 });
             }
+
             document.getElementById('userStatusFilter').addEventListener('change', function () {
                 var statusFilter = this.value.toLowerCase();
                 var table = document.getElementById('sampleTable');
