@@ -219,30 +219,30 @@ public class Product_Search extends HttpServlet {
 //                request.getRequestDispatcher("shop_category.jsp").forward(request, response);
 //            }
 //        }
-//        if (action.equals("search")) {
-//            String text = request.getParameter("text");
-//            productDAO c = new productDAO();
-//            List<model.Product> productList = c.SearchAll(text);
-//            List<Category> category = c.getCategory();
-//            int page, numperpage = 9;
-//            int size = productList.size();
-//            int num = (size % 9 == 0 ? (size / 9) : ((size / 9)) + 1);//so trang
-//            String xpage = request.getParameter("page");
-//            if (xpage == null) {
-//                page = 1;
-//            } else {
-//                page = Integer.parseInt(xpage);
-//            }
-//            int start, end;
-//            start = (page - 1) * numperpage;
-//            end = Math.min(page * numperpage, size);
-//            List<model.Product> product = c.getListByPage(productList, start, end);
-//            request.setAttribute("page", page);
-//            request.setAttribute("num", num);
-//            request.setAttribute("CategoryData", category);
-//            request.setAttribute("ProductData", product);
-//            request.getRequestDispatcher("shop_category.jsp").forward(request, response);
-//        }
+        if (action.equals("search")) {
+            String text = request.getParameter("text");
+            productDAO c = new productDAO();
+            List<model.Product> productList = c.SearchAll(text);
+            List<Category> category = c.getCategory();
+            int page, numperpage = 9;
+            int size = productList.size();
+            int num = (size % 9 == 0 ? (size / 9) : ((size / 9)) + 1);//so trang
+            String xpage = request.getParameter("page");
+            if (xpage == null) {
+                page = 1;
+            } else {
+                page = Integer.parseInt(xpage);
+            }
+            int start, end;
+            start = (page - 1) * numperpage;
+            end = Math.min(page * numperpage, size);
+            List<model.Product> product = c.getListByPage(productList, start, end);
+            request.setAttribute("page", page);
+            request.setAttribute("num", num);
+            request.setAttribute("CategoryData", category);
+            request.setAttribute("ProductData", product);
+            request.getRequestDispatcher("shop_category.jsp").forward(request, response);
+        }
         //SearchByPrice
 //        if (action.equalsIgnoreCase("searchByPrice")) {
 //            productDAO dao = new productDAO();
