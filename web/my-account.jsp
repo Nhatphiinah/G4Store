@@ -213,6 +213,7 @@
                                                     <th>Hình thức GD</th>
                                                     <th>Địa chỉ</th>
                                                     <th>Tổng đơn</th>
+                                                    <th>Trạng thái</th>
                                                     <th>Actions</th>	 	 	 	
                                                 </tr>
                                             </thead>
@@ -224,6 +225,17 @@
                                                         <td><span class="success">${b.payment}</span></td>
                                                         <td>${b.address}</td>
                                                         <td>${b.total}</td>
+                                                                                                                <td>
+                                                             <c:if test="${b.status == 1}">
+                                                                 Chưa thanh toán
+                                                             </c:if>
+                                                             <c:if test="${b.status == 2}">
+                                                                 Đã thanh toán
+                                                             </c:if>
+                                                             <c:if test="${b.status == 3}">
+                                                                 Đã nhận hàng
+                                                             </c:if>
+                                                         </td>
                                                         <td><a href="user?action=showdetail&bill_id=${b.bill_id}" class="view">view</a></td>
                                                     </tr>
                                                 </c:forEach>
@@ -268,7 +280,6 @@
                                 </div>
                                 <div class="tab-pane fade show" id="change-pass">               
                                     <h3>Thay đổi mật khẩu</h3>
-                                    <p style="color: red">${re_enter_mess}</p>
                                     <div class="login">
                                         <div class="login_form_container">
                                             <div class="account_login_form">
@@ -281,10 +292,7 @@
 
                                                     <label><b>Mật khẩu mới</b></label>
                                                     <input required="true" type="password" id="user_pass" name="new_pass" placeholder="Nhập mật khẩu mới A-Z 0-9">
-                                                    
-                                                    <label><b>Nhập lại mật khẩu mới</b></label>
-                                                    <input required="true" type="password" id="user_pass" name="re_enter_pass" placeholder="Nhập lại mật khẩu mới"><!-- comment -->
-                                                    
+
                                                     <div class="cart_submit">
                                                         <button type="submit">Lưu</button>
                                                     </div>
