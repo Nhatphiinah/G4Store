@@ -68,12 +68,11 @@ public class CustomerManager extends HttpServlet {
                     dao.unbanUser(id);
                     response.sendRedirect("customermanager");
                     return;
-                }
-                else if (action.equals("insertStaff")) {
+                } else if (action.equals("insertStaff")) {
                     userDAO da = new userDAO();
                     String name = request.getParameter("name");
                     String email = request.getParameter("email");
-                    String defaultPass = "Abc123";
+                    String defaultPass = "Abc@123";
                     model.User a = da.checkAcc(email);
                     if (a == null) {
                         User u = new User(name, email, defaultPass, "FALSE", false, "TRUE");
@@ -83,8 +82,12 @@ public class CustomerManager extends HttpServlet {
                         response.sendRedirect("customermanager");
                         return;
                     } else {
+                        userDAO dao = new userDAO();
+                        List<User> user1 = dao.getUser();
                         request.setAttribute("error", "Email đã tồn tại");
-                        request.getRequestDispatcher("customermanager").forward(request, response);
+                        request.setAttribute("user", user1);
+                        page = "admin/customer.jsp";
+
                     }
                 }
             } else {
