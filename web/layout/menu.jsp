@@ -229,12 +229,11 @@
                                             list-style: none; /* Bỏ dấu chấm */
                                             padding: 0;
                                             margin: 0;
-                                            background-color: #f8f9fa; /* Nền menu (có thể đổi màu tùy ý) */
                                         }
 
                                         /* Định dạng chữ trong menu */
                                         .menu li a {
-                                            font-size: 20px; /* Làm chữ to hơn */
+                                            font-size: 15px; /* Làm chữ to hơn */
                                             font-weight: bold; /* Chữ đậm hơn */
                                             text-decoration: none; /* Bỏ gạch chân */
                                             color: black; /* Màu chữ */
