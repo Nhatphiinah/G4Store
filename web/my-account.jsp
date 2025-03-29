@@ -193,6 +193,7 @@
                             <div class="dashboard_tab_button">
                                 <ul role="tablist" class="nav flex-column dashboard-list">
                                     <li><a href="#account-details" data-toggle="tab" class="nav-link">Tài khoản của tôi</a></li>
+                                    <li> <a href="#change-pass" data-toggle="tab" class="nav-link">Thay đổi mật khẩu</a></li>
                                     <li> <a href="#orders" data-toggle="tab" class="nav-link">Đơn hàng</a></li>
                                     <li><a href="user?action=logout" class="nav-link">Đăng xuất</a></li>
                                 </ul>
@@ -212,7 +213,6 @@
                                                     <th>Hình thức GD</th>
                                                     <th>Địa chỉ</th>
                                                     <th>Tổng đơn</th>
-                                                    <th>Trạng thái</th>
                                                     <th>Actions</th>	 	 	 	
                                                 </tr>
                                             </thead>
@@ -224,17 +224,6 @@
                                                         <td><span class="success">${b.payment}</span></td>
                                                         <td>${b.address}</td>
                                                         <td>${b.total}</td>
-                                                        <td>
-                                                            <c:if test="${b.status == 1}">
-                                                                Chưa thanh toán
-                                                            </c:if>
-                                                            <c:if test="${b.status == 2}">
-                                                                Đã thanh toán
-                                                            </c:if>
-                                                            <c:if test="${b.status == 3}">
-                                                                Đã nhận hàng
-                                                            </c:if>
-                                                        </td>
                                                         <td><a href="user?action=showdetail&bill_id=${b.bill_id}" class="view">view</a></td>
                                                     </tr>
                                                 </c:forEach>
@@ -243,34 +232,68 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade show active" id="account-details">
-                                    <h3>Tài khoản của tôi </h3>
+                                    <h3>Tài khoản của tôi</h3>
                                     <div class="login">
                                         <div class="login_form_container">
                                             <div class="account_login_form">
                                                 <form name="MyAccountForm" onsubmit="return validateForm()" action="user?action=updateinfo" method="POST">
                                                     <label><b>Tên người dùng</b></label>
                                                     <input required="true" type="text" name="user_name" value="${sessionScope.user.user_name}" placeholder="Nhập tên người dùng">
+
                                                     <label><b>Email</b></label>
                                                     <input required="true" type="email" readonly name="user_email" value="${sessionScope.user.user_email}">
-                                                    <label><b>Mật khẩu</b></label>
-                                                    <input required="true" type="password" name="user_pass" value="${sessionScope.user.user_pass}" placeholder="Nhập mật khẩu A-Z 0-9">
+
+                                                    <!--                                                    <label><b>Mật khẩu cũ</b></label>
+                                                                                                        <input required="true" type="password" id="old_pass" name="old_pass" placeholder="Nhập mật khẩu cũ">
+                                                    
+                                                                                                        <label><b>Mật khẩu mới</b></label>
+                                                                                                        <input required="true" type="password" id="user_pass" name="new_pass" placeholder="Nhập mật khẩu mới A-Z 0-9">-->
 
                                                     <label><b>Ngày sinh</b></label>
-                                                    <input required="true" type="Date" id="dateOfBirth" name="dateOfBirth" value="${sessionScope.user.dateOfBirth}" placeholder="Nhập ngày sinh(ngày/tháng/năm)">
+                                                    <input required="true" type="date" id="dateOfBirth" name="dateOfBirth" value="${sessionScope.user.dateOfBirth}" placeholder="Nhập ngày sinh(ngày/tháng/năm)">
 
                                                     <label><b>Địa chỉ</b></label>
                                                     <input required="true" type="text" name="address" value="${sessionScope.user.address}" placeholder="Nhập địa chỉ (Xã,Huyện,Tỉnh)">
+
                                                     <label><b>Số điện thoại</b></label>
                                                     <input required="true" type="text" id="phoneNumber" name="phoneNumber" value="${sessionScope.user.phoneNumber}" placeholder="Nhập số điện thoại (10 số)">
+
                                                     <div class="cart_submit">
                                                         <button type="submit">Lưu</button>
-                                                    </div> 
+                                                    </div>
                                                 </form>
-                                                    
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="tab-pane fade show" id="change-pass">               
+                                    <h3>Thay đổi mật khẩu</h3>
+                                    <p style="color: red">${re_enter_mess}</p>
+                                    <div class="login">
+                                        <div class="login_form_container">
+                                            <div class="account_login_form">
+                                                <form name="MyAccountForm2" onsubmit="return validateForm2()" action="user?action=changepass" method="POST">
+                                                    <label><b>Email</b></label>
+                                                    <input required="true" type="email" readonly name="user_email" value="${sessionScope.user.user_email}">
+
+                                                    <label><b>Mật khẩu cũ</b></label>
+                                                    <input required="true" type="password" id="old_pass" name="old_pass" placeholder="Nhập mật khẩu cũ">
+
+                                                    <label><b>Mật khẩu mới</b></label>
+                                                    <input required="true" type="password" id="user_pass" name="new_pass" placeholder="Nhập mật khẩu mới A-Z 0-9">
+                                                    
+                                                    <label><b>Nhập lại mật khẩu mới</b></label>
+                                                    <input required="true" type="password" id="user_pass" name="re_enter_pass" placeholder="Nhập lại mật khẩu mới"><!-- comment -->
+                                                    
+                                                    <div class="cart_submit">
+                                                        <button type="submit">Lưu</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -292,162 +315,214 @@
         <script src="assets/js/main.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-            function showNotification(message, isSuccess) {
-                Swal.fire({
-                    title: isSuccess ? 'Thành công!' : 'Lỗi!',
-                    text: message,
-                    icon: isSuccess ? 'success' : 'error',
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                    function showNotification(message, isSuccess) {
+                                                        Swal.fire({
+                                                            title: isSuccess ? 'Thành công!' : 'Lỗi!',
+                                                            text: message,
+                                                            icon: isSuccess ? 'success' : 'error',
+                                                            toast: true,
+                                                            position: 'top-end',
+                                                            showConfirmButton: false,
+                                                            timer: 3000,
+                                                            timerProgressBar: true,
+                                                            didOpen: (toast) => {
+                                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                                            }
+                                                        });
+                                                    }
+
+                                                    // Kiểm tra và hiển thị thông báo khi trang được tải
+                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                        var error_dob = "${sessionScope.error_dob}";
+                                                        var error_pass = "${sessionScope.error_pass}";
+                                                        var updateMessage = "${sessionScope.updateMessage}";
+                                                        if (error_dob) {
+                                                            showNotification(error_dob, false);
+            <% session.removeAttribute("error_dob"); %>
+                                                        }
+                                                        if (updateMessage) {
+                                                            showNotification(updateMessage, true);
+            <% session.removeAttribute("updateMessage"); %>
+                                                        } else if (error_pass) {
+
+                                                            showNotification(error_pass, false);
+            <% session.removeAttribute("error_pass"); %>
+                                                        }
+                                                    });
+        </script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const dateOfBirthInput = document.getElementById('dateOfBirth');
+                const form = dateOfBirthInput.closest('form');
+                let isDateValid = true;
+
+                dateOfBirthInput.addEventListener('change', function () {
+                    const selectedDate = new Date(this.value);
+                    const currentDate = new Date();
+
+                    if (selectedDate > currentDate) {
+                        // Show SweetAlert for invalid date
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Ngày không hợp lệ',
+                            text: 'Ngày sinh không thể là ngày trong tương lai!',
+                            confirmButtonText: 'Đóng'
+                        });
+                        isDateValid = false;
+
+                    } else {
+                        isDateValid = true;
+
                     }
                 });
+
+                form.addEventListener('submit', function (event) {
+                    if (!isDateValid) {
+                        event.preventDefault(); // Prevent form submission
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Không thể gửi biểu mẫu',
+                            text: 'Vui lòng sửa ngày sinh không hợp lệ trước khi gửi.',
+                            confirmButtonText: 'Đóng'
+                        });
+                    }
+
+                });
+            });
+
+        </script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const phoneInput = document.getElementById('phoneNumber');
+                const form = phoneInput.closest('form');
+                let isPhoneValid = true;
+                console.log(isPhoneValid);
+                phoneInput.addEventListener('input', function () {
+                    this.value = this.value.replace(/\D/g, '');
+
+                    // Limit to 10 digits
+                    if (this.value.length > 10) {
+                        this.value = this.value.slice(0, 10);
+                    }
+
+                    // Validate the number
+                    const phoneNumber = this.value;
+                    isPhoneValid = phoneNumber.length === 10 && phoneNumber.startsWith('0');
+
+                    // Update visual feedback
+                    if (isPhoneValid) {
+
+
+                    } else {
+
+
+                    }
+                });
+
+                form.addEventListener('submit', function (event) {
+                    if (!isPhoneValid) {
+                        event.preventDefault(); // Prevent form submission
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Số điện thoại không hợp lệ',
+                            text: 'Vui lòng nhập số điện thoại hợp lệ (10 số, bắt đầu bằng số 0).',
+                            confirmButtonText: 'Đóng'
+                        });
+                    }
+                });
+            });
+
+        </script>
+        <script>
+            function validateForm() {
+                var userName = document.forms["MyAccountForm"]["user_name"].value.trim();
+                var address = document.forms["MyAccountForm"]["address"].value.trim();
+                var phoneNumber = document.forms["MyAccountForm"]["phoneNumber"].value.trim();
+//                var oldPass = document.getElementById("old_pass").value;
+//                var newPass = document.getElementById("user_pass").value;
+//                var sessionPass = "${sessionScope.user.user_pass}";
+                if (userName === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Tên người dùng không cho phép khoảng trắng!',
+                        text: 'Vui lòng nhập tên người dùng hợp lệ!',
+                        confirmButtonText: 'Đóng'
+                    });
+                    return false;
+                }
+                if (address === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Địa chỉ không cho phép khoảng trắng!',
+                        text: 'Vui lòng nhập địa chỉ hợp lệ!',
+                        confirmButtonText: 'Đóng'
+                    });
+                    return false;
+                }
+                if (phoneNumber === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Số điện thoại không cho phép khoảng trắng!',
+                        text: 'Vui lòng nhập số điện thoại hợp lệ!',
+                        confirmButtonText: 'Đóng'
+                    });
+                    return false;
+                }
+//                if (oldPass !== sessionPass) {
+//                    Swal.fire({
+//                        icon: 'error',
+//                        title: 'Lỗi!',
+//                        text: 'Mật khẩu cũ không đúng!',
+//                        confirmButtonText: 'Đóng'
+//                    });
+//                    return false;
+//                }
+//
+//                // Kiểm tra mật khẩu mới phải khác mật khẩu cũ
+//                if (newPass === oldPass) {
+//                    Swal.fire({
+//                        icon: 'error',
+//                        title: 'Lỗi!',
+//                        text: 'Mật khẩu mới phải khác mật khẩu cũ!',
+//                        confirmButtonText: 'Đóng'
+//                    });
+//                    return false;
+//                }
+                return true;
             }
 
-            // Kiểm tra và hiển thị thông báo khi trang được tải
-            document.addEventListener('DOMContentLoaded', function () {
-                var error_dob = "${sessionScope.error_dob}";
-                var error_pass = "${sessionScope.error_pass}";
-                var updateMessage = "${sessionScope.updateMessage}";
-                if (error_dob) {
-                    showNotification(error_dob, false);
-            <% session.removeAttribute("error_dob"); %>
+            function validateForm2() {
+                var oldPass = document.getElementById("old_pass").value;
+                var newPass = document.getElementById("user_pass").value;
+                var sessionPass = "${sessionScope.user.user_pass}";
+                if (oldPass !== sessionPass) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: 'Mật khẩu cũ không đúng!',
+                        confirmButtonText: 'Đóng'
+                    });
+                    return false;
                 }
-                if (updateMessage) {
-                    showNotification(updateMessage, true);
-            <% session.removeAttribute("updateMessage"); %>
-                } else if (error_pass) {
 
-                    showNotification(error_pass, false);
-            <% session.removeAttribute("error_pass"); %>
+                // Kiểm tra mật khẩu mới phải khác mật khẩu cũ
+                if (newPass === oldPass) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: 'Mật khẩu mới phải khác mật khẩu cũ!',
+                        confirmButtonText: 'Đóng'
+                    });
+                    return false;
                 }
-            });
+                return true;
+            }
         </script>
-
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-    const dateOfBirthInput = document.getElementById('dateOfBirth');
-    const form = dateOfBirthInput.closest('form');
-    let isDateValid = true;
-    
-    dateOfBirthInput.addEventListener('change', function() {
-        const selectedDate = new Date(this.value);
-        const currentDate = new Date();
-        
-        if (selectedDate > currentDate) {
-            // Show SweetAlert for invalid date
-            Swal.fire({
-                icon: 'error',
-                title: 'Ngày không hợp lệ',
-                text: 'Ngày sinh không thể là ngày trong tương lai!',
-                confirmButtonText: 'Đóng'
-            });
-            isDateValid = false;
-            
-        } else {
-            isDateValid = true;
-           
-        }
-    });
-
-    form.addEventListener('submit', function(event) {
-        if (!isDateValid) {
-            event.preventDefault(); // Prevent form submission
-            Swal.fire({
-                icon: 'error',
-                title: 'Không thể gửi biểu mẫu',
-                text: 'Vui lòng sửa ngày sinh không hợp lệ trước khi gửi.',
-                confirmButtonText: 'Đóng'
-            });
-        }
-    });
-});
-            
-        </script>
-
-        
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-    const phoneInput = document.getElementById('phoneNumber');
-    const form = phoneInput.closest('form');
-    let isPhoneValid = true;
-    console.log(isPhoneValid);
-    phoneInput.addEventListener('input', function() {
-        this.value = this.value.replace(/\D/g, '');
-        
-        // Limit to 10 digits
-        if (this.value.length > 10) {
-            this.value = this.value.slice(0, 10);
-        }
-
-        // Validate the number
-        const phoneNumber = this.value;
-        isPhoneValid = phoneNumber.length === 10 && phoneNumber.startsWith('0');
-
-        // Update visual feedback
-        if (isPhoneValid) {
-            
-          
-        } else {
-            
-          
-        }
-    });
-
-    form.addEventListener('submit', function(event) {
-        if (!isPhoneValid) {
-            event.preventDefault(); // Prevent form submission
-            Swal.fire({
-                icon: 'error',
-                title: 'Số điện thoại không hợp lệ',
-                text: 'Vui lòng nhập số điện thoại hợp lệ (10 số, bắt đầu bằng số 0).',
-                confirmButtonText: 'Đóng'
-            });
-        }
-    });
-});
-            
-        </script>
-                                            <script>
-                                                    function validateForm() {
-                                                        var userName = document.forms["MyAccountForm"]["user_name"].value.trim();
-                                                        var address = document.forms["MyAccountForm"]["address"].value.trim();
-                                                        var phoneNumber = document.forms["MyAccountForm"]["phoneNumber"].value.trim();
-                                                        if (userName === "") {
-                                                            Swal.fire({
-                                                                icon: 'error',
-                                                                title: 'Tên người dùng không cho phép khoảng trắng!',
-                                                                text: 'Vui lòng nhập tên người dùng hợp lệ!',
-                                                                confirmButtonText: 'Đóng'
-                                                            });
-                                                            return false;
-                                                        }else if(address === ""){
-                                                            Swal.fire({
-                                                                icon: 'error',
-                                                                title: 'Địa chỉ không cho phép khoảng trắng!',
-                                                                text: 'Vui lòng nhập địa chỉ hợp lệ!',
-                                                                confirmButtonText: 'Đóng'
-                                                            });
-                                                            return false;
-                                                        }
-                                                        else if(phoneNumber === ""){
-                                                            Swal.fire({
-                                                                icon: 'error',
-                                                                title: 'Số điện thoại không cho phép khoảng trắng!',
-                                                                text: 'Vui lòng nhập số điện thoại hợp lệ!',
-                                                                confirmButtonText: 'Đóng'
-                                                            });
-                                                            return false;
-                                                        }
-                                                        return true;
-                                                    }
-                                                </script>
     </body>
 
 </html>

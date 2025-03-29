@@ -15,13 +15,19 @@ import java.util.Date;
 import java.util.Date;
 
 public class SaleOff {
+
     private String sale_id;
     private String product_id;
+
     private float discount_percentage;
     private Date start_date;
     private Date end_date;
+    private String product_name;
+    private float beforeSalePrice;
+    private float afterSalePrice;
 
-    public SaleOff() {}
+    public SaleOff() {
+    }
 
     public SaleOff(String sale_id, String product_id, float discount_percentage, Date start_date, Date end_date) {
         this.sale_id = sale_id;
@@ -69,6 +75,30 @@ public class SaleOff {
 
     public void setEnd_date(Date end_date) {
         this.end_date = end_date;
+    }
+
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
+    }
+
+    public float getBeforeSalePrice() {
+        return beforeSalePrice;
+    }
+
+    public void setBeforeSalePrice(float beforeSalePrice) {
+        this.beforeSalePrice = beforeSalePrice;
+    }
+
+    public float getAfterSalePrice() {
+        return afterSalePrice;
+    }
+
+    public void setAfterSalePrice(float afterSalePrice) {
+        this.afterSalePrice = afterSalePrice;
     }
 
     @Override
