@@ -2,7 +2,7 @@ package model;
 
 /**
  *
- * @author An
+ * @author 
  */
 public class Product_Active {
     private String product_id;

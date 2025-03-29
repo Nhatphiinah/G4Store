@@ -104,21 +104,41 @@
             </table>
             <br/>
             <h2>Add New Sale Off</h2>
-            <form action="saleoff" method="post">
-                <input type="hidden" name="action" value="insert">
-                Sale ID: <input type="text" name="saleId" required><br>
-                Product 
-                <select name="productId" required >
-                    <c:forEach var="p" items="${products}">
-                        <option value="${p.product_id}">${p.product_name}</option>
-                    </c:forEach>
-                </select>
-                <br>
-                Discount Percentage: <input type="number" name="discountPercentage" step="0.01" required><br>
-                Start Date: <input type="date" name="startDate" required><br>
-                End Date: <input type="date" name="endDate" required><br>
-                <input type="submit" value="Add Sale Off">
-            </form>
+<form action="saleoff" method="post" class="p-4 bg-light rounded shadow-sm w-50 mx-auto">
+    <input type="hidden" name="action" value="insert">
+    
+    <div class="mb-3">
+        <label class="form-label">Sale ID:</label>
+        <input type="text" name="saleId" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Product:</label>
+        <select name="productId" class="form-select" required>
+            <c:forEach var="p" items="${products}">
+                <option value="${p.product_id}">${p.product_name}</option>
+            </c:forEach>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Discount Percentage:</label>
+        <input type="number" name="discountPercentage" step="0.01" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Start Date:</label>
+        <input type="date" name="startDate" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">End Date:</label>
+        <input type="date" name="endDate" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Add Sale Off</button>
+</form>
+
         </main>
 
 
