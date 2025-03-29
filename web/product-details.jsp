@@ -400,8 +400,25 @@
                                 <div class="product_container">                               
                                     <h1>${ProductData.product_name}</h1>
                                     <div class="product_price">
-                                        <label >Giá tiền: </label>
-                                        <span class="current_price">${ProductData.product_price} VNĐ</span>
+                                        <label>Giá tiền: </label>
+                                        <c:choose>
+                                            <c:when test="${ProductData.discount > 0}">
+                                                <span class="old_price">
+                                                    <del>
+                                                        <fmt:formatNumber value="${ProductData.product_price}" pattern="#,##0" /> VNĐ
+                                                    </del>
+                                                </span>
+                                                <span class="current_price">
+                                                    <c:set var="discountedPrice" value="${ProductData.product_price - (ProductData.product_price * ProductData.discount / 100)}" />
+                                                    <fmt:formatNumber value="${discountedPrice}" pattern="#,##0" /> VNĐ
+                                                </span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="current_price">
+                                                    <fmt:formatNumber value="${ProductData.product_price}" pattern="#,##0" /> VNĐ
+                                                </span>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                     <div class="product_desc">
                                         <h4>Đánh giá trung bình: 

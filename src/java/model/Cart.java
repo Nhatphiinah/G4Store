@@ -110,12 +110,16 @@ public class Cart {
     }
     //tổng tiền của cả giỏ hàng – sẽ add vào bảng Order
 
-    public double getTotalMoney() {
-        double t = 0;
-        for (Item i : items) {
-            t += (i.getQuantity() * i.getProduct().product_price);
+public double getTotalMoney() {
+    double total = 0;
+    for (Item i : items) {
+        double price = i.getProduct().getProduct_price();
+        if (i.getProduct().getDiscount() > 0) {
+            price = price * (1 - i.getProduct().getDiscount() / 100.0);
         }
-        return t;
+        total += i.getQuantity() * price;
     }
+    return total;
+}
 
 }
