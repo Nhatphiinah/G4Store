@@ -72,10 +72,10 @@
                     <div class="tile">
                         <div class="tile-body">
                             <div class="row element-button">
-                                <div class="col-sm-2">
+<!--                                <div class="col-sm-2">
                                     <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
                                             class="fas fa-print"></i> In dữ liệu</a>
-                                </div>
+                                </div>-->
                             </div>
                             <table class="table table-hover table-bordered" id="sampleTable">
                                 <thead>

@@ -53,11 +53,12 @@ public class billDAO extends DBContext {
                 for (Item i : cart.getItems()) {
                     // Lấy giá gốc và discount từ sản phẩm
                     double productPrice = i.getProduct().getProduct_price();
-                    float discount = i.getProduct().getDiscount();  // Lấy discount từ đối tượng Product
-                    if (discount > 0) {
-                        productPrice = productPrice * (1 - discount / 100.0);
-                    }
-                    double total = i.getQuantity() * productPrice;
+                     float discount = i.getProduct().getDiscount();  // Lấy discount từ đối tượng Product
+                     if (discount > 0) {
+                         productPrice = productPrice * (1 - discount / 100.0);
+                     }
+                     double total = i.getQuantity() * productPrice;
+ 
 
                     String sql2 = "insert into [bill_detail] values(?,?,?,?,?,?)";
                     ps = conn.prepareStatement(sql2);

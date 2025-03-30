@@ -61,7 +61,7 @@
                 <li><a class="app-menu__item" href="categorymanager"><i class='app-menu__icon bx bxs-category'></i><span class="app-menu__label">Quản lý danh mục</span></a></li>
                 <li><a class="app-menu__item" href="productmanager"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
                 <li><a class="app-menu__item" href="ordermanager"><i class='app-menu__icon bx bx-task'></i><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
-
+ <li><a class="app-menu__item" href="saleoff"><i class='app-menu__icon bx bxs-discount'></i><span class="app-menu__label">Quản lý khuyến mãi</span></a></li>
                 <!-- Conditionally Display Menu Items -->
                 <c:if test="${sessionScope.user.isAdmin}">
                     <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý khách hàng</span></a></li>
@@ -74,7 +74,7 @@
         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
-                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách các bài viết giới thiệu</b></a></li>
+                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách tin tức</b></a></li>
                 </ul>
                 <div id="clock"></div>
             </div>
@@ -85,12 +85,12 @@
                             <div class="row element-button">
                                 <div class="col-sm-2">
                                     <a class="btn btn-add btn-sm" href="aboutmanager?action=insert" title="Thêm"><i class="fas fa-plus"></i>
-                                        Tạo mới phần giới thiệu</a>
+                                        Tạo Tin Tức Mới</a>
                                 </div>
-                                <div class="col-sm-2">
+<!--                                <div class="col-sm-2">
                                     <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
                                             class="fas fa-print"></i> In dữ liệu</a>
-                                </div>
+                                </div>-->
                             </div>
                             <form action="aboutmanager" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
 

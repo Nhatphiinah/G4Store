@@ -56,7 +56,7 @@
                 <li><a class="app-menu__item" href="categorymanager"><i class='app-menu__icon bx bxs-category'></i><span class="app-menu__label">Quản lý danh mục</span></a></li>
                 <li><a class="app-menu__item" href="productmanager"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
                 <li><a class="app-menu__item" href="ordermanager"><i class='app-menu__icon bx bx-task'></i><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
-
+ <li><a class="app-menu__item" href="saleoff"><i class='app-menu__icon bx bxs-discount'></i><span class="app-menu__label">Quản lý khuyến mãi</span></a></li>
                 <!-- Conditionally Display Menu Items -->
                 <c:if test="${sessionScope.user.isAdmin}">
                     <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span class="app-menu__label">Quản lý khách hàng</span></a></li>
@@ -77,11 +77,11 @@
                 <div class="col-md-12">
                     <div class="tile">
                         <div class="tile-body">
-                            <div class="row element-button"
+<!--                            <div class="row element-button"
                                  <div class="col-sm-2">
                                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
                                         class="fas fa-print"></i> In dữ liệu</a>
-                            </div>
+                            </div>-->
                         </div>
                         <div>
                             <label for="paymentFilter">Phương thức thanh toán:</label>

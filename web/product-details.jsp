@@ -427,7 +427,7 @@
                                         </h5>
                                         <label>Mô tả sản phẩm: </label>
                                         <p>${ProductData.product_describe}</p>
-                                                 <label>Số lượng sản phẩm: </label>
+                                        <label>Số lượng sản phẩm: </label>
                                         <p id="quantity">${ProductData.quantity}</p>
                                     </div>
                                 </div>
@@ -446,14 +446,31 @@
                                     <div class="size-selection-container">
                                         <select class="niceselect_option" id="size" name="size" onchange="handleChange(this)" required="">
                                             <option disabled="true" selected="true" value="">Size</option>
-                                                <c:forEach items="${SizeData}" var="s">
-                                                    <option value="${s.size}" data-quantity="${s.quantity}">${s.size}</option>
-                                                </c:forEach>
-                                            </select>
-                                        <a href="#" id="size-guide-link">
+                                            <c:forEach items="${SizeData}" var="s">
+                                                <option value="${s.size}" data-quantity="${s.quantity}">${s.size}</option>
+                                            </c:forEach>
+                                        </select>
+                                        <a href="#" id="open-size-guide">
                                             <i class="fas fa-ruler"></i> Hướng dẫn chọn size
                                         </a>
                                     </div>
+                                    <script>
+                                        document.getElementById("open-size-guide").addEventListener("click", function (event) {
+                                            event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+                                            document.getElementById("size-guide-popup").style.display = "block";
+                                        });
+
+                                        // Kiểm tra xem phần tử "close-popup" có tồn tại trước khi gán sự kiện
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            var closeBtn = document.getElementById("close-popup");
+                                            if (closeBtn) {
+                                                closeBtn.addEventListener("click", function () {
+                                                    document.getElementById("size-guide-popup").style.display = "none";
+                                                });
+                                            }
+                                        });
+                                    </script>
+
                                 </div>
 
 
@@ -559,10 +576,10 @@
         <!-- Main JS -->
         <script src="assets/js/main.js"></script>
         <script>
-            function setActionAndSubmit(action) {
-                document.getElementById('action').value = action;
-                document.getElementById('productForm').submit();
-            }
+                function setActionAndSubmit(action) {
+                    document.getElementById('action').value = action;
+                    document.getElementById('productForm').submit();
+                }
         </script>
         <div id="size-guide-popup" style="display: none; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid black; z-index: 1000;">
 
@@ -634,15 +651,15 @@
         </div>
 
         <script>
-            
+
             function handleChange(select) {
-                var selectedOption = select.options[select.selectedIndex]; 
-                var quantity = selectedOption.getAttribute("data-quantity"); 
+                var selectedOption = select.options[select.selectedIndex];
+                var quantity = selectedOption.getAttribute("data-quantity");
                 console.log("Số lượng có sẵn:", quantity);
                 document.getElementById('inputQuantity').max = quantity;
                 document.getElementById('quantity').innerText = quantity;
             }
-            
+
             function showNotification(message, isSuccess) {
                 Swal.fire({
                     title: isSuccess ? 'Thành công!' : 'Lỗi!',
@@ -682,20 +699,20 @@
             });
         </script>
         <script>
-                                                    function validateForm() {
-                                                        var comment = document.forms["commentForm"]["comment"].value.trim();
-                                                        
-                                                        if (comment === "") {
-                                                            Swal.fire({
-                                                                icon: 'error',
-                                                                title: 'Bình luận không cho phép khoảng trắng!',
-                                                                text: 'Vui lòng nhập bình luận hợp lệ!',
-                                                                confirmButtonText: 'Đóng'
-                                                            });
-                                                            return false;
-                                                        }
-                                                        return true;
-                                                    }
-                                                </script>
+            function validateForm() {
+                var comment = document.forms["commentForm"]["comment"].value.trim();
+
+                if (comment === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Bình luận không cho phép khoảng trắng!',
+                        text: 'Vui lòng nhập bình luận hợp lệ!',
+                        confirmButtonText: 'Đóng'
+                    });
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </body>
 </html>

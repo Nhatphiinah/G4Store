@@ -65,7 +65,7 @@
                     <li><a class="app-menu__item" href="reportmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý phản hồi</span></a></li>
                     <li><a class="app-menu__item" href="aboutmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý trang giới thiệu</span></a></li>
                     <li><a class="app-menu__item" href="commentmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý bình luận</span></a></li>
-                    <li><a class="app-menu__item" href="saleoff"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý sale</span></a></li>
+
                             </c:if>
             </ul>
         </aside>
@@ -80,11 +80,11 @@
                 <div class="col-md-12">
                     <div class="tile">
                         <div class="tile-body">
-                            <div class="row element-button"
+<!--                            <div class="row element-button"
                                  <div class="col-sm-2">
                                 <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
                                         class="fas fa-print"></i> In dữ liệu</a>
-                            </div>
+                            </div>-->
                             <div>
                                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
                                         class="fas fa-folder-plus"></i> Thêm danh mục</a>
@@ -108,8 +108,8 @@
                                         <td>
                                             <button class="btn btn-primary btn-sm edit" type="button" data-toggle="modal" data-target="#ModalEditCategory${c.category_id}" title="Sửa"><i class="fas fa-edit"></i></button>
                                             <c:if test="${c.status == true}">
-                                            <button class="btn btn-primary btn-sm trash" type="button" title="xóa" value="${c.category_id}">
-                                                <i class="fas fa-trash"></i></button></c:if></td>
+<!--                                            <button class="btn btn-primary btn-sm trash" type="button" title="xóa" value="${c.category_id}">
+                                                <i class="fas fa-trash"></i></button></c:if></td>-->
 
                                     </tr>
                                 <div class="modal fade" id="ModalEditCategory${c.category_id}" tabindex="-1" role="dialog" aria-hidden="true">

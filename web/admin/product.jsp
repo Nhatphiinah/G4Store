@@ -91,14 +91,14 @@
                                 <!-- UploadExcelBtn -->
                                 <!-- UploadExcelBtn -->
                                 <!-- UploadExcelBtn -->
-                                <div class="col-sm-2">
+<!--                                <div class="col-sm-2">
                                     <a class="btn btn-add btn-sm"  title="ThêmExcel"
                                        data-toggle="modal" data-target="#uploadModal"><i class="fas fa-plus"></i>
                                         Tạo mới sản phẩm bằng Excel(chỉ xlsx)</a>
-                                </div>
+                                </div>-->
                                 <!-- UploadExcelBtn -->
                                 <!-- uploadModal -->
-                                <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+<!--                                <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -119,16 +119,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <!-- uploadModal -->   
                                 <!-- UploadExcelBtn -->
                                 <!-- UploadExcelBtn -->
 
 
-                                <div class="col-sm-2">
+<!--                                <div class="col-sm-2">
                                     <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
                                             class="fas fa-print"></i> In dữ liệu</a>
-                                </div>
+                                </div>-->
                             </div>
                             <form action="productmanager" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="updateproduct">
