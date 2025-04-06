@@ -229,6 +229,12 @@
                                 <form name="insertCate" action="customermanager?action=insertStaff" method="post"> 
                                     <label class="control-label">Tên</label>
                                     <input class="form-control" type="text" name="name" required>
+                                    <label class="control-label">Ngày sinh</label>
+                                    <input class="form-control" type="date" name="dob" id="dob" required>
+                                    <label class="control-label">Sdt</label>
+                                    <input class="form-control" type="phone" name="phone" required pattern="0\d{8,9}" title="Số điện thoại phải bắt đầu bằng 0 và có 9 hoặc 10 chữ số">
+                                    <label class="control-label">Ðia chi</label>
+                                    <input class="form-control" type="text" name="address" required>
                                     <label class="control-label">Email</label>
                                     <input class="form-control" type="email" name="email" required>
                                     <br>
@@ -425,6 +431,11 @@
                     }
                 }
             });
+        </script>
+         <script>
+            // Get today's date in yyyy-mm-dd format
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('dob').setAttribute('max', today);
         </script>
     </body>
 

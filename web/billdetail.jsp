@@ -72,7 +72,7 @@
                                                     <td class="product-price">${d.size}</td>
                                                     <td class="product-price">${d.color}</td>
                                                     <td class="product_quantity">${d.quantity}</td>
-                                                    <td class="product_total"> <fmt:formatNumber pattern="##########" value="${d.price}"/></td>
+                                                    <td class="product_total"> <fmt:formatNumber pattern="##########" value="${d.price}"  /> VNĐ</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

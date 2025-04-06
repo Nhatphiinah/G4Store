@@ -82,10 +82,16 @@ public class CustomerManager extends HttpServlet {
                     userDAO da = new userDAO();
                     String name = request.getParameter("name");
                     String email = request.getParameter("email");
+                    String dob = request.getParameter("dob");
+                    String phone = request.getParameter("phone");
+                    String address = request.getParameter("address");
                     String defaultPass = "Abc123";
                     model.User a = da.checkAcc(email);
                     if (a == null) {
                         User u = new User(name, email, defaultPass, "FALSE", false, "TRUE");
+                        u.setDateOfBirth(dob);
+                        u.setPhoneNumber(phone);
+                        u.setAddress(address);
                         da.addStaff(u);
                         SendEmail sm = new SendEmail();
                         sm.sendEmail3(email, "Staff Account", "Admin create a account for you. Your password is: " + defaultPass);

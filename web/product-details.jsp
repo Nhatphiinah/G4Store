@@ -446,11 +446,11 @@
                                     <div class="size-selection-container">
                                         <select class="niceselect_option" id="size" name="size" onchange="handleChange(this)" required="">
                                             <option disabled="true" selected="true" value="">Size</option>
-                                            <c:forEach items="${SizeData}" var="s">
-                                                <option value="${s.size}" data-quantity="${s.quantity}">${s.size}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <a href="#" id="open-size-guide">
+                                                <c:forEach items="${SizeData}" var="s">
+                                                     <option value="${s.size}" data-quantity="${s.quantity}">${s.size}</option>
+                                                 </c:forEach>
+                                             </select>
+                                         <a href="#" id="size-guide-link">
                                             <i class="fas fa-ruler"></i> Hướng dẫn chọn size
                                         </a>
                                     </div>

@@ -224,7 +224,7 @@
                                                         <td>${b.date}</td>
                                                         <td><span class="success">${b.payment}</span></td>
                                                         <td>${b.address}</td>
-                                                        <td>${b.total}</td>
+                                                        <td>${b.total} VNĐ</td>
                                                                                                                 <td>
                                                              <c:if test="${b.status == 1}">
                                                                  Chưa thanh toán

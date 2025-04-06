@@ -49,7 +49,7 @@ public class userDAO extends DBContext {
         } catch (Exception e) {
         }
     }
-    
+
     public void changePass(int user_id, String pass) {
         String sql = "update users set [user_pass] =? where user_id = ?";
         try {
@@ -206,10 +206,14 @@ public class userDAO extends DBContext {
 
         }
     }
-    
+
     public void addStaff(User u) {
         try {
-            String query = "insert into users([user_name],[user_email],[user_pass],[isAdmin],[banned],[isStoreStaff]) values(?,?,?,?,?,?)";
+            String query = "insert into users([user_name],[user_email],[user_pass],[isAdmin],[banned],[isStoreStaff],"
+                    + "[dateOfBirth]\n"
+                    + "      ,[address]\n"
+                    + "      ,[phoneNumber]) "
+                    + "values(?,?,?,?,?,?,?,?,?)";
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, u.getUser_name());
@@ -218,6 +222,9 @@ public class userDAO extends DBContext {
             ps.setString(4, u.getIsAdmin());
             ps.setBoolean(5, u.isBanned());
             ps.setString(6, u.getIsStoreStaff());
+            ps.setString(7, u.getDateOfBirth());
+            ps.setString(8, u.getAddress());
+            ps.setString(9, u.getPhoneNumber());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

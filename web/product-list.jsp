@@ -22,19 +22,22 @@
                             <h5 class="card-title product-title">${p.product_name}</h5>
                             <c:choose>
                                 <c:when test="${p.discount > 0}">
-                                    <p class="card-text product-price">
-                                        Giá gốc: <del><fmt:formatNumber value="${p.product_price}" pattern="#,##0" /> VNĐ</del>
-                                    </p>
+<!--                                    <p class="card-text product-price">
+                                        Giá gốc: <del>
+<%--<fmt:formatNumber value="${p.product_price}" pattern="#,##0" />--%> 
+VNĐ</del>
+                                    </p>-->
                                     <p class="card-text product-final-price">
-                                        Giá sau giảm: <strong>
+                                        Giá: <strong>
                                             <c:set var="discountedPrice" value="${p.product_price - (p.product_price * p.discount / 100)}" />
+                                            <del style="color: red"><fmt:formatNumber value="${p.product_price}" pattern="#,##0" /> </del>
                                             <fmt:formatNumber value="${discountedPrice}" pattern="#,##0" /> VNĐ
                                         </strong>
                                     </p>
                                 </c:when>
                                 <c:otherwise>
                                     <p class="card-text product-final-price">
-                                        Giá gốc: <strong><fmt:formatNumber value="${p.product_price}" pattern="#,##0" /> VNĐ</strong>
+                                        Giá: <strong><fmt:formatNumber value="${p.product_price}" pattern="#,##0" /> VNĐ</strong>
                                     </p>
                                 </c:otherwise>
                             </c:choose>

@@ -53,7 +53,7 @@ public class Checkout extends HttpServlet {
             Size productSize = proDAO.getQuatityBySize(i.getProduct().getProduct_id(), i.getSize());
             System.out.println(productSize);
             if (productSize == null || i.getQuantity() > productSize.getQuantity()) {
-                session.setAttribute("orderErrorMessage", "Sản phẩm " + i.getProduct().getProduct_id()
+                session.setAttribute("orderErrorMessage", "Sản phẩm " + i.getProduct().getProduct_name()
                         + " chỉ còn " + (productSize != null ? productSize.getQuantity() : 0) + " chiếc.");
                 response.sendRedirect("cart?action=showcart");
                 return;

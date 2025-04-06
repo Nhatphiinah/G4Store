@@ -72,6 +72,15 @@ public class billDAO extends DBContext {
                     ps.executeUpdate();
                 }
             }
+                        String sql3 = "update product set quantity = quantity - ? "
+                     + "where product_id = ?";
+             ps = conn.prepareStatement(sql3);
+             for (Item i : cart.getItems()) {
+                 ps.setInt(1, i.getQuantity());
+                 ps.setString(2, i.getProduct().getProduct_id());
+                 ps.executeUpdate();
+             }
+ 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -123,14 +132,14 @@ public class billDAO extends DBContext {
 
             }
 
-            String sql3 = "update product set quantity = quantity - ? "
-                    + "where product_id = ?";
-            ps = conn.prepareStatement(sql3);
-            for (Item i : cart.getItems()) {
-                ps.setInt(1, i.getQuantity());
-                ps.setString(2, i.getProduct().getProduct_id());
-                ps.executeUpdate();
-            }
+//            String sql3 = "update product set quantity = quantity - ? "
+//                    + "where product_id = ?";
+//            ps = conn.prepareStatement(sql3);
+//            for (Item i : cart.getItems()) {
+//                ps.setInt(1, i.getQuantity());
+//                ps.setString(2, i.getProduct().getProduct_id());
+//                ps.executeUpdate();
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();

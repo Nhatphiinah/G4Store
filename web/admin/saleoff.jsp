@@ -69,8 +69,8 @@
                     <li><a class="app-menu__item" href="reportmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý phản hồi</span></a></li>
                     <li><a class="app-menu__item" href="aboutmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý trang giới thiệu</span></a></li>
                     <li><a class="app-menu__item" href="commentmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý bình luận</span></a></li>
-                    
-                            </c:if>
+
+                </c:if>
             </ul>
         </aside>
         <main class="app-content">
@@ -138,7 +138,7 @@
                                                     <input type="number" name="discountPercentage" id="update-discountPercentage" step="0.01" max="99.99" class="form-control" required>
 
                                                     <label>Start Date:</label>
-                                                    <input type="date" name="startDate" id="update-startDate" class="form-control" required>
+                                                    <input readonly type="date" name="startDate" id="update-startDate" class="form-control" required>
 
                                                     <label>End Date:</label>
                                                     <input type="date" name="endDate" id="update-endDate" class="form-control" required>
@@ -147,7 +147,7 @@
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <input type="submit" class="btn btn-success" value="Update">
+                                                    <input type="submit" id="update-button" class="btn btn-success" value="Update">
                                                 </div>
 
                                             </form>
@@ -163,6 +163,15 @@
                                         document.getElementById('update-discountPercentage').value = discountPercentage;
                                         document.getElementById('update-startDate').value = startDate;
                                         document.getElementById('update-endDate').value = endDate;
+
+                                        const todayDate = new Date().toISOString().split('T')[0];
+                                        const updateButton = document.getElementById('update-button'); // giả sử nút Update có id là 'update-button'
+
+                                        if (endDate < todayDate) {
+                                            updateButton.disabled = true;
+                                        } else {
+                                            updateButton.disabled = false;
+                                        }
                                     }
                                 </script>
 
@@ -222,7 +231,7 @@
 
                                 <div class="form-group">
                                     <label>End Date:</label>
-                                    <input type="date" name="endDate" class="form-control" required>
+                                    <input type="date" name="endDate" id="add-endDate" class="form-control" required>
                                 </div>
 
                             </div>
@@ -244,6 +253,12 @@
 
         </main>
 
-
+        <script>
+            // Get today's date in yyyy-mm-dd format
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('add-startDate').setAttribute('min', today);
+            document.getElementById('add-endDate').setAttribute('min', today);
+            document.getElementById('update-endDate').setAttribute('min', today);
+        </script>
     </body>
 </html>

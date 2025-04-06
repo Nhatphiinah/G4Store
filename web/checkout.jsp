@@ -119,16 +119,16 @@
                                         <c:if test="${sessionScope.cart!=null}">
                                             <tfoot>
                                                 <tr>
-                                                    <th>Tổng giá</th>
-                                                    <td>${sessionScope.total}</td>
+                                                    <th>Tổng giá </th>
+                                                    <td>${sessionScope.total} VNĐ</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Phí ship</th>
-                                                    <td><strong>0</strong></td>
+                                                    <th>Phí ship </th>
+                                                    <td><strong>0 VNĐ</strong></td>
                                                 </tr>
                                                 <tr class="order_total">
                                                     <th>Tổng đơn</th>
-                                                    <td><strong>${sessionScope.total + 0}</strong></td>
+                                                    <td><strong>${sessionScope.total + 0} VNĐ</strong></td>
                                                 </tr>
                                             </tfoot>
                                         </c:if>
