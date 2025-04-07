@@ -20,7 +20,7 @@
         <link rel="stylesheet" type="text/css"
               href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
-<script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script>
+        <script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script>
 
         <script>
 
@@ -160,7 +160,7 @@
                 </div>
             </div>
             <hr>
-          <ul class="app-menu">
+            <ul class="app-menu">
                 <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span class="app-menu__label">Bảng thống kê</span></a></li>
                 <li><a class="app-menu__item" href="categorymanager"><i class='app-menu__icon bx bxs-category'></i><span class="app-menu__label">Quản lý danh mục</span></a></li>
                 <li><a class="app-menu__item" href="productmanager"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a></li>
@@ -173,7 +173,7 @@
                     <li><a class="app-menu__item" href="aboutmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý trang giới thiệu</span></a></li>
                     <li><a class="app-menu__item" href="commentmanager"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý bình luận</span></a></li>
                     <li><a class="app-menu__item" href="saleoff"><i class='app-menu__icon bx bx-receipt'></i><span class="app-menu__label">Quản lý sale</span></a></li>
-                </c:if>
+                            </c:if>
             </ul>
         </aside>
         <main class="app-content">
@@ -212,11 +212,11 @@
                                 <div class="form-group col-md-3">
                                     <label for="exampleSelect1" class="control-label">Danh mục</label>
                                     <select name="category_id" class="form-control" id="exampleSelect1">
-    <option>-- Chọn danh mục --</option>
-    <c:forEach items="${CategoryData}" var="cat" varStatus="status">
-        <option value="${cat.category_id}" <c:if test="${status.first}">selected</c:if>>${cat.category_name}</option>
-    </c:forEach>
-</select>
+                                        <option>-- Chọn danh mục --</option>
+                                        <c:forEach items="${CategoryData}" var="cat" varStatus="status">
+                                            <option value="${cat.category_id}" <c:if test="${status.first}">selected</c:if>>${cat.category_name}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
 
                                 <div class="form-group col-md-3">
@@ -227,30 +227,30 @@
                                     <label class="control-label">Giá bán</label>
                                     <input class="form-control" name="price" type="number" min="0">
                                 </div>
-<div class="form-group col-md-3">
-    <label class="control-label">Size</label>
-    <div id="sizeCheckboxes">
-        <label><input type="checkbox" value="S" onclick="updateSizeInput()"> S</label>
-        <label><input type="checkbox" value="M" onclick="updateSizeInput()"> M</label>
-        <label><input type="checkbox" value="L" onclick="updateSizeInput()"> L</label>
-        <label><input type="checkbox" value="XL" onclick="updateSizeInput()"> XL</label>
-        <label><input type="checkbox" value="XXL" onclick="updateSizeInput()"> XXL</label>
-        <label><input type="checkbox" value="XXXL" onclick="updateSizeInput()"> XXXL</label>
-    </div>
-    <input type="hidden" name="size" id="sizeInput">
-</div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label">Size</label>
+                                    <div id="sizeCheckboxes">
+                                        <label><input type="checkbox" value="S" onclick="updateSizeInput()"> S</label>
+                                        <label><input type="checkbox" value="M" onclick="updateSizeInput()"> M</label>
+                                        <label><input type="checkbox" value="L" onclick="updateSizeInput()"> L</label>
+                                        <label><input type="checkbox" value="XL" onclick="updateSizeInput()"> XL</label>
+                                        <label><input type="checkbox" value="XXL" onclick="updateSizeInput()"> XXL</label>
+                                        <label><input type="checkbox" value="XXXL" onclick="updateSizeInput()"> XXXL</label>
+                                    </div>
+                                    <input type="hidden" name="size" id="sizeInput">
+                                </div>
 
-<script>
-function updateSizeInput() {
-    const checkboxes = document.querySelectorAll("#sizeCheckboxes input[type='checkbox']");
-    const selectedSizes = Array.from(checkboxes)
-        .filter(checkbox => checkbox.checked)
-        .map(checkbox => checkbox.value);
-    
-    // Cập nhật giá trị vào input ẩn
-    document.getElementById("sizeInput").value = selectedSizes.join(",");
-}
-</script>
+                                <script>
+                                    function updateSizeInput() {
+                                        const checkboxes = document.querySelectorAll("#sizeCheckboxes input[type='checkbox']");
+                                        const selectedSizes = Array.from(checkboxes)
+                                                .filter(checkbox => checkbox.checked)
+                                                .map(checkbox => checkbox.value);
+
+                                        // Cập nhật giá trị vào input ẩn
+                                        document.getElementById("sizeInput").value = selectedSizes.join(",");
+                                    }
+                                </script>
 
 
 
@@ -299,63 +299,63 @@ function updateSizeInput() {
 
                             </form>
                         </div>
-                            <script>
-                                                function validateForm() {
-                                                    let id = document.forms["insertProduct"]["product_id"].value.trim();
-                                                let name = document.forms["insertProduct"]["product_name"].value.trim();
-                                                let price = document.forms["insertProduct"]["price"].value.trim();
-                                                let color = document.forms["insertProduct"]["color"].value.trim();
-                                                let size = document.forms["insertProduct"]["size"].value.trim();
-                                                let quantity = document.forms["insertProduct"]["quantity"].value.trim();
-                                                if (id === ""||name === ""||price===""||color===""||size===""||quantity==="") {
-                                                  alert("Các trường tên, giá, màu sắc, size, số lượng không chấp nhận khoảng trắng!");
-                                                  return false;
-                                                }
-                                              }
-                                        </script>
+                        <script>
+                            function validateForm() {
+                                let id = document.forms["insertProduct"]["product_id"].value.trim();
+                                let name = document.forms["insertProduct"]["product_name"].value.trim();
+                                let price = document.forms["insertProduct"]["price"].value.trim();
+                                let color = document.forms["insertProduct"]["color"].value.trim();
+                                let size = document.forms["insertProduct"]["size"].value.trim();
+                                let quantity = document.forms["insertProduct"]["quantity"].value.trim();
+                                if (id === "" || name === "" || price === "" || color === "" || size === "" || quantity === "") {
+                                    alert("Các trường tên, giá, màu sắc, size, số lượng không chấp nhận khoảng trắng!");
+                                    return false;
+                                }
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
         </main>
 
-<!--        <div class="modal fade" id="adddanhmuc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-             data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="form-group  col-md-12">
-                                <span class="thong-tin-thanh-toan">
-                                    <h5>Thêm mới danh mục </h5>
-                                </span>
-                            </div>
-
-                            <div class="form-group col-md-12" >
-
-                                <h2 style="color: red; padding-left: 10px">
-                                    ${error}</h2>
-                                <label class="control-label">Nhập tên danh mục mới</label>
-                                <form action="productmanager?action=insertcategory" method="post"> 
-                                    <input class="form-control" type="text" name="name" required>
-                                    <br>
-                                    <button class="btn btn-save" type="submit">Lưu lại</button>
-                                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                                </form>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Danh mục sản phẩm hiện đang có</label>
-                                <ul style="padding-left: 20px;">
-                                    <c:forEach items="${CategoryData}" var="cat">
-                                        <li>${cat.category_name}</li>
-                                        </c:forEach>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
+        <!--        <div class="modal fade" id="adddanhmuc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                     data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+        
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group  col-md-12">
+                                        <span class="thong-tin-thanh-toan">
+                                            <h5>Thêm mới danh mục </h5>
+                                        </span>
+                                    </div>
+        
+                                    <div class="form-group col-md-12" >
+        
+                                        <h2 style="color: red; padding-left: 10px">
+        ${error}</h2>
+    <label class="control-label">Nhập tên danh mục mới</label>
+    <form action="productmanager?action=insertcategory" method="post"> 
+        <input class="form-control" type="text" name="name" required>
+        <br>
+        <button class="btn btn-save" type="submit">Lưu lại</button>
+        <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+    </form>
+</div>
+<div class="form-group col-md-12">
+    <label class="control-label">Danh mục sản phẩm hiện đang có</label>
+    <ul style="padding-left: 20px;">
+        <c:forEach items="${CategoryData}" var="cat">
+            <li>${cat.category_name}</li>
+        </c:forEach>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>-->
 
         <script src="admin/js/jquery-3.2.1.min.js"></script>
         <script src="admin/js/popper.min.js"></script>
@@ -363,25 +363,25 @@ function updateSizeInput() {
         <script src="admin/js/main.js"></script>
         <script src="admin/js/plugins/pace.min.js"></script>
         <script>
-                                        const inpFile = document.getElementById("inpFile");
-                                        const loadFile = document.getElementById("loadFile");
+                                const inpFile = document.getElementById("inpFile");
+                                const loadFile = document.getElementById("loadFile");
 
-                                        const previewContainer = document.getElementById("imagePreview");
-                                        const previewImage = previewContainer.querySelector(".image-preview__image");
-                                        const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-                                        const object = new ActiveXObject("Scripting.FileSystemObject");
-                                        inpFile.addEventListener("change", function () {
-                                            const file = this.files[0];
-                                            if (file) {
-                                                const reader = new FileReader();
-                                                previewDefaultText.style.display = "none";
-                                                previewImage.style.display = "block";
-                                                reader.addEventListener("load", function () {
-                                                    previewImage.setAttribute("src", this.result);
-                                                });
-                                                reader.readAsDataURL(file);
-                                            }
+                                const previewContainer = document.getElementById("imagePreview");
+                                const previewImage = previewContainer.querySelector(".image-preview__image");
+                                const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+                                const object = new ActiveXObject("Scripting.FileSystemObject");
+                                inpFile.addEventListener("change", function () {
+                                    const file = this.files[0];
+                                    if (file) {
+                                        const reader = new FileReader();
+                                        previewDefaultText.style.display = "none";
+                                        previewImage.style.display = "block";
+                                        reader.addEventListener("load", function () {
+                                            previewImage.setAttribute("src", this.result);
                                         });
+                                        reader.readAsDataURL(file);
+                                    }
+                                });
 
         </script>
         <script>

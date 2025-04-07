@@ -4,6 +4,7 @@ import dal.cartDAO;
 import dal.productDAO;
 import model.Item;
 import model.Product;
+import model.User;
 import java.io.IOException;
 import java.util.List;
 import jakarta.servlet.ServletException;
@@ -91,6 +92,8 @@ public class Cart extends HttpServlet {
 
     private void addToCart(HttpServletRequest request, model.Cart cart) {
         cartDAO cd = new cartDAO();
+         HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
         String Squantity = request.getParameter("quantity");
         String product_id = request.getParameter("product_id");
         String size = request.getParameter("size");
@@ -101,13 +104,14 @@ public class Cart extends HttpServlet {
             Product product = pdao.getProductByID(product_id);
             Item item = new Item(product, quantity, size, color);
 //            cart.addItem(item);
-            if (cart.getUserId() != null) {
-                if (cd.GetUserProductInCart(product_id, cart.getUserId()) == null) {
+//            lỗi logic khi add sản phẩm của vòng else
+            if (cart.getUserId() != null) {              
+                if (cd.GetUserProductInCart(product.getProduct_id(), user.getUser_id(),  size) == null) {
                     cart.addItem(item);
                     cd.AddCart(item, cart.getUserId());
                 } else {
                     for (Item i : cart.getItems()) {
-                        if (i.getProduct().getProduct_id().equals(product_id)) {
+                        if (i.getProduct().getProduct_id().equals(product_id) && i.getSize().equals(size)) {
                             i.setQuantity(quantity + i.getQuantity());
                             break;
                         }

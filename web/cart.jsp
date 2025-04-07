@@ -150,8 +150,7 @@
         <td class="product-price">${i.color}</td>
 
         <td class="product_quantity">
-            <input name="quantity" min="1" max="${i.product.quantity}" value="${i.quantity}" 
-                   type="number" onchange="updateQuantity('${i.product.product_id}', this.value, ${actualPrice})">
+            <div name="quantity" >${i.quantity}</div>
         </td>
 
         <!-- Tổng tiền = actualPrice * quantity -->

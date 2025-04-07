@@ -106,7 +106,7 @@ public class cartDAO {
         return null;
     }
 
-    public Cart GetUserProductInCart(String productId, String userId) {
+    public Cart GetUserProductInCart(String productId, int userId, String size) {
         String sql = "SELECT [cart_id]\n"
                 + "      ,[product_id]\n"
                 + "      ,[product_name]\n"
@@ -116,13 +116,14 @@ public class cartDAO {
                 + "      ,[quantity]\n"
                 + "      ,[user_id]\n"
                 + "  FROM [ShopYouAndMeVersionFinal].[dbo].[cart]\n"
-                + "  Where product_id = ? And user_id = ?";
+                + "  Where product_id = ? And user_id = ? And size = ?";
 
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, productId);
-            ps.setString(2, userId);
+            ps.setInt(2, userId);
+            ps.setString(3, size);
             rs = ps.executeQuery();
             if (rs.next()) {
                 Cart c = new Cart();

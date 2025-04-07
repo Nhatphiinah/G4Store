@@ -424,14 +424,12 @@
                                         <h4>Đánh giá trung bình: 
                                             <fmt:formatNumber value="${averageRating}" maxFractionDigits="1"/> <span class="star">&#9733;</span>
                                         </h4>
-                                        </h5>
                                         <label>Mô tả sản phẩm: </label>
                                         <p>${ProductData.product_describe}</p>
                                         <label>Số lượng sản phẩm: </label>
-                                        <p id="quantity">${ProductData.quantity}</p>
+                                        <p id="quantity" style="display: none;"></p>
                                     </div>
                                 </div>
-
 
                                 <div class="product_variant color">
                                     <h3>Chọn màu sắc :</h3>
@@ -444,7 +442,7 @@
                                 <div class="product_variant size">
                                     <h3>Chọn size :</h3>
                                     <div class="size-selection-container">
-                                        <select class="niceselect_option" id="size" name="size" onchange="handleChange(this)" required="">
+                                        <select class="niceselect_option" id="size" name="size" onchange="handleSizeChange(this)" required>
                                             <option disabled="true" selected="true" value="">Size</option>
                                                 <c:forEach items="${SizeData}" var="s">
                                                      <option value="${s.size}" data-quantity="${s.quantity}">${s.size}</option>
@@ -455,24 +453,20 @@
                                         </a>
                                     </div>
                                     <script>
-                                        document.getElementById("open-size-guide").addEventListener("click", function (event) {
-                                            event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
-                                            document.getElementById("size-guide-popup").style.display = "block";
-                                        });
-
-                                        // Kiểm tra xem phần tử "close-popup" có tồn tại trước khi gán sự kiện
-                                        document.addEventListener("DOMContentLoaded", function () {
-                                            var closeBtn = document.getElementById("close-popup");
-                                            if (closeBtn) {
-                                                closeBtn.addEventListener("click", function () {
-                                                    document.getElementById("size-guide-popup").style.display = "none";
-                                                });
+                                        function handleSizeChange(selectElement) {
+                                            var selectedOption = selectElement.options[selectElement.selectedIndex];
+                                            var quantityText = document.getElementById("quantity");
+                                            var quantity = selectedOption.getAttribute("data-quantity");
+                                            
+                                            if (quantity) {
+                                                quantityText.textContent = quantity;
+                                                quantityText.style.display = "block"; // Hiển thị số lượng khi chọn size
+                                            } else {
+                                                quantityText.style.display = "none"; // Ẩn nếu không có size được chọn
                                             }
-                                        });
+                                        }
                                     </script>
-
                                 </div>
-
 
                                 <div class="product_variant quantity">
                                     <label>Số lượng :</label>
@@ -481,7 +475,6 @@
                                         <button class="button" type="submit">Thêm vào giỏ hàng</button>
                                     </div>
                                 </div>
-
 
                             </form>
                         </div>

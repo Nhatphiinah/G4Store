@@ -91,44 +91,44 @@
                                 <!-- UploadExcelBtn -->
                                 <!-- UploadExcelBtn -->
                                 <!-- UploadExcelBtn -->
-<!--                                <div class="col-sm-2">
-                                    <a class="btn btn-add btn-sm"  title="ThêmExcel"
-                                       data-toggle="modal" data-target="#uploadModal"><i class="fas fa-plus"></i>
-                                        Tạo mới sản phẩm bằng Excel(chỉ xlsx)</a>
-                                </div>-->
+                                <!--                                <div class="col-sm-2">
+                                                                    <a class="btn btn-add btn-sm"  title="ThêmExcel"
+                                                                       data-toggle="modal" data-target="#uploadModal"><i class="fas fa-plus"></i>
+                                                                        Tạo mới sản phẩm bằng Excel(chỉ xlsx)</a>
+                                                                </div>-->
                                 <!-- UploadExcelBtn -->
                                 <!-- uploadModal -->
-<!--                                <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" style="color: green" id="uploadModalLabel">Upload Excel File</h5>
-                                                <button type="button" class="btn btn-cancel btn-cancel" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="productmanager?action=insertByExcel" method="POST" enctype="multipart/form-data">
-                                                    <div class="form-group">
-                                                        <label for="fileInput">Choose file</label>
-                                                        <input type="file"  accept=".xlsx" "class="form-control-file" id="fileInput" name="file" required>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Upload</button>
-                                                    <a style="margin: 10px" href="productmanager?action=dowloadTemplate" class="btn btn-primary">Download Template File</a>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>-->
+                                <!--                                <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" style="color: green" id="uploadModalLabel">Upload Excel File</h5>
+                                                                                <button type="button" class="btn btn-cancel btn-cancel" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form action="productmanager?action=insertByExcel" method="POST" enctype="multipart/form-data">
+                                                                                    <div class="form-group">
+                                                                                        <label for="fileInput">Choose file</label>
+                                                                                        <input type="file"  accept=".xlsx" "class="form-control-file" id="fileInput" name="file" required>
+                                                                                    </div>
+                                                                                    <button type="submit" class="btn btn-primary">Upload</button>
+                                                                                    <a style="margin: 10px" href="productmanager?action=dowloadTemplate" class="btn btn-primary">Download Template File</a>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>-->
                                 <!-- uploadModal -->   
                                 <!-- UploadExcelBtn -->
                                 <!-- UploadExcelBtn -->
 
 
-<!--                                <div class="col-sm-2">
-                                    <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                                            class="fas fa-print"></i> In dữ liệu</a>
-                                </div>-->
+                                <!--                                <div class="col-sm-2">
+                                                                    <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
+                                                                            class="fas fa-print"></i> In dữ liệu</a>
+                                                                </div>-->
                             </div>
                             <form action="productmanager" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="action" value="updateproduct">
@@ -237,27 +237,49 @@
                                                                     <label class="control-label">Màu</label>
                                                                     <select class="form-control" name="product_color">
                                                                         <c:forEach items="${ColorData}" var="c"><c:if test="${p.product_id==c.product_id}">
-                                                                        <option value="White" <c:if test="${c.color eq 'White'}">selected</c:if>>White</option>
-                                                                        <option value="Black" <c:if test="${c.color eq 'Black'}">selected</c:if>>Black</option>
-                                                                        <option value="Green" <c:if test="${c.color eq 'Green'}">selected</c:if>>Green</option>
-                                                                        <option value="Yellow" <c:if test="${c.color eq 'Yellow'}">selected</c:if>>Yellow</option>
-                                                                        <option value="Brown" <c:if test="${c.color eq 'Brown'}">selected</c:if>>Brown</option>
-                                                                        <option value="Blue" <c:if test="${c.color eq 'Blue'}">selected</c:if>>Blue</option>
-                                                                        <option value="Red" <c:if test="${c.color eq 'Red'}">selected</c:if>>Red</option></c:if></c:forEach>
-                                                                        </select>
-                                                                                                        <!--<input class="form-control" name="product_color" type="text" value="
-                                                                        <%--<c:forEach items="${ColorData}" var="c"><c:if test="${p.product_id==c.product_id}">${c.color},</c:if></c:forEach>--%>
-                                                                                                        ">-->
-                                                                        </div>
+                                                                                <option value="White" <c:if test="${c.color eq 'White'}">selected</c:if>>White</option>
+                                                                                <option value="Black" <c:if test="${c.color eq 'Black'}">selected</c:if>>Black</option>
+                                                                                <option value="Green" <c:if test="${c.color eq 'Green'}">selected</c:if>>Green</option>
+                                                                                <option value="Yellow" <c:if test="${c.color eq 'Yellow'}">selected</c:if>>Yellow</option>
+                                                                                <option value="Brown" <c:if test="${c.color eq 'Brown'}">selected</c:if>>Brown</option>
+                                                                                <option value="Blue" <c:if test="${c.color eq 'Blue'}">selected</c:if>>Blue</option>
+                                                                                <option value="Red" <c:if test="${c.color eq 'Red'}">selected</c:if>>Red</option></c:if></c:forEach>
+                                                                                </select>
+                                                                                <!--<input class="form-control" name="product_color" type="text" value="
+                                                                    <%--<c:forEach items="${ColorData}" var="c"><c:if test="${p.product_id==c.product_id}">${c.color},</c:if></c:forEach>--%>
+                                                                                                    ">-->
+                                                                </div>
 
-                                                                        <div class="form-group col-md-6">
-                                                                            <label class="control-label">Size</label>
-                                                                            <input class="form-control" name="product_size" type="text" value="<c:forEach items="${SizeData}" var="s"><c:if test="${p.product_id==s.product_id}">${s.size},</c:if></c:forEach>">
-                                                                        </div>
+                                                                <div class="form-group col-md-6">
+                                                                    <label class="control-label">Size</label>
+                                                                    <input class="form-control" name="product_size" type="text" 
+                                                                           value="<c:forEach items='${SizeData}' var='s'><c:if test='${p.product_id==s.product_id}'>${s.size},</c:if></c:forEach>" 
+                                                                                   onchange="validateSizeInput(this)" placeholder="Nhập size, ví dụ: S, M, L">
+                                                                           </div>
 
-                                                                        <div class="form-group col-md-6">
-                                                                            <label class="control-label">Thông tin</label>
-                                                                            <textarea class="ckeditor" name="product_describe">${p.product_describe}</textarea>
+                                                                           <script>
+                                                                               function validateSizeInput(input) {
+                                                                                   const validSizes = ["S", "M", "L", "XL", "XXL","XXXL"];
+                                                                                   let sizes = input.value.split(",").map(s => s.trim().toUpperCase()).filter(s => s !== "");
+
+                                                                                   // Kiểm tra từng size nhập vào
+                                                                                   for (let size of sizes) {
+                                                                                       if (!validSizes.includes(size)) {
+                                                                                           alert("Chỉ được nhập các size: S, M, L, XL, XXL, XXXL");
+                                                                                           input.value = ""; // Xóa nội dung nếu nhập sai
+                                                                                           return;
+                                                                                       }
+                                                                                   }
+
+                                                                                   // Định dạng lại input để tránh dư dấu phẩy
+                                                                                   input.value = sizes.join(", ");
+                                                                               }
+                                                                           </script>
+
+
+                                                                           <div class="form-group col-md-6">
+                                                                               <label class="control-label">Thông tin</label>
+                                                                               <textarea class="ckeditor" name="product_describe">${p.product_describe}</textarea>
                                                                     <script>
                                                                         CKEDITOR.replace('product_describe');
                                                                     </script>
@@ -348,26 +370,26 @@
         <script type="text/javascript" src="admin/js/plugins/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
         <script>
-                                           document.addEventListener('DOMContentLoaded', function () {
-                                               var insertStatus = "<%= (session.getAttribute("insertStatus") != null) ? session.getAttribute("insertStatus") : "default" %>";
-                                               var insertStatus = "<%= (session.getAttribute("insertStatus") != null) ? session.getAttribute("insertStatus") : "default" %>";
-                                               if (insertStatus === "succ") {
-                                                   swal({
-                                                       title: 'Thành công!',
-                                                       text: 'Thêm thành công!',
-                                                       icon: 'success',
-                                                       confirmButtonText: 'OK'
-                                                   });
-                                               }
-                                               if (insertStatus === "err") {
-                                                   swal({
-                                                       title: 'Lỗi!',
-                                                       text: 'Thêm thất bại',
-                                                       icon: 'error',
-                                                       confirmButtonText: 'OK'
-                                                   });
-                                               }
-                                           });
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                var insertStatus = "<%= (session.getAttribute("insertStatus") != null) ? session.getAttribute("insertStatus") : "default" %>";
+                                                var insertStatus = "<%= (session.getAttribute("insertStatus") != null) ? session.getAttribute("insertStatus") : "default" %>";
+                                                if (insertStatus === "succ") {
+                                                    swal({
+                                                        title: 'Thành công!',
+                                                        text: 'Thêm thành công!',
+                                                        icon: 'success',
+                                                        confirmButtonText: 'OK'
+                                                    });
+                                                }
+                                                if (insertStatus === "err") {
+                                                    swal({
+                                                        title: 'Lỗi!',
+                                                        text: 'Thêm thất bại',
+                                                        icon: 'error',
+                                                        confirmButtonText: 'OK'
+                                                    });
+                                                }
+                                            });
         </script>
         <%
             if (session.getAttribute("insertStatus") != null) {

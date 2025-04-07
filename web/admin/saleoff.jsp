@@ -88,13 +88,13 @@
                 <thead>
                     <tr>
                         <th>Sale ID</th>
-                        <th>Product Name</th>
-                        <th>Discount Percentage</th>
-                        <th>Before Sale Price</th>
-                        <th>After Sale Price</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Action</th>
+                        <th>Tên Sản phẩm</th>
+                        <th>Khuyến mãi</th>
+                        <th>Giá gốc</th>
+                        <th>Giá Sale</th>
+                        <th>Bắt đầu </th>
+                        <th>Kết thúc</th>
+                        <th>Tùy chọn</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -134,13 +134,13 @@
 
                 <div class="modal-body">
 
-                    <label>Discount Percentage:</label>
+                    <label>Khuyến mãi:</label>
                     <input type="number" name="discountPercentage" id="update-discountPercentage" step="0.01" max="99.99" class="form-control" required>
 
-                    <label>Start Date:</label>
+                    <label>Bắt đầu:</label>
                     <input readonly type="date" name="startDate" id="update-startDate" class="form-control" required>
 
-                    <label>End Date:</label>
+                    <label>Kết Thúc:</label>
                     <input type="date" name="endDate" id="update-endDate" class="form-control" required onchange="checkEndDate()">
 
                 </div>
@@ -173,7 +173,7 @@
         let updateButton = document.getElementById("update-button");
 
         if (endDate < startDate) {
-            alert("End Date must be greater than or equal to Start Date.");
+            alert("Ngày kết thúc phải sau ngày bắt đầu.");
             updateButton.disabled = true;
         } else {
             updateButton.disabled = false;
@@ -185,7 +185,7 @@
         let endDate = new Date(document.getElementById("update-endDate").value);
 
         if (endDate < startDate) {
-            alert("End Date must be greater than or equal to Start Date.");
+            alert("Ngày kết thúc phải sau hoặc trong ngày bắt đầu");
             return false; // Ngăn form submit
         }
         return true; // Cho phép submit nếu hợp lệ
@@ -196,7 +196,7 @@
                                 <form action="saleoff" method="get">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="saleId" value="${sale.sale_id}">
-                                    <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this sale off?')" style="background-color: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
+                                    <input type="submit" value="Delete" onclick="return confirm('Bạn có chắc muốn xóa khuyến mãi này?')" style="background-color: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
                                 </form>
 
                             </td>
@@ -215,7 +215,7 @@
     <input type="hidden" name="action" value="insert">
 
     <div class="modal-header">
-        <h5 class="modal-title">Add New Sale Off</h5>
+        <h5 class="modal-title">Thêm sản phẩm khuyến mãi mới </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -229,7 +229,7 @@
         </div>
 
         <div class="form-group">
-            <label>Product:</label>
+            <label>Sản phẩm:</label>
             <select name="productId" class="form-control" required>
                 <c:forEach var="p" items="${products}">
                     <option value="${p.product_id}">${p.product_name}</option>
@@ -238,17 +238,17 @@
         </div>
 
         <div class="form-group">
-            <label>Discount Percentage:</label>
+            <label>Khuyến mãi:</label>
             <input type="number" name="discountPercentage" step="0.01" max="99.99" class="form-control" required>
         </div>
 
         <div class="form-group">
-            <label>Start Date:</label>
+            <label>Bắt đầu:</label>
             <input type="date" name="startDate" id="add-startDate" class="form-control" required>
         </div>
 
         <div class="form-group">
-            <label>End Date:</label>
+            <label>Kết thúc:</label>
             <input type="date" name="endDate" id="add-endDate" class="form-control" required>
         </div>
 
