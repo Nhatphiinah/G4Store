@@ -116,64 +116,82 @@
                                     Update
                                 </button>
 
-                                <!-- Update Modal -->
-                                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
+<!-- Update Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
 
-                                            <form action="saleoff" method="post">
-                                                <input type="hidden" name="action" value="update">
-                                                <input type="hidden" name="saleId" id="update-saleId">
+            <form action="saleoff" method="post" onsubmit="return validateUpdateSaleOffForm()">
+                <input type="hidden" name="action" value="update">
+                <input type="hidden" name="saleId" id="update-saleId">
 
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Update Sale Off</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Sale Off</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-                                                <div class="modal-body">
+                <div class="modal-body">
 
-                                                    <label>Discount Percentage:</label>
-                                                    <input type="number" name="discountPercentage" id="update-discountPercentage" step="0.01" max="99.99" class="form-control" required>
+                    <label>Discount Percentage:</label>
+                    <input type="number" name="discountPercentage" id="update-discountPercentage" step="0.01" max="99.99" class="form-control" required>
 
-                                                    <label>Start Date:</label>
-                                                    <input readonly type="date" name="startDate" id="update-startDate" class="form-control" required>
+                    <label>Start Date:</label>
+                    <input readonly type="date" name="startDate" id="update-startDate" class="form-control" required>
 
-                                                    <label>End Date:</label>
-                                                    <input type="date" name="endDate" id="update-endDate" class="form-control" required>
+                    <label>End Date:</label>
+                    <input type="date" name="endDate" id="update-endDate" class="form-control" required onchange="checkEndDate()">
 
-                                                </div>
+                </div>
 
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <input type="submit" id="update-button" class="btn btn-success" value="Update">
-                                                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <input type="submit" id="update-button" class="btn btn-success" value="Update">
+                </div>
 
-                                            </form>
+            </form>
 
-                                        </div>
-                                    </div>
-                                </div>
+        </div>
+    </div>
+</div>
 
-                                <script>
-                                    function showUpdateModal(saleId, discountPercentage, startDate, endDate) {
-                                        // Gán giá trị vào form trong modal
-                                        document.getElementById('update-saleId').value = saleId;
-                                        document.getElementById('update-discountPercentage').value = discountPercentage;
-                                        document.getElementById('update-startDate').value = startDate;
-                                        document.getElementById('update-endDate').value = endDate;
+<script>
+    function showUpdateModal(saleId, discountPercentage, startDate, endDate) {
+        // Gán giá trị vào form trong modal
+        document.getElementById('update-saleId').value = saleId;
+        document.getElementById('update-discountPercentage').value = discountPercentage;
+        document.getElementById('update-startDate').value = startDate;
+        document.getElementById('update-endDate').value = endDate;
 
-                                        const todayDate = new Date().toISOString().split('T')[0];
-                                        const updateButton = document.getElementById('update-button'); // giả sử nút Update có id là 'update-button'
+        checkEndDate(); // Kiểm tra ngày ngay khi mở modal
+    }
 
-                                        if (endDate < todayDate) {
-                                            updateButton.disabled = true;
-                                        } else {
-                                            updateButton.disabled = false;
-                                        }
-                                    }
-                                </script>
+    function checkEndDate() {
+        let startDate = new Date(document.getElementById("update-startDate").value);
+        let endDate = new Date(document.getElementById("update-endDate").value);
+        let updateButton = document.getElementById("update-button");
+
+        if (endDate < startDate) {
+            alert("End Date must be greater than or equal to Start Date.");
+            updateButton.disabled = true;
+        } else {
+            updateButton.disabled = false;
+        }
+    }
+
+    function validateUpdateSaleOffForm() {
+        let startDate = new Date(document.getElementById("update-startDate").value);
+        let endDate = new Date(document.getElementById("update-endDate").value);
+
+        if (endDate < startDate) {
+            alert("End Date must be greater than or equal to Start Date.");
+            return false; // Ngăn form submit
+        }
+        return true; // Cho phép submit nếu hợp lệ
+    }
+</script>
+
 
                                 <form action="saleoff" method="get">
                                     <input type="hidden" name="action" value="delete">
@@ -193,55 +211,68 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
 
-                        <form action="saleoff" method="post">
-                            <input type="hidden" name="action" value="insert">
+<form action="saleoff" method="post" onsubmit="return validateSaleOffForm()">
+    <input type="hidden" name="action" value="insert">
 
-                            <div class="modal-header">
-                                <h5 class="modal-title">Add New Sale Off</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+    <div class="modal-header">
+        <h5 class="modal-title">Add New Sale Off</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
-                            <div class="modal-body">
+    <div class="modal-body">
 
-                                <div class="form-group">
-                                    <label>Sale ID:</label>
-                                    <input type="text" name="saleId" class="form-control" required>
-                                </div>
+        <div class="form-group">
+            <label>Sale ID:</label>
+            <input type="text" name="saleId" class="form-control" required>
+        </div>
 
-                                <div class="form-group">
-                                    <label>Product:</label>
-                                    <select name="productId" class="form-control" required>
-                                        <c:forEach var="p" items="${products}">
-                                            <option value="${p.product_id}">${p.product_name}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
+        <div class="form-group">
+            <label>Product:</label>
+            <select name="productId" class="form-control" required>
+                <c:forEach var="p" items="${products}">
+                    <option value="${p.product_id}">${p.product_name}</option>
+                </c:forEach>
+            </select>
+        </div>
 
-                                <div class="form-group">
-                                    <label>Discount Percentage:</label>
-                                    <input type="number" name="discountPercentage" step="0.01" max="99.99" class="form-control" required>
-                                </div>
+        <div class="form-group">
+            <label>Discount Percentage:</label>
+            <input type="number" name="discountPercentage" step="0.01" max="99.99" class="form-control" required>
+        </div>
 
-                                <div class="form-group">
-                                    <label>Start Date:</label>
-                                    <input type="date" name="startDate" id="add-startDate" class="form-control" required>
-                                </div>
+        <div class="form-group">
+            <label>Start Date:</label>
+            <input type="date" name="startDate" id="add-startDate" class="form-control" required>
+        </div>
 
-                                <div class="form-group">
-                                    <label>End Date:</label>
-                                    <input type="date" name="endDate" id="add-endDate" class="form-control" required>
-                                </div>
+        <div class="form-group">
+            <label>End Date:</label>
+            <input type="date" name="endDate" id="add-endDate" class="form-control" required>
+        </div>
 
-                            </div>
+    </div>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <input type="submit" class="btn btn-success" value="Add Sale Off">
-                            </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <input type="submit" class="btn btn-success" value="Add Sale Off">
+    </div>
+</form>
 
-                        </form>
+<script>
+    function validateSaleOffForm() {
+        let startDate = new Date(document.getElementById("add-startDate").value);
+        let endDate = new Date(document.getElementById("add-endDate").value);
+
+        if (endDate < startDate) {
+            alert("End Date must be greater than or equal to Start Date.");
+            return false; // Ngăn form gửi đi
+        }
+        return true; // Cho phép submit nếu hợp lệ
+    }
+</script>
+
 
                     </div>
                 </div>
@@ -257,8 +288,8 @@
             // Get today's date in yyyy-mm-dd format
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('add-startDate').setAttribute('min', today);
-            document.getElementById('add-endDate').setAttribute('min', today);
-            document.getElementById('update-endDate').setAttribute('min', today);
+            document.getElementById('add-endDate').setAttribute('min', startDate);
+            document.getElementById('update-endDate').setAttribute('min', startDate);
         </script>
     </body>
 </html>

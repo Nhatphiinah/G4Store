@@ -16,9 +16,15 @@ public class Cart extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession(true);
         String action = request.getParameter("action");
         model.User user = (model.User) session.getAttribute("user");
+        if (user == null) {
+            request.getRequestDispatcher("user?action=login").forward(request, response);
+            return;
+        }
         if (user != null && ("TRUE".equalsIgnoreCase(user.getIsAdmin()) || "TRUE".equalsIgnoreCase(user.getIsStoreStaff()))) {
             session.setAttribute("errorMessage", "Quản trị viên và nhân viên cửa hàng không thể thêm hoặc mua sản phẩm.");
             request.getRequestDispatcher("search?action=productdetail&product_id=" + request.getParameter("product_id")).forward(request, response);
@@ -33,17 +39,17 @@ public class Cart extends HttpServlet {
         } else {
             cart = new model.Cart();
         }
-        if(user != null){
-            cart.setUserId(user.getUser_id()+"");
+        if (user != null) {
+            cart.setUserId(user.getUser_id() + "");
         }
-        
+
         if (action == null || action.equalsIgnoreCase("addtocart")) {
             addToCart(request, cart);
             List<Item> list = cart.getItems();
             session.setAttribute("cart", cart);
             session.setAttribute("total", cart.getTotalMoney());
             session.setAttribute("size", list.size());
-            session.setAttribute("successMessageAdd", "Sản phẩm đã được thêm vào giỏ hàng thành công.");
+            session.setAttribute("successMessage", "Sản phẩm đã được thêm vào giỏ hàng thành công.");
             request.getRequestDispatcher("search?action=productdetail&product_id=" + request.getParameter("product_id")).forward(request, response);
         } else if (action.equalsIgnoreCase("buynow")) {
             addToCart(request, cart);
@@ -57,7 +63,7 @@ public class Cart extends HttpServlet {
         } else if (action.equals("deletecart")) {
             String product_id = request.getParameter("product_id");
             cart.removeItem(product_id);
-            cartDao.DeleteProductInCart(product_id, user.getUser_id()+"");
+            cartDao.DeleteProductInCart(product_id, user.getUser_id() + "");
             List<Item> list = cart.getItems();
             session.setAttribute("cart", cart);
             session.setAttribute("total", cart.getTotalMoney());
@@ -69,7 +75,7 @@ public class Cart extends HttpServlet {
             int quantity = Integer.parseInt(request.getParameter("quantity"));
 
             cart.updateQuantity(productId, quantity);
-            
+
             cartDao.UpdateQuantity(cart);
             session.setAttribute("cart", cart);
             double total = cart.getTotalMoney();
@@ -94,11 +100,18 @@ public class Cart extends HttpServlet {
             productDAO pdao = new productDAO();
             Product product = pdao.getProductByID(product_id);
             Item item = new Item(product, quantity, size, color);
-            cart.addItem(item);
-            if(cart.getUserId() != null){
-                if(cd.GetUserProductInCart( product_id, cart.getUserId()) == null){
-                    cd.AddCart(cart);
-                }else{
+//            cart.addItem(item);
+            if (cart.getUserId() != null) {
+                if (cd.GetUserProductInCart(product_id, cart.getUserId()) == null) {
+                    cart.addItem(item);
+                    cd.AddCart(item, cart.getUserId());
+                } else {
+                    for (Item i : cart.getItems()) {
+                        if (i.getProduct().getProduct_id().equals(product_id)) {
+                            i.setQuantity(quantity + i.getQuantity());
+                            break;
+                        }
+                    }
                     cd.UpdateQuantity(cart);
                 }
             }
